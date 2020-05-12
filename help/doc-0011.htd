@@ -1,0 +1,6 @@
+<HTML>
+<HEAD><TITLE>Populate the tables (2/2)</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+There is one more table that you have to fill in yourself, and then the GUI will take care of the remaining ones: <I>yatish</I> needs information about "projects". A project only has a name and a (previously defined) client. The dialog to create or modify a project is described <A HREF="doc-0016.htm">here</A>.
+</BODY>
+</HTML>

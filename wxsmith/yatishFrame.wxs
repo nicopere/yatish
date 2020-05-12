@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxFrame" name="yatishFrame">
+		<title>YATiSh</title>
+		<id_arg>0</id_arg>
+		<handler function="OnClose" entry="EVT_CLOSE" />
+		<object class="wxBoxSizer" variable="BoxSizer1" member="yes">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<object class="wxNotebook" name="idNotebook" variable="notebook" member="yes">
+					<handler function="OnNotebookPageChanged" entry="EVT_NOTEBOOK_PAGE_CHANGED" />
+					<object class="notebookpage">
+						<object class="wxPanel" name="idPanelCurrent" variable="panelCurrent" member="no">
+							<style>0</style>
+							<object class="wxBoxSizer" variable="BoxSizer2" member="no">
+								<orient>wxVERTICAL</orient>
+								<object class="spacer">
+									<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+									<border>5</border>
+									<option>1</option>
+								</object>
+								<object class="sizeritem">
+									<object class="wxStaticBoxSizer" variable="StaticBoxSizer1" member="no">
+										<label>Select project, task and tool</label>
+										<object class="sizeritem">
+											<object class="wxChoice" name="idChoiceProject" variable="choiceProject" member="yes" />
+											<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+											<border>10</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxChoice" name="idChoiceTask" variable="choiceTask" member="yes" />
+											<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+											<border>10</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxChoice" name="idChoiceTool" variable="choiceTool" member="yes" />
+											<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+											<border>10</border>
+										</object>
+									</object>
+									<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+									<border>5</border>
+								</object>
+								<object class="spacer">
+									<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+									<border>5</border>
+									<option>1</option>
+								</object>
+								<object class="sizeritem">
+									<object class="wxBoxSizer" variable="BoxSizer3" member="no">
+										<object class="sizeritem">
+											<object class="wxButton" name="idButtonStart" variable="buttonStart" member="yes">
+												<label>&amp;RECORD</label>
+												<handler function="OnButtonStartClick" entry="EVT_BUTTON" />
+											</object>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>5</border>
+											<option>1</option>
+										</object>
+										<object class="sizeritem">
+											<object class="wxButton" name="idButtonStop" variable="buttonStop" member="yes">
+												<label>&amp;STOP</label>
+												<handler function="OnButtonStopClick" entry="EVT_BUTTON" />
+											</object>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>5</border>
+											<option>1</option>
+										</object>
+									</object>
+									<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+									<option>1</option>
+								</object>
+								<object class="spacer">
+									<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+									<border>5</border>
+									<option>1</option>
+								</object>
+							</object>
+						</object>
+						<label>Current activity</label>
+					</object>
+					<object class="notebookpage">
+						<object class="wxPanel" name="idPanelList" variable="panelList" member="no">
+							<style>0</style>
+							<object class="wxBoxSizer" variable="BoxSizer4" member="no">
+								<orient>wxVERTICAL</orient>
+								<object class="sizeritem">
+									<object class="wxBoxSizer" variable="BoxSizer5" member="no">
+										<object class="sizeritem">
+											<object class="wxStaticBoxSizer" variable="StaticBoxSizer2" member="no">
+												<label>Table</label>
+												<object class="sizeritem">
+													<object class="wxChoice" name="idChoiceTable" variable="choiceTable" member="yes">
+														<content>
+															<item>Client</item>
+															<item>Task</item>
+															<item>Tool</item>
+															<item>Project</item>
+															<item>Activity</item>
+															<item>Timeslot</item>
+														</content>
+														<selection>5</selection>
+														<handler function="OnChoiceTableSelect" entry="EVT_CHOICE" />
+													</object>
+													<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+													<border>5</border>
+													<option>1</option>
+												</object>
+											</object>
+											<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxStaticBoxSizer" variable="StaticBoxSizer3" member="no">
+												<label>Date interval (inclusive)</label>
+												<object class="sizeritem">
+													<object class="wxDatePickerCtrl" name="idDatePicker1" variable="datePicker1" member="yes">
+														<handler function="OnDatePicker1Changed" entry="EVT_DATE_CHANGED" />
+													</object>
+													<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+													<border>5</border>
+													<option>1</option>
+												</object>
+												<object class="sizeritem">
+													<object class="wxDatePickerCtrl" name="idDatePicker2" variable="datePicker2" member="yes">
+														<handler function="OnDatePicker2Changed" entry="EVT_DATE_CHANGED" />
+													</object>
+													<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+													<border>5</border>
+													<option>1</option>
+												</object>
+											</object>
+											<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+											<border>5</border>
+										</object>
+										<object class="spacer">
+											<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+											<border>5</border>
+											<option>1</option>
+										</object>
+										<object class="sizeritem">
+											<object class="wxButton" name="idButtonPDF" variable="buttonPDF" member="yes">
+												<label>Export PDF</label>
+											</object>
+											<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+											<border>5</border>
+										</object>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>5</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxListCtrl" name="idListCtrl" variable="listCtrl" member="yes">
+										<style>wxLC_REPORT|wxLC_SINGLE_SEL</style>
+										<handler function="OnListKeyDown" entry="EVT_LIST_KEY_DOWN" />
+										<handler function="OnListColumnClick" entry="EVT_LIST_COL_CLICK" />
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>5</border>
+									<option>1</option>
+								</object>
+							</object>
+						</object>
+						<label>List/Edit</label>
+					</object>
+					<object class="notebookpage">
+						<object class="wxPanel" name="idPanelChart" variable="panelChart" member="no">
+							<style>0</style>
+						</object>
+						<label>Charts</label>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<option>3</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxTextCtrl" name="idTextCtrl" variable="textCtrl" member="yes">
+					<style>wxTE_MULTILINE|wxTE_READONLY</style>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+		</object>
+		<object class="wxMenuBar" variable="menuBar" member="no">
+			<object class="wxMenu" variable="Menu1" member="no">
+				<label>&amp;File</label>
+				<object class="wxMenuItem" name="idFileConnect" variable="menuitemFileConnect" member="yes">
+					<label>&amp;Connect</label>
+					<accel>Ctrl-C</accel>
+					<help>Connect to a (remote) MySQL/MariaDB server</help>
+					<handler function="OnMenuitemFileConnectSelected" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="idFileUpdate" variable="menuitemFileUpdate" member="yes">
+					<label>&amp;Update</label>
+					<accel>Ctrl-U</accel>
+					<help>Update remote database</help>
+					<enabled>0</enabled>
+					<handler function="OnMenuitemFileUpdateSelected" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="idFileUpload" variable="menuitemFileUpload" member="yes">
+					<label>Up&amp;load</label>
+					<help>Replace remote data (by local)</help>
+					<enabled>0</enabled>
+					<handler function="OnMenuitemFileUploadSelected" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="idFileDownload" variable="menuitemFileDownload" member="yes">
+					<label>&amp;Download</label>
+					<help>Replace local data (by remote)</help>
+					<enabled>0</enabled>
+					<handler function="OnMenuitemFileDownloadSelected" entry="EVT_MENU" />
+				</object>
+				<object class="separator" />
+				<object class="wxMenuItem" name="idFileQuit" variable="menuitemFileQuit" member="no">
+					<label>&amp;Quit</label>
+					<accel>Ctrl-Q</accel>
+					<handler function="OnQuit" entry="EVT_MENU" />
+				</object>
+			</object>
+			<object class="wxMenu" variable="Menu2" member="no">
+				<label>&amp;Edit</label>
+				<object class="wxMenuItem" name="idEditTable" variable="menuitemEditTable" member="no">
+					<label>&amp;Tables</label>
+					<accel>Ctrl-T</accel>
+					<help>Edit any table</help>
+					<handler function="OnMenuitemEditTableSelected" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="idEditNew" variable="menuitemEditNew" member="yes">
+					<label>&amp;New record...</label>
+					<accel>Ctrl-N</accel>
+					<help>Add a record to the currently selected table</help>
+					<handler function="OnMenuitemEditNewSelected" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="idEditReset" variable="menuitemEditReset" member="yes">
+					<label>&amp;Reset filter</label>
+					<accel>Ctrl-R</accel>
+					<help>Reset the viewing filter</help>
+					<handler function="OnMenuitemEditResetSelected" entry="EVT_MENU" />
+				</object>
+				<object class="separator" />
+				<object class="wxMenuItem" name="idEditSettings" variable="menuitemEditSettings" member="no">
+					<label>&amp;Settings...</label>
+					<accel>Ctrl-S</accel>
+					<help>Set user preferences</help>
+					<handler function="OnMenuitemEditSettingsSelected" entry="EVT_MENU" />
+				</object>
+			</object>
+			<object class="wxMenu" variable="Menu3" member="no">
+				<label>&amp;Help</label>
+				<object class="wxMenuItem" name="idHelpUser" variable="menuitemHelpUser" member="no">
+					<label>&amp;User guide</label>
+					<accel>F1</accel>
+					<handler function="OnHelp" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="idHelpAbout" variable="menuitemHelpAbout" member="no">
+					<label>&amp;About...</label>
+					<handler function="OnAbout" entry="EVT_MENU" />
+				</object>
+			</object>
+		</object>
+		<object class="wxStatusBar" name="idStatusBar" variable="statusBar" member="yes">
+			<fields>3</fields>
+			<widths>65,85,-1</widths>
+			<styles>wxSB_RAISED,wxSB_RAISED,wxSB_NORMAL</styles>
+		</object>
+		<object class="wxTimer" name="idTimer" variable="timer" member="yes">
+			<handler function="OnTimerTrigger" entry="EVT_TIMER" />
+		</object>
+	</object>
+</wxsmith>

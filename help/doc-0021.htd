@@ -1,0 +1,21 @@
+<HTML>
+<HEAD><TITLE>MySQL/MariaDB</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+An important feature of <I>yatish</I> is its ability to connect to a MySQL/MariaDB server. One can use this functionality to:
+<UL>
+<LI>backup data;
+<LI>synchronise devices if working on several ones;
+<LI>provide willingfull access to your data (a <U>reader</U> version of <I>yatish</I> will be provided in the future).
+</UL><P>
+But then you must of course provide credentials. On a Linux system <I>yatish</I> expects to find a <TT>yatish.auth</TT> file in your <TT>~/.yatish</TT> directory (where your <I>yatish</I> database and settings are also stored). Check that you alone have read/write access to this file! (<TT>chmod 600</TT> on Linux)<P>
+The <TT>yatish.auth</TT> must follow this template
+(which is also provided in <TT>/usr/local/share/yatish/</TT> on Linux):
+<PRE>
+[MySQL]
+server=xxx   #domain name or IP address
+database=yyy #yatish database
+user=zzz     #MySQL/MariaDB user
+password=***
+</PRE>
+</BODY>
+</HTML>

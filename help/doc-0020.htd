@@ -1,0 +1,23 @@
+<HTML>
+<HEAD><TITLE>User settings</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+The user settings are "remembered" by <I>yatish</I> when you start it.<P>
+<IMG SRC="img/settings.png">
+<H3>Dialog fields</H3>
+<TABLE>
+<TR>
+<TD><B>Logging</B></TD>
+<TD>Check this if you want logging messages to appear at the bottom of the <I>yatish</I> main window; otherwise the (few) messages will be sent to ad hoc message boxes. Mostly used for developing purposes.</TD>
+</TR>
+<TR>
+<TD><B>Timeslot</B></TD>
+<TD>Whether or not to limit the listing provided by panel #2 when the <I>timeslot</I> table is selected.</TD>
+</TR>
+<TR>
+<TD><B>Row limit</B></TD>
+<TD>The maximum number of rows if the previous choice is selected.</TD>
+</TR>
+</TABLE><P>
+N.B. The <B>charts</B> choice will be available in a future release.
+</BODY>
+</HTML>

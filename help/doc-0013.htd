@@ -1,0 +1,6 @@
+<HTML>
+<HEAD><TITLE>List the tables</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+Switch to panel #2 to view the contents of the various tables. We have already used this panel to initialize <I>yatish</I> but afterwards it is mainly useful to compute the total and average durations of (a selection of) recorded timeslots (checkout the <A HREF="doc-0008.htm">status bar</A>). From time to time, you will also use this view to correct a mistyped record. 
+</BODY>
+</HTML>

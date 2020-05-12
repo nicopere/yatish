@@ -1,0 +1,11 @@
+<HTML>
+<HEAD><TITLE>Context menu commands</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+A context (right clic) menu is available inside panel #2.<P>
+It provides another access to the following <A HREF="doc-0023.htm#edit">Edit menu</A> commands:
+<UL>
+<LI><B>New record...</B>
+<LI><B>Reset filter</B>
+</UL>
+</BODY>
+</HTML>

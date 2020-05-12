@@ -1,0 +1,5 @@
+[MySQL]
+server=<domain name or IP address>
+database=<yatish database>
+user=<MySQL/MariaDB user>
+password=********

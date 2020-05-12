@@ -1,0 +1,9 @@
+<HTML>
+<HEAD><TITLE>Getting started</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+<U>Before using <I>yatish</I></U> you need to create a <TT>.yatish</TT> directory in your $HOME and copy there the squeleton SQLite database file which you will find at <TT>/usr/local/share/yatish/yatish.sqlite</TT> (Linux path).<P>
+Then when you start <I>yatish</I> for the first time, the selectors are empty and all controls are actually disabled:<P>
+<IMG SRC="img/empty.png"><P>
+<U>This is normal:</U> you must first populate the <I>yatish</I> tables with at least a few items. The procedure is described in the next pages and cannot be done on your behalf because it depends heavily on what you use <I>yatish</I> for.
+</BODY>
+</HTML>

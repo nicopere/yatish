@@ -1,0 +1,7 @@
+<HTML>
+<HEAD><TITLE>Panel #1</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+The first thing you see in <I>yatish</I> is panel #1. From here you can select an activity (i.e. a combination of project, task and tool) and <A HREF="doc-0012.htm">start recording</A> a new timeslot (by pressing the RECORD button):<P>
+<IMG SRC="img/startup.png">
+</BODY>
+</HTML>

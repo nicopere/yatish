@@ -1,0 +1,39 @@
+<HTML>
+<HEAD><TITLE>Keyboard shorcuts</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+<TABLE>
+<TR>
+<TD><B>File/Connect</B></TD>
+<TD>CTRL-C</TD>
+</TR>
+<TR>
+<TD><B>File/Update</B></TD>
+<TD>CTRL-U</TD>
+</TR>
+<TR>
+<TD><B>File/Quit</B></TD>
+<TD>CTRL-Q</TD>
+</TR>
+<TR>
+<TD><B>Edit/Tables</B></TD>
+<TD>CTRL-T</TD>
+</TR>
+<TR>
+<TD><B>Edit/New record...</B></TD>
+<TD>CTRL-N</TD>
+</TR>
+<TR>
+<TD><B>Edit/Reset filter</B></TD>
+<TD>CTRL-R</TD>
+</TR>
+<TR>
+<TD><B>Edit/Settings</B></TD>
+<TD>CTRL-S</TD>
+</TR>
+<TR>
+<TD><B>Help/User guide</B></TD>
+<TD>F1</TD>
+</TR>
+</TABLE>
+</BODY>
+</HTML>

@@ -1,0 +1,17 @@
+<HTML>
+<HEAD><TITLE>Edit project</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+<IMG SRC="img/editProject.png">
+<H3>Dialog fields</H3>
+<TABLE>
+<TR>
+<TD><B>Name</B></TD>
+<TD>An alphanumeric string (&~#$*!... will not input)</TD>
+</TR>
+<TR>
+<TD><B>Client</B></TD>
+<TD>Choose among the previously entered clients</TD>
+</TR>
+</TABLE>
+</BODY>
+</HTML>

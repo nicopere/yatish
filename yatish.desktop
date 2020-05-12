@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=YATiSh
+GenericName=Time tracker
+Comment=Time tracker for freelancers/homeworkers
+Icon=yatish.xpm
+Exec=yatish
+Terminal=false
+StartupNotify=false
+Categories=Utility;
