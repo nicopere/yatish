@@ -2,6 +2,9 @@
 <HEAD><TITLE>User interface</TITLE></HEAD>
 <BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
 The main frame of Yatish is composed of a <A HREF="doc-0005.htm">menu bar</A>, a notebook with two panels (<A HREF="doc-0006.htm">#1</A> and <A HREF="doc-0007.htm">#2</A>), and a <A HREF="doc-0008.htm">status bar</A>:<P>
-<IMG SRC="img/startup.png">
+<IMG SRC="img/startup.png"><P>
+The screenshot above was taken on Linux; here is the corresponding Windows picture:<P>
+<IMG SRC="img/startup_win.png"><P>
+N.B. Panel #3 (Charts) is empty so far, and hidden on Linux.
 </BODY>
 </HTML>

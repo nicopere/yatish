@@ -11,6 +11,8 @@
   * - Privacy: _yatish_ will not publish anything unless you do mean it,
   * and then only in a privately owned database.
   *
+  * \todo try and unify `yatish.cbp` and `yatish4windows.cbp` using C::B global variables
+  *
   * This file:
 > * Name:      yatishApp.cpp
 > * Purpose:   Code for Application Class
@@ -35,7 +37,9 @@ bool yatishApp::OnInit () {
     wxConfig::Set ( new wxConfig ("yatish", "EIF-services",
                                   wxEmptyString, wxEmptyString,
                                   wxCONFIG_USE_LOCAL_FILE|wxCONFIG_USE_SUBDIR) );
+#ifdef __WXGTK__
     wxStandardPaths::Get().SetInstallPrefix ("/usr/local"); // should be already there according to the wxwidgets doc...
+#endif
     yatishLocale = new wxLocale ( wxLANGUAGE_DEFAULT );
     yatishLocale->AddCatalog ("yatish");
 #ifdef NDEBUG

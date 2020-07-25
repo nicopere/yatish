@@ -107,7 +107,7 @@ yatishDlgTimeslot::yatishDlgTimeslot (yatishDBsqlite * p_db, long sql_id) {
     } else
         wxLogError ("Initialization of dates failed (yatishDlgTimeslot)");
     Fit(); SetMaxSize ( GetSize() ); // Fit() really needed here !
-    /** \todo TAB traversal broken by wx[Date|Time]PickerCtrl... (idem panel #1) */
+    /** \todo TAB traversal broken by wx[Date|Time]PickerCtrl... (idem panel #2) [no problem on Windows]*/
 }
 
 /** The dialog box is initially empty and only writes NEW records (the SAVE button is cancelled). */

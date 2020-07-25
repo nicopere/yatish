@@ -32,8 +32,16 @@ MySQL connection and application exit<P>
 Access yatish tables and preferences.<P>
 <TABLE>
 <TR>
+<TD><B>Activity</B></TD>
+<TD>Edit any table (switch to panel #1)</TD>
+</TR>
+<TR>
 <TD><B>Tables</B></TD>
 <TD>Edit any table (switch to panel #2)</TD>
+</TR>
+<TR>
+<TD><B>Charts</B></TD>
+<TD><I>Will be activated in a future release</I></TD>
 </TR>
 <TR>
 <TD><B>New record...</B></TD>
@@ -42,6 +50,30 @@ Access yatish tables and preferences.<P>
 <TR>
 <TD><B>Reset filter</B></TD>
 <TD>Reset the viewing <A HREF="doc-0019.htm">filter</A> (and <A HREF="doc-0007.htm">date interval</A>)</TD>
+</TR>
+<TR>
+<TD><B>Today</B></TD>
+<TD>Set the date interval to the present day</TD>
+</TR>
+<TR>
+<TD><B>This week</B></TD>
+<TD>Set the date interval to the present week</TD>
+</TR>
+<TR>
+<TD><B>This month</B></TD>
+<TD>Set the date interval to the present month</TD>
+</TR>
+<TR>
+<TD><B>Yesterday</B></TD>
+<TD>Set the date interval to the previous day</TD>
+</TR>
+<TR>
+<TD><B>Last week</B></TD>
+<TD>Set the date interval to the previous week</TD>
+</TR>
+<TR>
+<TD><B>Last month</B></TD>
+<TD>Set the date interval to the previous month</TD>
 </TR>
 <TR>
 <TD><B>Settings</B></TD>

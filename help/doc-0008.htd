@@ -5,11 +5,13 @@ It has 3 fields. From left to right:
 <OL>
 <LI>Clock: if evolving, it is the time elapsed since the beginning of the current timeslot. Frozen when the STOP button is pressed (panel #1). <TT>00:00:00</TT> at <I>yatish</I> onset.
 <LI>MySQL status: either OFF, ON or ERR, reflecting the state of the (optional) <A HREF="doc-0021.htm">MySQL/MariaDB connection</A>.
-<LI>Menu hint / Timeslot stats: a short description of menu commands is provided here, or when in panel #2 with <I>timeslot</I> table selected, the following indicators:
+<LI>Menu hint / Timeslot stats: a short description of menu commands is provided here, or when in panel #2 with the <I>timeslot</I> table selected, the following indicators:
 <OL>
 <LI>SUM: total duration of the currently selected timeslots (in work days of 7 hours);
-<LI>AVG: average duration of the currently selected timeslots (hours).
+<LI>AVG: average duration of the currently selected timeslots (hours);
+<LI>the count of currently selected timeslots (in brackets).
 </OL>
+<B>N.B.</B> These numbers depend on the <A HREF="doc-0007.htm">date interval</A> chosen, any <A HREF="doc-0019.htm">filter</A> applied and possibly the row limit in your <A HREF="doc-0020.htm">preferences</A>.
 </OL>
 </BODY>
 </HTML>

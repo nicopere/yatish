@@ -1,9 +1,9 @@
 <HTML>
-<HEAD><TITLE>Panel #2</TITLE></HEAD>
+<HEAD><TITLE>Panel 2</TITLE></HEAD>
 <BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
 Panel #2 (CTRL-T) lets you choose one of the <A HREF="doc-0041.htm"><I>yatish</I> tables</A> (directional arrows available), then lists its content:<P>
 <IMG SRC="img/list.png"><P>
-If (and only if) the <I>timeslot</I> table is chosen (as shown above), date picker controls are also activated, allowing you to narrow the timeslot list; by default the date interval is set to the entire range of recorded timeslots; you can reset the date interval with the <B>Edit/Reset filter</B> menu command (a.k.a. CTRL-R), which is also provided by the <A HREF="doc-0024.htm">context menu</A>.<P>
+If (and only if) the <I>timeslot</I> table is chosen (as shown above), date picker controls are also activated, allowing you to narrow the timeslot list; by default the date interval is set to the entire range of recorded timeslots; you can reset the date interval with the <B>Edit/Reset filter</B> menu command (a.k.a. CTRL-R), which is also provided in a <A HREF="doc-0024.htm">context menu</A>.<P>
 As its name implies, the <B>Reset filter</B> command also erases previous selections you may have made by clicking on a column title and choosing a value in the <A HREF="doc-0019.htm">filter dialog</A>. Any filtering thus selected is appended to the previous one and the current listing updated, until <B>Reset filter</B> is used. Not all columns can be filtered on: just click and see! (for the <I>timeslot</I> table those are the "Project", "Client", "Task" and "Tool" column titles, but not the "Date" and "Duration" ones)<P>
 An important feature of the list/edit panel, however, is to create, edit or delete records, even <I>timeslot</I> records (which should be started/stopped via panel #1, though). This functionality is accessible using the SHIFT key, as explained below.<P>
 Finally, the panel #2 is also useful because basic timeslot statistics for the current selection are automatically updated in the <A HREF="doc-0008.htm">status bar</A>.<P>

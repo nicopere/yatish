@@ -1,11 +1,25 @@
 <HTML>
 <HEAD><TITLE>Context menu commands</TITLE></HEAD>
 <BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
-A context (right clic) menu is available inside panel #2.<P>
-It provides another access to the following <A HREF="doc-0023.htm#edit">Edit menu</A> commands:
+A context (right clic) menu is available at three places inside <A HREF="doc-0007.htm">panel #2</A>:
+<OL>
+<LI>Inside the listing, the context menu provides another access to the following <A HREF="doc-0023.htm#edit">Edit menu</A> commands:
 <UL>
 <LI><B>New record...</B>
 <LI><B>Reset filter</B>
 </UL>
+<LI>Inside the first date, a context menu gives direct access to:
+<UL>
+<LI><B>Today</B>
+<LI><B>This week</B>
+<LI><B>This month</B>
+</UL>
+<LI>Inside the second date, it gives access to:
+<UL>
+<LI><B>Yesterday</B>
+<LI><B>Last week</B>
+<LI><B>Last month</B>
+</UL>
+</OL>
 </BODY>
 </HTML>

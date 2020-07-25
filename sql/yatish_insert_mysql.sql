@@ -3,33 +3,37 @@ INSERT INTO yatish_client (name) VALUES
   ('EIF');
 INSERT INTO yatish_task (name) VALUES
   ('Research'),
+  ('Sysadmin'),
   ('Development'),
-  ('Accounting'),
   ('Data'),
   ('Model'),
   ('Report'),
+  ('Accounting'),
   ('maths-sciences'),
   ('coordination'),
   ('vie sco et conseils'),
   ('examens, certifs'),
   ('(auto)formation');
 INSERT INTO yatish_tool (name) VALUES
-  ('blender/grass'),
-  ('basilisk/gerris/swat'),
-  ('drupal/dokuwiki'),
-  ('SACoche'),
+  ('Blender/Grass'),
+  ('Basilisk/Gerris/Swat'),
+  ('CodeBlocks/Poedit/HelpBlocks'),
+  ('Drupal/Dokuwiki'),
+  ('Pronote/SACoche'),
+  ('Pyromaths/GeoGebra')
+  ('Windows'),
   ('bash/C/C++/SQL'),
   ('web/pdf/books'),
-  ('bureautique-images'),
+  ('bureautique/images'),
   ('courriel'),
   ('secrétariat'),
   ('tél.'),
-  ('réunion-Rdv'),
+  ('réunion-RdV'),
   ('reporting-ERP'),
   ('forums/réseaux'),
   ('photocop/chariot'),
   ('correction copies'),
-  ('TICE/multimédia');
+  ('tice/multimédia');
 INSERT INTO yatish_project (name,client_id) VALUES
   ('DDL29',1),
   ('Portfolio',2),
@@ -37,8 +41,8 @@ INSERT INTO yatish_project (name,client_id) VALUES
 INSERT INTO yatish_activity (project_id,task_id,tool_id) VALUES
   (3,1,6),
   (3,2,5);
-INSERT INTO yatish_timeslot (start,stop,activity_id) VALUES
+/*INSERT INTO yatish_timeslot (start,stop,activity_id) VALUES
   ('2020-02-19 09:30:00','2020-02-19 10:45:00',1),
   ('2020-02-19 11:15:00','2020-02-19 13:20:00',2);
 SELECT sum(round((unix_timestamp(stop)-unix_timestamp(start))/3600.,1))
-  FROM yatish_timeslot GROUP BY activity_id;
+  FROM yatish_timeslot GROUP BY activity_id;*/

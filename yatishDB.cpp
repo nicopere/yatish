@@ -49,7 +49,7 @@ wxDatabase * yatishDB::GetDatabase (const wxString& configString) {
     wxDatabase * pDatabase;
     try {
         if ( configString.IsEmpty() ) {
-            wxString configPath = wxStandardPaths::Get().GetUserDataDir() + wxFILE_SEP_PATH + "yatish.auth";
+            wxString configPath = wxStandardPaths::Get().GetUserLocalDataDir() + wxFILE_SEP_PATH + "yatish.auth";
             if ( !wxFileName::FileExists (configPath) ) {
                 wxString msg;
                 msg.Printf (_("Authentication file '%s' not found"), configPath);

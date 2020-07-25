@@ -15,8 +15,16 @@
 <TD>CTRL-Q</TD>
 </TR>
 <TR>
+<TD><B>Edit/Activity</B></TD>
+<TD>CTRL-A</TD>
+</TR>
+<TR>
 <TD><B>Edit/Tables</B></TD>
 <TD>CTRL-T</TD>
+</TR>
+<TR>
+<TD><B>Edit/Charts</B></TD>
+<TD>CTRL-G <I>(not yet activated)</I></TD>
 </TR>
 <TR>
 <TD><B>Edit/New record...</B></TD>

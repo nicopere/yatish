@@ -11,9 +11,11 @@
 #define YATISHDB_H
 
 #include <wx/database/wxprec.h>
-#include <wx/wfstream.h>
+#include <wx/fileconf.h>
+#include <wx/filename.h>
 #include <wx/sstream.h>
 #include <wx/stdpaths.h>
+#include <wx/wfstream.h>
 
 enum tableID {
     client_tid, // 0
@@ -28,7 +30,7 @@ enum tableID {
  wxLogError ( "[%d] %s", e.GetErrorCode(), e.GetErrorMessage() );\
  return returnValue; }
 
-/** Provides a few basic methods and (static) members to interact with _yatish_ tables. 
+/** Provides a few basic methods and (static) members to interact with _yatish_ tables.
  * `yatishDB` and its daugters potentially raise `wxDatabaseException`s.
  * The list of _yatish_ error codes is centralized here for reference:
  *

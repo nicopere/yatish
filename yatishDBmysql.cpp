@@ -21,6 +21,8 @@ wxDatabase * yatishDBmysql::slaveDB = nullptr;
 /** \brief Mainly connects to the MySQL database specified in `yatish.auth`
  *
  * (initializing private member `slaveDB`).
+ *
+ * \todo optimize Download() & Upload() (wxPreparedStatement?)
  */
 yatishDBmysql::yatishDBmysql () {
     wxASSERT_MSG (slaveDB == nullptr, "There can be only one instance of yatishDBmysql.");
@@ -136,10 +138,6 @@ int yatishDBmysql::Commit () {
  */
 int yatishDBmysql::Upload () {
     if (!slaveDB || !masterDB) return 0;
-    if ( wxMessageBox ( _("Remote data (if any) will be\noverwritten by local ones."),
-                        _("Are you sure?"),
-                        wxICON_EXCLAMATION|wxOK|wxCANCEL|wxCANCEL_DEFAULT )
-         == wxCANCEL ) return 0;
     EmptySlaveTables();
     OutdateMasterTables();
     Insert() && InsertProject() && InsertActivity() && InsertTimeslot();
@@ -152,10 +150,6 @@ int yatishDBmysql::Upload () {
  */
 int yatishDBmysql::Download () {
     if (!slaveDB || !masterDB) return 0;
-    if ( wxMessageBox ( _("Local data (if any) will be\noverwritten by remote ones."),
-                        _("Are you sure?"),
-                        wxICON_EXCLAMATION|wxOK|wxCANCEL|wxCANCEL_DEFAULT )
-         == wxCANCEL ) return 0;
     EmptyMasterTables();
     DownloadNames() && DownloadProject() && DownloadActivity() && DownloadTimeslot();
     return errorCode;

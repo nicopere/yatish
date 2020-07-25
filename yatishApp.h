@@ -11,10 +11,10 @@
 #define YATISHAPP_H
 
 #include <wx/app.h>
-#include <wx/snglinst.h>
-#include <wx/stdpaths.h>
 #include <wx/config.h>
 #include <wx/fs_zip.h>
+#include <wx/snglinst.h>
+#include <wx/stdpaths.h>
 
 class yatishApp : public wxApp {
     public:

@@ -15,8 +15,8 @@
 #include <wx/spinctrl.h>
 //*)
 
-#include <wx/valgen.h>
 #include <wx/config.h>
+#include <wx/valgen.h>
 
 enum ChartLib {
     wxFreeChart, // 0

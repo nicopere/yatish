@@ -26,7 +26,7 @@ yatishDlgProject::yatishDlgProject (yatishDBsqlite * p_db, long sql_id) {
     pdb = p_db;
     id = sql_id;
     name = pdb->ReadName (project_tid, id);
-    textCtrlName->SetValidator ( wxTextValidator (wxFILTER_ALPHANUMERIC, &name) );
+    textCtrlName->SetValidator ( wxTextValidator (wxFILTER_ASCII, &name) );
     if ( !pdb->FillChoice (choiceClient, client_tid) )
         wxLogError ("Initialization of choiceClient failed (yatishDlgProject)");
     choice = pdb->ChoiceSelector (client_tid, id);
@@ -41,7 +41,7 @@ yatishDlgProject::yatishDlgProject (yatishDBsqlite * p_db) {
     pdb = p_db;
     buttonSave->Disable();
     name = wxEmptyString;
-    textCtrlName->SetValidator ( wxTextValidator (wxFILTER_ALPHANUMERIC, &name) );
+    textCtrlName->SetValidator ( wxTextValidator (wxFILTER_ASCII, &name) );
     if ( !pdb->FillChoice (choiceClient, client_tid) )
         wxLogError ("Initialization of choiceClient failed (yatishDlgProject)");
     choice = 0;

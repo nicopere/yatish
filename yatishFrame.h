@@ -11,31 +11,33 @@
 #define YATISHMAIN_H
 
 //(*Headers(yatishFrame)
-#include <wx/sizer.h>
-#include <wx/datectrl.h>
-#include <wx/listctrl.h>
-#include <wx/notebook.h>
 #include <wx/button.h>
-#include <wx/menu.h>
-#include <wx/dateevt.h>
-#include <wx/panel.h>
-#include <wx/statusbr.h>
-#include <wx/frame.h>
-#include <wx/textctrl.h>
 #include <wx/choice.h>
+#include <wx/datectrl.h>
+#include <wx/dateevt.h>
+#include <wx/frame.h>
+#include <wx/listctrl.h>
+#include <wx/menu.h>
+#include <wx/notebook.h>
+#include <wx/panel.h>
+#include <wx/sizer.h>
+#include <wx/stattext.h>
+#include <wx/statusbr.h>
+#include <wx/textctrl.h>
 #include <wx/timer.h>
 //*)
 
 #include <wx/aboutdlg.h>
 #include <wx/help.h>
+#include <wx/html/helpctrl.h>
 //#include "yatishApp.h"
-#include "yatishDBsqlite.h"
 #include "yatishDBmysql.h"
+#include "yatishDBsqlite.h"
+#include "yatishDlgActivity.h"
+#include "yatishDlgFilter.h"
 #include "yatishDlgName.h"
 #include "yatishDlgProject.h"
-#include "yatishDlgActivity.h"
 #include "yatishDlgTimeslot.h"
-#include "yatishDlgFilter.h"
 #include "yatishSettings.h"
 
 enum mysqlStatus {
@@ -86,11 +88,24 @@ class yatishFrame: public wxFrame {
         void OnMenuitemFileDownloadSelected(wxCommandEvent& event);
         void OnMenuitemEditSettingsSelected(wxCommandEvent& event);
         void OnHelp(wxCommandEvent& event);
+        void OnMenuitemEditTodaySelected(wxCommandEvent& event);
+        void OnMenuitemEditThisweekSelected(wxCommandEvent& event);
+        void OnMenuitemEditThismonthSelected(wxCommandEvent& event);
+        void OnMenuitemEditYestedaySelected(wxCommandEvent& event);
+        void OnMenuitemEditLastweekSelected(wxCommandEvent& event);
+        void OnMenuitemEditLastmonthSelected(wxCommandEvent& event);
+        void OnMenuitemEditActivitySelected(wxCommandEvent& event);
+        void OnMenuitemEditChartSelected(wxCommandEvent& event);
         //*)
+        void OnMenuitemEditActivityUpdate (wxUpdateUIEvent&);
         void OnMenuitemEditTableUpdate (wxUpdateUIEvent&);
+        void OnMenuitemEditChartUpdate (wxUpdateUIEvent&);
         void OnMenuitemEditNewUpdate (wxUpdateUIEvent&);
         void OnMenuitemEditResetUpdate (wxUpdateUIEvent&);
-        void OnContextMenu (wxContextMenuEvent&);
+        void OnMenuitemEditTodayUpdate (wxUpdateUIEvent&);
+        void OnContextMenu1 (wxContextMenuEvent&);
+        void OnContextMenu2 (wxContextMenuEvent&);
+        void OnContextMenu3 (wxContextMenuEvent&);
         //(*Identifiers(yatishFrame)
         static const long idChoiceProject;
         static const long idChoiceTask;
@@ -112,9 +127,17 @@ class yatishFrame: public wxFrame {
         static const long idFileUpload;
         static const long idFileDownload;
         static const long idFileQuit;
+        static const long idEditActivity;
         static const long idEditTable;
+        static const long idEditChart;
         static const long idEditNew;
         static const long idEditReset;
+        static const long idEditToday;
+        static const long idEditThisweek;
+        static const long idEditThismonth;
+        static const long idEditYesterday;
+        static const long idEditLastweek;
+        static const long idEditLastmonth;
         static const long idEditSettings;
         static const long idHelpUser;
         static const long idHelpAbout;
@@ -122,27 +145,25 @@ class yatishFrame: public wxFrame {
         static const long idTimer;
         //*)
         //(*Declarations(yatishFrame)
-        wxTimer timer;
-        wxDatePickerCtrl* datePicker1;
-        wxStatusBar* statusBar;
-        wxChoice* choiceProject;
-        wxChoice* choiceTask;
-        wxMenuItem* menuitemFileDownload;
-        wxChoice* choiceTable;
-        wxMenuItem* menuitemFileConnect;
-        wxNotebook* notebook;
-        wxButton* buttonStop;
-        wxMenuItem* menuitemFileUpload;
-        wxTextCtrl* textCtrl;
-        wxButton* buttonPDF;
-        wxMenuItem* menuitemEditReset;
-        wxChoice* choiceTool;
-        wxListCtrl* listCtrl;
-        wxMenuItem* menuitemEditNew;
         wxBoxSizer* BoxSizer1;
-        wxDatePickerCtrl* datePicker2;
-        wxMenuItem* menuitemFileUpdate;
+        wxButton* buttonPDF;
         wxButton* buttonStart;
+        wxButton* buttonStop;
+        wxChoice* choiceProject;
+        wxChoice* choiceTable;
+        wxChoice* choiceTask;
+        wxChoice* choiceTool;
+        wxDatePickerCtrl* datePicker1;
+        wxDatePickerCtrl* datePicker2;
+        wxListCtrl* listCtrl;
+        wxMenuItem* menuitemFileConnect;
+        wxMenuItem* menuitemFileDownload;
+        wxMenuItem* menuitemFileUpdate;
+        wxMenuItem* menuitemFileUpload;
+        wxNotebook* notebook;
+        wxStatusBar* statusBar;
+        wxTextCtrl* textCtrl;
+        wxTimer timer;
         //*)
         DECLARE_EVENT_TABLE()
 };

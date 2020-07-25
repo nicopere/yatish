@@ -26,23 +26,6 @@
   option (BUILD_SAMPLE "Build Sample Application" ON) 
   #Build type
   #set(CMAKE_BUILD_TYPE Debug)
-***************
-*** 58,64 ****
-  
-  #Support for MySQL?
-  if (ENABLE_MYSQL)   
-!     find_package(MySQL)
-      if(MYSQL_FOUND)
-          #add MySQL include. libs are seemed to dealt with in find_package
-          include_directories(${MYSQL_INCLUDE_DIR})         
---- 59,65 ----
-  
-  #Support for MySQL?
-  if (ENABLE_MYSQL)   
-!     find_package(MySQL REQUIRED)
-      if(MYSQL_FOUND)
-          #add MySQL include. libs are seemed to dealt with in find_package
-          include_directories(${MYSQL_INCLUDE_DIR})         
 *** samples/wxDatabaseApp.cpp	2020-01-10 12:22:05.873802748 +0100
 --- samples/wxDatabaseApp.cpp.new	2020-01-10 12:20:14.900708580 +0100
 ***************

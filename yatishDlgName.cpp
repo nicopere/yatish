@@ -26,7 +26,7 @@ yatishDlgName::yatishDlgName (yatishDBsqlite * p_db, tableID t_id, long sql_id) 
     tid = t_id;
     id = sql_id;
     name = pdb->ReadName (tid, id);
-    textCtrl->SetValidator ( wxTextValidator (wxFILTER_ALPHANUMERIC, &name) );
+    textCtrl->SetValidator ( wxTextValidator (wxFILTER_ASCII, &name) );
     SetLabel ( wxString(_("Table: yatish_") ) + yatishDB::tableName[tid] );
     Fit(); SetMaxSize ( GetSize() );
 }
@@ -39,7 +39,7 @@ yatishDlgName::yatishDlgName (yatishDBsqlite * p_db, tableID t_id) {
     tid = t_id;
     buttonSave->Disable();
     name = wxEmptyString;
-    textCtrl->SetValidator ( wxTextValidator (wxFILTER_ALPHANUMERIC, &name) );
+    textCtrl->SetValidator ( wxTextValidator (wxFILTER_ASCII, &name) );
     SetLabel ( wxString(_("Table: yatish_") ) + yatishDB::tableName[tid] );
     Fit(); SetMaxSize ( GetSize() );
 }

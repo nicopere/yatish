@@ -1,15 +1,19 @@
 <HTML>
 <HEAD><TITLE>MySQL/MariaDB</TITLE></HEAD>
 <BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
-An important feature of <I>yatish</I> is its ability to connect to a MySQL/MariaDB server. One can use this functionality to:
+An important feature of <I>yatish</I> is its ability to connect to a MySQL/MariaDB server. One can use this <U>optional</U> functionality to:<P>
 <UL>
 <LI>backup data;
 <LI>synchronise devices if working on several ones;
 <LI>provide willingfull access to your data (a <U>reader</U> version of <I>yatish</I> will be provided in the future).
 </UL><P>
-But then you must of course provide credentials. On a Linux system <I>yatish</I> expects to find a <TT>yatish.auth</TT> file in your <TT>~/.yatish</TT> directory (where your <I>yatish</I> database and settings are also stored). Check that you alone have read/write access to this file! (<TT>chmod 600</TT> on Linux)<P>
+But then you must of course provide credentials: <I>yatish</I> expects to find a <TT>yatish.auth</TT> file alongside <TT>yatish.sqlite</TT> in your <A HREF="doc-0009.htm">personal data directory</A>.<P>
+You had better check that you alone have read/write access to this file:<P>
+<UL>
+<LI>Linux: <TT>chmod 600</TT>;
+<LI>Windows: Right Click>Properties>Security.
+</UL><P>
 The <TT>yatish.auth</TT> must follow this template
-(which is also provided in <TT>/usr/local/share/yatish/</TT> on Linux):
 <PRE>
 [MySQL]
 server=xxx   #domain name or IP address
@@ -17,5 +21,10 @@ database=yyy #yatish database
 user=zzz     #MySQL/MariaDB user
 password=***
 </PRE>
+This template is also provided system-wide for you to copy:<P> 
+<UL>
+<LI>Linux: <TT>/usr/local/share/yatish/yatish.auth</TT>;
+<LI>Windows: <TT>C:\\Windows\\Program files\\Yatish\\sql\\yatish.auth</TT>.
+</UL>
 </BODY>
 </HTML>

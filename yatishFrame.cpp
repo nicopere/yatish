@@ -16,8 +16,8 @@ const char * not_used = _("translator-credits");
 // ...when a locale is defined and wxAboutDialogInfo::AddTranslator() is not called
 
 //(*InternalHeaders(yatishFrame)
-#include <wx/string.h>
 #include <wx/intl.h>
+#include <wx/string.h>
 //*)
 
 //(*IdInit(yatishFrame)
@@ -41,9 +41,17 @@ const long yatishFrame::idFileUpdate = wxNewId();
 const long yatishFrame::idFileUpload = wxNewId();
 const long yatishFrame::idFileDownload = wxNewId();
 const long yatishFrame::idFileQuit = wxNewId();
+const long yatishFrame::idEditActivity = wxNewId();
 const long yatishFrame::idEditTable = wxNewId();
+const long yatishFrame::idEditChart = wxNewId();
 const long yatishFrame::idEditNew = wxNewId();
 const long yatishFrame::idEditReset = wxNewId();
+const long yatishFrame::idEditToday = wxNewId();
+const long yatishFrame::idEditThisweek = wxNewId();
+const long yatishFrame::idEditThismonth = wxNewId();
+const long yatishFrame::idEditYesterday = wxNewId();
+const long yatishFrame::idEditLastweek = wxNewId();
+const long yatishFrame::idEditLastmonth = wxNewId();
 const long yatishFrame::idEditSettings = wxNewId();
 const long yatishFrame::idHelpUser = wxNewId();
 const long yatishFrame::idHelpAbout = wxNewId();
@@ -54,33 +62,46 @@ const long yatishFrame::idTimer = wxNewId();
 BEGIN_EVENT_TABLE (yatishFrame, wxFrame)
     //(*EventTable(yatishFrame)
     //*)
+    EVT_UPDATE_UI(idEditActivity, yatishFrame::OnMenuitemEditActivityUpdate)
     EVT_UPDATE_UI(idEditTable, yatishFrame::OnMenuitemEditTableUpdate)
+    EVT_UPDATE_UI(idEditChart, yatishFrame::OnMenuitemEditChartUpdate)
     EVT_UPDATE_UI(idEditNew, yatishFrame::OnMenuitemEditNewUpdate)
     EVT_UPDATE_UI(idEditReset, yatishFrame::OnMenuitemEditResetUpdate)
-    EVT_CONTEXT_MENU (yatishFrame::OnContextMenu)
+    EVT_UPDATE_UI_RANGE(idEditToday, idEditLastmonth, yatishFrame::OnMenuitemEditTodayUpdate)
 END_EVENT_TABLE()
 
 yatishFrame::yatishFrame (wxWindow* parent, wxWindowID id) {
     //(*Initialize(yatishFrame)
-    wxStaticBoxSizer* StaticBoxSizer2;
-    wxPanel* panelList;
-    wxPanel* panelCurrent;
+    wxBoxSizer* BoxSizer2;
+    wxBoxSizer* BoxSizer3;
+    wxBoxSizer* BoxSizer4;
+    wxBoxSizer* BoxSizer5;
+    wxMenu* Menu1;
+    wxMenu* Menu2;
+    wxMenu* Menu3;
+    wxMenuBar* menuBar;
+    wxMenuItem* menuitemEditActivity;
+    wxMenuItem* menuitemEditChart;
+    wxMenuItem* menuitemEditLastmonth;
+    wxMenuItem* menuitemEditLastweek;
+    wxMenuItem* menuitemEditNew;
+    wxMenuItem* menuitemEditReset;
+    wxMenuItem* menuitemEditSettings;
+    wxMenuItem* menuitemEditTable;
+    wxMenuItem* menuitemEditThismonth;
+    wxMenuItem* menuitemEditThisweek;
+    wxMenuItem* menuitemEditToday;
+    wxMenuItem* menuitemEditYesteday;
+    wxMenuItem* menuitemFileQuit;
     wxMenuItem* menuitemHelpAbout;
     wxMenuItem* menuitemHelpUser;
-    wxMenuBar* menuBar;
-    wxBoxSizer* BoxSizer3;
-    wxMenu* Menu1;
-    wxMenu* Menu3;
-    wxBoxSizer* BoxSizer2;
-    wxStaticBoxSizer* StaticBoxSizer3;
-    wxMenuItem* menuitemEditTable;
-    wxBoxSizer* BoxSizer4;
     wxPanel* panelChart;
-    wxMenuItem* menuitemFileQuit;
-    wxMenu* Menu2;
-    wxMenuItem* menuitemEditSettings;
-    wxBoxSizer* BoxSizer5;
+    wxPanel* panelCurrent;
+    wxPanel* panelList;
     wxStaticBoxSizer* StaticBoxSizer1;
+    wxStaticBoxSizer* StaticBoxSizer2;
+    wxStaticBoxSizer* StaticBoxSizer3;
+    wxStaticText* StaticText1;
 
     Create(parent, wxID_ANY, _("YATiSh"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("wxID_ANY"));
     BoxSizer1 = new wxBoxSizer(wxVERTICAL);
@@ -136,10 +157,11 @@ yatishFrame::yatishFrame (wxWindow* parent, wxWindowID id) {
     BoxSizer4->Fit(panelList);
     BoxSizer4->SetSizeHints(panelList);
     panelChart = new wxPanel(notebook, idPanelChart, wxDefaultPosition, wxDefaultSize, 0, _T("idPanelChart"));
+    StaticText1 = new wxStaticText(panelChart, wxID_ANY, _("Coming soon..."), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
     notebook->AddPage(panelCurrent, _("Current activity"), false);
     notebook->AddPage(panelList, _("List/Edit"), false);
     notebook->AddPage(panelChart, _("Charts"), false);
-    BoxSizer1->Add(notebook, 3, wxALL|wxEXPAND, 5);
+    BoxSizer1->Add(notebook, 3, wxALL|wxEXPAND, 0);
     textCtrl = new wxTextCtrl(this, idTextCtrl, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxTE_READONLY, wxDefaultValidator, _T("idTextCtrl"));
     BoxSizer1->Add(textCtrl, 1, wxALL|wxEXPAND, 5);
     SetSizer(BoxSizer1);
@@ -161,12 +183,31 @@ yatishFrame::yatishFrame (wxWindow* parent, wxWindowID id) {
     Menu1->Append(menuitemFileQuit);
     menuBar->Append(Menu1, _("&File"));
     Menu2 = new wxMenu();
+    menuitemEditActivity = new wxMenuItem(Menu2, idEditActivity, _("&Activity\tCtrl-A"), _("Start/stop current activity"), wxITEM_NORMAL);
+    Menu2->Append(menuitemEditActivity);
     menuitemEditTable = new wxMenuItem(Menu2, idEditTable, _("&Tables\tCtrl-T"), _("Edit any table"), wxITEM_NORMAL);
     Menu2->Append(menuitemEditTable);
+    menuitemEditChart = new wxMenuItem(Menu2, idEditChart, _("&Charts\tCtrl-G"), _("Look at various charts"), wxITEM_NORMAL);
+    Menu2->Append(menuitemEditChart);
+    Menu2->AppendSeparator();
     menuitemEditNew = new wxMenuItem(Menu2, idEditNew, _("&New record...\tCtrl-N"), _("Add a record to the currently selected table"), wxITEM_NORMAL);
     Menu2->Append(menuitemEditNew);
     menuitemEditReset = new wxMenuItem(Menu2, idEditReset, _("&Reset filter\tCtrl-R"), _("Reset the viewing filter"), wxITEM_NORMAL);
     Menu2->Append(menuitemEditReset);
+    Menu2->AppendSeparator();
+    menuitemEditToday = new wxMenuItem(Menu2, idEditToday, _("Today"), _("Time interval to show: today"), wxITEM_NORMAL);
+    Menu2->Append(menuitemEditToday);
+    menuitemEditThisweek = new wxMenuItem(Menu2, idEditThisweek, _("This week"), _("Time interval to show: this week"), wxITEM_NORMAL);
+    Menu2->Append(menuitemEditThisweek);
+    menuitemEditThismonth = new wxMenuItem(Menu2, idEditThismonth, _("This month"), _("Time interval to show: this month"), wxITEM_NORMAL);
+    Menu2->Append(menuitemEditThismonth);
+    menuitemEditYesteday = new wxMenuItem(Menu2, idEditYesterday, _("Yesterday"), _("Time interval to show: yesterday"), wxITEM_NORMAL);
+    Menu2->Append(menuitemEditYesteday);
+    menuitemEditLastweek = new wxMenuItem(Menu2, idEditLastweek, _("Last week"), _("Time interval to show: last week"), wxITEM_NORMAL);
+    Menu2->Append(menuitemEditLastweek);
+    menuitemEditLastweek->Enable(false);
+    menuitemEditLastmonth = new wxMenuItem(Menu2, idEditLastmonth, _("Last month"), _("Time interval to show: last month"), wxITEM_NORMAL);
+    Menu2->Append(menuitemEditLastmonth);
     Menu2->AppendSeparator();
     menuitemEditSettings = new wxMenuItem(Menu2, idEditSettings, _("&Settings...\tCtrl-S"), _("Set user preferences"), wxITEM_NORMAL);
     Menu2->Append(menuitemEditSettings);
@@ -201,15 +242,26 @@ yatishFrame::yatishFrame (wxWindow* parent, wxWindowID id) {
     Connect(idFileUpload,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&yatishFrame::OnMenuitemFileUploadSelected);
     Connect(idFileDownload,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&yatishFrame::OnMenuitemFileDownloadSelected);
     Connect(idFileQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&yatishFrame::OnQuit);
+    Connect(idEditActivity,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&yatishFrame::OnMenuitemEditActivitySelected);
     Connect(idEditTable,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&yatishFrame::OnMenuitemEditTableSelected);
+    Connect(idEditChart,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&yatishFrame::OnMenuitemEditChartSelected);
     Connect(idEditNew,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&yatishFrame::OnMenuitemEditNewSelected);
     Connect(idEditReset,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&yatishFrame::OnMenuitemEditResetSelected);
+    Connect(idEditToday,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&yatishFrame::OnMenuitemEditTodaySelected);
+    Connect(idEditThisweek,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&yatishFrame::OnMenuitemEditThisweekSelected);
+    Connect(idEditThismonth,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&yatishFrame::OnMenuitemEditThismonthSelected);
+    Connect(idEditYesterday,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&yatishFrame::OnMenuitemEditYestedaySelected);
+    Connect(idEditLastweek,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&yatishFrame::OnMenuitemEditLastweekSelected);
+    Connect(idEditLastmonth,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&yatishFrame::OnMenuitemEditLastmonthSelected);
     Connect(idEditSettings,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&yatishFrame::OnMenuitemEditSettingsSelected);
     Connect(idHelpUser,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&yatishFrame::OnHelp);
     Connect(idHelpAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&yatishFrame::OnAbout);
     Connect(idTimer,wxEVT_TIMER,(wxObjectEventFunction)&yatishFrame::OnTimerTrigger);
     Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&yatishFrame::OnClose);
     //*)
+    datePicker1->Bind(wxEVT_CONTEXT_MENU, &yatishFrame::OnContextMenu1, this);
+    datePicker2->Bind(wxEVT_CONTEXT_MENU, &yatishFrame::OnContextMenu2, this);
+    listCtrl->Bind(wxEVT_CONTEXT_MENU, &yatishFrame::OnContextMenu3, this);
     SetIcon ( wxIcon (yatish_xpm) );
     yatishHelp.Initialize (wxStandardPaths::Get().GetDataDir() + wxFILE_SEP_PATH + "yatish");
     buttonStop->Disable(); clockStart = wxDateTime::Now();
@@ -386,7 +438,7 @@ void yatishFrame::OnMenuitemFileUpdateSelected (wxCommandEvent& event) {
         return;
     }
     int err = slaveDB->Commit();
-    if (err == 2013) {
+    if (err == 2006 || err == 2013) {
         wxLogMessage (_("MySQL connection timed out: try to reconnect...") );
         UpdateStatus (mysql_err);
         ToggleConnect();
@@ -394,8 +446,14 @@ void yatishFrame::OnMenuitemFileUpdateSelected (wxCommandEvent& event) {
 }
 
 void yatishFrame::OnMenuitemFileUploadSelected (wxCommandEvent& event) {
+    if ( wxMessageBox ( _("Remote data (if any) will be\noverwritten by local ones."),
+                        _("Are you sure?"),
+                        wxICON_EXCLAMATION|wxOK|wxCANCEL|wxCANCEL_DEFAULT )
+         == wxCANCEL ) return;
+    SetStatusText (_("Please wait, working..."), 2);
     int err = slaveDB->Upload();
-    if (err == 2013) {
+    SetStatusText (wxEmptyString, 2);
+    if (err == 2006 || err == 2013) {
         wxLogMessage (_("MySQL connection timed out: try to reconnect...") );
         UpdateStatus (mysql_err);
         ToggleConnect();
@@ -403,22 +461,46 @@ void yatishFrame::OnMenuitemFileUploadSelected (wxCommandEvent& event) {
 }
 
 void yatishFrame::OnMenuitemFileDownloadSelected (wxCommandEvent& event) {
+    if ( wxMessageBox ( _("Local data (if any) will be\noverwritten by remote ones."),
+                        _("Are you sure?"),
+                        wxICON_EXCLAMATION|wxOK|wxCANCEL|wxCANCEL_DEFAULT )
+         == wxCANCEL ) return;
+    SetStatusText (_("Please wait, working..."), 2);
     int err = slaveDB->Download();
-    if (err == 2013) {
+    SetStatusText (wxEmptyString, 2);
+    if (err == 2006 || err == 2013) {
         wxLogMessage (_("MySQL connection timed out: try to reconnect...") );
         UpdateStatus (mysql_err);
         ToggleConnect();
+    } else {
+        int page = notebook->GetSelection();
+        if (page == 0) ResetChoices();
+        if (page == 1) {
+            ResetPickers();
+            UpdateRows ( (tableID) choiceTable->GetSelection() );
+        }
     }
-    if ( !err && notebook->GetSelection() == 1 )
-        UpdateRows ( (tableID) choiceTable->GetSelection() );
 }
 
+
+void yatishFrame::OnMenuitemEditActivitySelected(wxCommandEvent& event) {
+    notebook->SetSelection (0);
+}
+void yatishFrame::OnMenuitemEditActivityUpdate (wxUpdateUIEvent& event) {
+    event.Enable (notebook->GetSelection() != 0);
+}
 void yatishFrame::OnMenuitemEditTableSelected (wxCommandEvent& event) {
     notebook->SetSelection (1);
 }
-
 void yatishFrame::OnMenuitemEditTableUpdate (wxUpdateUIEvent& event) {
     event.Enable (notebook->GetSelection() != 1);
+}
+void yatishFrame::OnMenuitemEditChartSelected(wxCommandEvent& event) {
+    notebook->SetSelection (2);
+}
+void yatishFrame::OnMenuitemEditChartUpdate (wxUpdateUIEvent& event) {
+  //event.Enable (notebook->GetSelection() != 2); // Coming soon...
+    event.Enable (false);
 }
 
 void yatishFrame::OnMenuitemEditNewSelected (wxCommandEvent& event) {
@@ -437,7 +519,11 @@ void yatishFrame::OnMenuitemEditNewSelected (wxCommandEvent& event) {
         yatishDlgTimeslot dlg (&masterDB);
         dlgEnd = dlg.ShowModal();
     }
-    if (dlgEnd != wxID_CANCEL) UpdateRows (tid);
+    if (dlgEnd != wxID_CANCEL) {
+        datePicker2->SetValue ( masterDB.Last() );
+        masterDB.SetLastDay ( datePicker2->GetValue() + wxDateSpan::Day() );
+        UpdateRows (tid);
+    }
 }
 
 void yatishFrame::OnMenuitemEditNewUpdate (wxUpdateUIEvent& event) {
@@ -456,10 +542,94 @@ void yatishFrame::OnMenuitemEditResetUpdate (wxUpdateUIEvent& event) {
     event.Enable (notebook->GetSelection() == 1 && filterAvailable);
 }
 
-void yatishFrame::OnContextMenu(wxContextMenuEvent& event) {
+void yatishFrame::OnMenuitemEditTodaySelected(wxCommandEvent& event) {
+    wxDateTime dt = wxDateTime::Today();
+    datePicker2->SetValue (dt);
+    datePicker1->SetValue (dt);
+    masterDB.SetFirstDay ( datePicker1->GetValue() );
+    masterDB.SetLastDay  ( datePicker2->GetValue() + wxDateSpan::Day() );
+    UpdateRows (timeslot_tid);
+}
+
+void yatishFrame::OnMenuitemEditTodayUpdate (wxUpdateUIEvent& event) {
+    tableID tid = (tableID) choiceTable->GetSelection();
+    event.Enable (notebook->GetSelection() == 1 && tid == timeslot_tid);
+}
+
+void yatishFrame::OnMenuitemEditThisweekSelected(wxCommandEvent& event) {
+    wxDateTime dt = wxDateTime::Today();
+    datePicker2->SetValue (dt);
+    dt.SetToPrevWeekDay (wxDateTime::Mon);
+    datePicker1->SetValue (dt);
+    masterDB.SetFirstDay ( datePicker1->GetValue() );
+    masterDB.SetLastDay  ( datePicker2->GetValue() + wxDateSpan::Day() );
+    UpdateRows (timeslot_tid);
+}
+
+void yatishFrame::OnMenuitemEditThismonthSelected(wxCommandEvent& event) {
+    wxDateTime dt = wxDateTime::Today();
+    datePicker2->SetValue (dt);
+    dt.SetDay (1);
+    datePicker1->SetValue (dt);
+    masterDB.SetFirstDay ( datePicker1->GetValue() );
+    masterDB.SetLastDay  ( datePicker2->GetValue() + wxDateSpan::Day() );
+    UpdateRows (timeslot_tid);
+}
+
+void yatishFrame::OnMenuitemEditYestedaySelected(wxCommandEvent& event) {
+    wxDateTime dt = wxDateTime::Today();
+    dt -= wxDateSpan::Day();
+    datePicker2->SetValue (dt);
+    datePicker1->SetValue (dt);
+    masterDB.SetFirstDay ( datePicker1->GetValue() );
+    masterDB.SetLastDay  ( datePicker2->GetValue() + wxDateSpan::Day() );
+    UpdateRows (timeslot_tid);
+}
+
+void yatishFrame::OnMenuitemEditLastweekSelected(wxCommandEvent& event) {
+    wxDateTime dt = wxDateTime::Today();
+    dt -= wxDateSpan::Week();
+    dt.SetToNextWeekDay (wxDateTime::Sun);
+    datePicker2->SetValue (dt);
+    dt.SetToPrevWeekDay (wxDateTime::Mon);
+    datePicker1->SetValue (dt);
+    masterDB.SetFirstDay ( datePicker1->GetValue() );
+    masterDB.SetLastDay  ( datePicker2->GetValue() + wxDateSpan::Day() );
+    UpdateRows (timeslot_tid);
+}
+
+void yatishFrame::OnMenuitemEditLastmonthSelected(wxCommandEvent& event) {
+    wxDateTime dt = wxDateTime::Today();
+    dt -= wxDateSpan::Month();
+    dt.SetToLastMonthDay();
+    datePicker2->SetValue (dt);
+    dt.SetDay (1);
+    datePicker1->SetValue (dt);
+    masterDB.SetFirstDay ( datePicker1->GetValue() );
+    masterDB.SetLastDay  ( datePicker2->GetValue() + wxDateSpan::Day() );
+    UpdateRows (timeslot_tid);
+}
+
+void yatishFrame::OnContextMenu1(wxContextMenuEvent& event) {
     wxMenu menu;
-    menu.Append (idEditNew, _("New record..."), _("Add a record to the currently selected table") );
-    menu.Append (idEditReset, _("Reset filter"), _("Reset the viewing filter") );
+    menu.Append ( idEditToday, _("Today"), _("Time interval to show: today") );
+    menu.Append ( idEditThisweek, _("This week"), _("Time interval to show: this week") );
+    menu.Append ( idEditThismonth, _("This month"), _("Time interval to show: this month") );
+    PopupMenu (&menu);
+}
+
+void yatishFrame::OnContextMenu2(wxContextMenuEvent& event) {
+    wxMenu menu;
+    menu.Append ( idEditYesterday, _("Yesterday"), _("Time interval to show: yesterday") );
+    menu.Append ( idEditLastweek, _("Last week"), _("Time interval to show: last week") );
+    menu.Append ( idEditLastmonth, _("Last month"), _("Time interval to show: last month") );
+    PopupMenu (&menu);
+}
+
+void yatishFrame::OnContextMenu3(wxContextMenuEvent& event) {
+    wxMenu menu;
+    menu.Append ( idEditNew, _("New record..."), _("Add a record to the currently selected table") );
+    menu.Append ( idEditReset, _("Reset filter"), _("Reset the viewing filter") );
   //wxPoint pos = ScreenToClient ( event.GetPosition() );
   //PopupMenu (&menu, pos);
     PopupMenu (&menu);
@@ -474,7 +644,7 @@ void yatishFrame::OnMenuitemEditSettingsSelected (wxCommandEvent& event) {
     if (settings.log2text != oldLog) ToggleLog();
     masterDB.SetLimit (settings.limitRow, settings.rowLimit);
     tableID tid = (tableID) choiceTable->GetSelection();
-    if (tid == timeslot_tid) UpdateRows (tid);
+    if (notebook->GetSelection() == 1) UpdateRows (tid);
 }
 
 void yatishFrame::OnHelp (wxCommandEvent& event) {
@@ -484,12 +654,12 @@ void yatishFrame::OnHelp (wxCommandEvent& event) {
 void yatishFrame::OnAbout (wxCommandEvent& event) {
     wxAboutDialogInfo info;
     info.SetName ("Yatish");
-    info.SetVersion ("0.1");
+    info.SetVersion ("0.2");
     wxString what (_("Yet Another TIme SHeet\n"
                      "Time tracking for freelancers/homeworkers\n"
                      "Built with:\n") );
     what << wxVERSION_STRING;
-    what << "\nwxDatabase 1.0.0\nCode::Blocks 16.01\nwxSmith 1.0";
+    what << "\n+wxDatabase\n+Code::Blocks\n+wxSmith";
     info.SetDescription (what);
     info.SetCopyright ("(C) 2020 EIF-services");
     info.SetLicence ("This program is free software:\n"
@@ -504,7 +674,7 @@ void yatishFrame::OnAbout (wxCommandEvent& event) {
     "You should have received a copy of the GNU General Public License\n"
     "along with this program.  If not, see https://www.gnu.org/licenses/");
     info.SetWebSite("https://www.eif-services.eu/yatish");
-    wxString me (L"Nicolas P\u00E9renne");
+    wxString me (L"Nicolas P\u00E9renne <nicolas.perenne@eif-services.eu>");
     info.AddDeveloper (me);
     wxAboutBox (info, this);
 }
@@ -518,8 +688,7 @@ void yatishFrame::OnNotebookPageChanged (wxNotebookEvent& event) {
     }
     if (event.GetSelection() == 1) {
         masterDB.ClearFilter();
-        if (event.GetOldSelection() == 0) // there might be a new timeslot
-            ResetPickers();
+        ResetPickers();
         UpdateRows ( (tableID) choiceTable->GetSelection() );
     }
 }
@@ -617,7 +786,10 @@ void yatishFrame::OnListColumnClick (wxListEvent& event) {
         yatishDlgFilter dlg (&masterDB, tool_tid);
         ret = dlg.ShowModal();
     }
-    if (ret == wxID_OK) UpdateRows (tid);
+    if (ret == wxID_OK) {
+        UpdateRows (tid);
+        ResetPickers();
+    }
 }
 
 void yatishFrame::OnListKeyDown (wxListEvent& event) {

@@ -19,7 +19,8 @@ yatishDBsqlite::yatishDBsqlite () {
     limitRow = false; rowLimit = 100;
     wxASSERT_MSG (masterDB == nullptr, "There can be only one instance of yatishDBsqlite.");
 #ifdef NDEBUG
-    wxString databasePath = wxStandardPaths::Get().GetUserDataDir() + wxFILE_SEP_PATH + "yatish.sqlite";
+    wxString databasePath = wxStandardPaths::Get().GetUserLocalDataDir() + wxFILE_SEP_PATH + "yatish.sqlite";
+    databasePath.Replace ("\\", "\\\\" ); // need to escape (Windows) anti-slashes
 #else
     wxString databasePath = "yatish.sqlite";
 #endif
@@ -142,7 +143,7 @@ int yatishDBsqlite::ChoiceSelector (tableID tid, long id) {
 
 /** Starts a new row in the timeslot table.
  * Also inserts the corresponding row in the activity table, if necessary.
- * \param project,task,tool item currently selected in panel #1 (0-based index)
+ * \param project,task,tool 0-based index of the item currently selected in panel #1
  * \return `false` if something went wrong
  */
 bool yatishDBsqlite::StartTimeslot (int project, int task, int tool) {
@@ -255,28 +256,29 @@ bool yatishDBsqlite::FillList (wxListCtrl * lst, tableID tid) {
             break;
         case timeslot_tid:
             if (colmax != 6) return false;
-            sql.Printf("SELECT t.id,t.start,t.stop,p.name,c.name,tk.name,tl.name"
-                       " FROM ((((yatish_timeslot AS t"
-                       " INNER JOIN yatish_activity AS a ON t.activity_id = a.id)"
-                       " INNER JOIN yatish_project AS p ON a.project_id = p.id)"
-                       " INNER JOIN yatish_client AS c ON p.client_id = c.id)"
-                       " INNER JOIN yatish_task AS tk ON a.task_id = tk.id)"
-                       " INNER JOIN yatish_tool AS tl ON a.tool_id = tl.id"
-                       " WHERE t.sync <> 'D' AND t.start BETWEEN '%s' AND '%s'"
-                       , firstDay, lastDay);
+            sql.Printf ("SELECT t.id,t.start,t.stop,p.name,c.name,tk.name,tl.name"
+                        " FROM ((((yatish_timeslot AS t"
+                        " INNER JOIN yatish_activity AS a ON t.activity_id = a.id)"
+                        " INNER JOIN yatish_project AS p ON a.project_id = p.id)"
+                        " INNER JOIN yatish_client AS c ON p.client_id = c.id)"
+                        " INNER JOIN yatish_task AS tk ON a.task_id = tk.id)"
+                        " INNER JOIN yatish_tool AS tl ON a.tool_id = tl.id"
+                        " WHERE t.sync <> 'D' AND t.start BETWEEN '%s' AND '%s'"
+                        , firstDay, lastDay);
             sql += filter;
             if (limitRow)
-              sql += wxString::Format(" ORDER BY t.id DESC LIMIT %d;", rowLimit);
+              sql += wxString::Format (" ORDER BY t.id DESC LIMIT %d;", rowLimit);
             else
               sql += " ORDER BY t.id DESC;";
             break;
         default:
             return false;
     }
-    // for timeslot_tid only...
+    // { for timeslot_tid only...
     wxTimeSpan span;
     slotCount = 0;
     totalSpan = wxTimeSpan::Hours (0);
+    // }
     try {
         wxDatabaseResultSet * results = masterDB->RunQueryWithResults (sql);
         long row = 0,
@@ -292,7 +294,7 @@ bool yatishDBsqlite::FillList (wxListCtrl * lst, tableID tid) {
                     span = stop - start;
                     slotCount++; totalSpan += span;
                     // update second item of the row
-                    lst->SetItem ( row_index, 1, span.Format("%H:%M:%S") );
+                    lst->SetItem ( row_index, 1, span.Format ("%H:%M:%S") );
                 }
                 colmin = 2;
             } else {
@@ -350,7 +352,8 @@ wxString yatishDBsqlite::FilteredTotal () {
     totalDays = totalSeconds / 3600.; // hours still...
     averageHours = totalDays / slotCount;
     totalDays /= 7.;                  // ...nowadays!
-    return wxString::Format(_("SUM: %.1f days | AVG: %.1f hours"), totalDays, averageHours);
+    return wxString::Format(_("SUM: %.1f days | AVG: %.1f hours (x%ld)"),
+                            totalDays, averageHours, slotCount);
 }
 
 /** Sets private member `firstDay` (for future SQL queries).
@@ -369,7 +372,7 @@ void yatishDBsqlite::SetLastDay (const wxDateTime& dt) {
     lastDay = dt.ToUTC().FormatISOCombined();
 }
 
-/** Obtains the minimum time in column _start_ of table _yatish_timeslot_.
+/** Obtains the minimum time in column _start_ from currently selected rows of table _yatish_timeslot_.
  * This time is provided in the local timezone.
  * \return `Now()` if something went wrong
  */
@@ -378,7 +381,15 @@ wxDateTime yatishDBsqlite::First () {
     if (!masterDB) return dt;
     wxString ans;
     try {
-        wxString sql ("SELECT MIN(start) FROM yatish_timeslot;");
+        wxString sql ("SELECT MIN(start) FROM ((((yatish_timeslot AS t"
+                      " INNER JOIN yatish_activity AS a ON t.activity_id = a.id)"
+                      " INNER JOIN yatish_project AS p ON a.project_id = p.id)"
+                      " INNER JOIN yatish_client AS c ON p.client_id = c.id)"
+                      " INNER JOIN yatish_task AS tk ON a.task_id = tk.id)"
+                      " INNER JOIN yatish_tool AS tl ON a.tool_id = tl.id"
+                      " WHERE t.sync <> 'D'");
+        sql += filter;
+        sql += ";";
         ans = masterDB->GetSingleResultString (sql, 1);
     }
     CATCH (dt)
@@ -386,7 +397,7 @@ wxDateTime yatishDBsqlite::First () {
     return dt.MakeFromUTC();
 }
 
-/** Obtains the maximum time in column _start_ of table _yatish_timeslot_.
+/** Obtains the maximum time in column _start_ from currently selected rows of table _yatish_timeslot_.
  * This time is provided in the local timezone.
  * \return `Now()` if something went wrong
  */
@@ -395,7 +406,15 @@ wxDateTime yatishDBsqlite::Last () {
     if (!masterDB) return dt;
     wxString ans;
     try {
-        wxString sql ("SELECT MAX(start) FROM yatish_timeslot;");
+         wxString sql ("SELECT MAX(start) FROM ((((yatish_timeslot AS t"
+                      " INNER JOIN yatish_activity AS a ON t.activity_id = a.id)"
+                      " INNER JOIN yatish_project AS p ON a.project_id = p.id)"
+                      " INNER JOIN yatish_client AS c ON p.client_id = c.id)"
+                      " INNER JOIN yatish_task AS tk ON a.task_id = tk.id)"
+                      " INNER JOIN yatish_tool AS tl ON a.tool_id = tl.id"
+                      " WHERE t.sync <> 'D'");
+        sql += filter;
+        sql += ";";
         ans = masterDB->GetSingleResultString (sql, 1);
     }
     CATCH (dt)
