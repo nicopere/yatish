@@ -3,12 +3,12 @@
 
 #ifndef WX_PRECOMP
     //(*HeadersPCH(yatishDlgProject)
+    #include <wx/button.h>
+    #include <wx/choice.h>
     #include <wx/dialog.h>
     #include <wx/sizer.h>
-    #include <wx/button.h>
     #include <wx/stattext.h>
     #include <wx/textctrl.h>
-    #include <wx/choice.h>
     //*)
 #endif
 //(*Headers(yatishDlgProject)
@@ -28,11 +28,11 @@ class yatishDlgProject: public wxDialog {
         static const long idChoiceClient;
         //*)
         //(*Declarations(yatishDlgProject)
-        wxStaticBoxSizer* staticBoxSizer;
-        wxTextCtrl* textCtrlName;
+        wxButton* buttonNew;
         wxButton* buttonSave;
         wxChoice* choiceClient;
-        wxButton* buttonNew;
+        wxStaticBoxSizer* staticBoxSizer;
+        wxTextCtrl* textCtrlName;
         //*)
         yatishDBsqlite * pdb;
         long id;

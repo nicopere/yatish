@@ -148,7 +148,7 @@ yatishFrame::yatishFrame (wxWindow* parent, wxWindowID id) {
     StaticBoxSizer3->Add(datePicker2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     BoxSizer5->Add(StaticBoxSizer3, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     BoxSizer5->Add(-1,-1,1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-    buttonPDF = new wxButton(panelList, idButtonPDF, _("Export PDF"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("idButtonPDF"));
+    buttonPDF = new wxButton(panelList, idButtonPDF, _("E&xport PDF"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("idButtonPDF"));
     BoxSizer5->Add(buttonPDF, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     BoxSizer4->Add(BoxSizer5, 0, wxALL|wxEXPAND, 5);
     listCtrl = new wxListCtrl(panelList, idListCtrl, wxDefaultPosition, wxDefaultSize, wxLC_REPORT|wxLC_SINGLE_SEL, wxDefaultValidator, _T("idListCtrl"));
@@ -234,6 +234,7 @@ yatishFrame::yatishFrame (wxWindow* parent, wxWindowID id) {
     Connect(idChoiceTable,wxEVT_COMMAND_CHOICE_SELECTED,(wxObjectEventFunction)&yatishFrame::OnChoiceTableSelect);
     Connect(idDatePicker1,wxEVT_DATE_CHANGED,(wxObjectEventFunction)&yatishFrame::OnDatePicker1Changed);
     Connect(idDatePicker2,wxEVT_DATE_CHANGED,(wxObjectEventFunction)&yatishFrame::OnDatePicker2Changed);
+    Connect(idButtonPDF,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&yatishFrame::OnButtonPDFClick);
     Connect(idListCtrl,wxEVT_COMMAND_LIST_KEY_DOWN,(wxObjectEventFunction)&yatishFrame::OnListKeyDown);
     Connect(idListCtrl,wxEVT_COMMAND_LIST_COL_CLICK,(wxObjectEventFunction)&yatishFrame::OnListColumnClick);
     Connect(idNotebook,wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED,(wxObjectEventFunction)&yatishFrame::OnNotebookPageChanged);
@@ -285,7 +286,7 @@ yatishFrame::yatishFrame (wxWindow* parent, wxWindowID id) {
         default:
             wxLogError (_("Several yatish were inappropriately terminated!") );
     }
-    buttonPDF->Disable(); panelChart->Hide(); // Coming soon...
+    panelChart->Hide(); // Coming soon...
     slaveDB = nullptr;
 }
 
@@ -374,14 +375,14 @@ void yatishFrame::UpdateRows (tableID tid) {
     for (int col = 0; col < listCtrl->GetColumnCount(); col++)
         listCtrl->SetColumnWidth (col, wxLIST_AUTOSIZE_USEHEADER);
     listCtrl->Thaw();   // or Show()...
-    SetStatusText (masterDB.FilteredTotal(), 2);
+    SetStatusText (masterDB.FilteredTotalFormatted(), 2);
 }
 
 void yatishFrame::ResetPickers () {
     datePicker1->SetValue ( masterDB.First() );
     datePicker2->SetValue ( masterDB.Last() );
     masterDB.SetFirstDay ( datePicker1->GetValue() );
-    masterDB.SetLastDay  ( datePicker2->GetValue() + wxDateSpan::Day() );
+    masterDB.SetLastDay  ( datePicker2->GetValue() );
 }
 
 void yatishFrame::ToggleConnect () {
@@ -482,7 +483,6 @@ void yatishFrame::OnMenuitemFileDownloadSelected (wxCommandEvent& event) {
     }
 }
 
-
 void yatishFrame::OnMenuitemEditActivitySelected(wxCommandEvent& event) {
     notebook->SetSelection (0);
 }
@@ -521,7 +521,7 @@ void yatishFrame::OnMenuitemEditNewSelected (wxCommandEvent& event) {
     }
     if (dlgEnd != wxID_CANCEL) {
         datePicker2->SetValue ( masterDB.Last() );
-        masterDB.SetLastDay ( datePicker2->GetValue() + wxDateSpan::Day() );
+        masterDB.SetLastDay ( datePicker2->GetValue() );
         UpdateRows (tid);
     }
 }
@@ -547,7 +547,7 @@ void yatishFrame::OnMenuitemEditTodaySelected(wxCommandEvent& event) {
     datePicker2->SetValue (dt);
     datePicker1->SetValue (dt);
     masterDB.SetFirstDay ( datePicker1->GetValue() );
-    masterDB.SetLastDay  ( datePicker2->GetValue() + wxDateSpan::Day() );
+    masterDB.SetLastDay  ( datePicker2->GetValue() );
     UpdateRows (timeslot_tid);
 }
 
@@ -562,7 +562,7 @@ void yatishFrame::OnMenuitemEditThisweekSelected(wxCommandEvent& event) {
     dt.SetToPrevWeekDay (wxDateTime::Mon);
     datePicker1->SetValue (dt);
     masterDB.SetFirstDay ( datePicker1->GetValue() );
-    masterDB.SetLastDay  ( datePicker2->GetValue() + wxDateSpan::Day() );
+    masterDB.SetLastDay  ( datePicker2->GetValue() );
     UpdateRows (timeslot_tid);
 }
 
@@ -572,7 +572,7 @@ void yatishFrame::OnMenuitemEditThismonthSelected(wxCommandEvent& event) {
     dt.SetDay (1);
     datePicker1->SetValue (dt);
     masterDB.SetFirstDay ( datePicker1->GetValue() );
-    masterDB.SetLastDay  ( datePicker2->GetValue() + wxDateSpan::Day() );
+    masterDB.SetLastDay  ( datePicker2->GetValue() );
     UpdateRows (timeslot_tid);
 }
 
@@ -582,7 +582,7 @@ void yatishFrame::OnMenuitemEditYestedaySelected(wxCommandEvent& event) {
     datePicker2->SetValue (dt);
     datePicker1->SetValue (dt);
     masterDB.SetFirstDay ( datePicker1->GetValue() );
-    masterDB.SetLastDay  ( datePicker2->GetValue() + wxDateSpan::Day() );
+    masterDB.SetLastDay  ( datePicker2->GetValue() );
     UpdateRows (timeslot_tid);
 }
 
@@ -594,7 +594,7 @@ void yatishFrame::OnMenuitemEditLastweekSelected(wxCommandEvent& event) {
     dt.SetToPrevWeekDay (wxDateTime::Mon);
     datePicker1->SetValue (dt);
     masterDB.SetFirstDay ( datePicker1->GetValue() );
-    masterDB.SetLastDay  ( datePicker2->GetValue() + wxDateSpan::Day() );
+    masterDB.SetLastDay  ( datePicker2->GetValue() );
     UpdateRows (timeslot_tid);
 }
 
@@ -606,7 +606,7 @@ void yatishFrame::OnMenuitemEditLastmonthSelected(wxCommandEvent& event) {
     dt.SetDay (1);
     datePicker1->SetValue (dt);
     masterDB.SetFirstDay ( datePicker1->GetValue() );
-    masterDB.SetLastDay  ( datePicker2->GetValue() + wxDateSpan::Day() );
+    masterDB.SetLastDay  ( datePicker2->GetValue() );
     UpdateRows (timeslot_tid);
 }
 
@@ -654,14 +654,14 @@ void yatishFrame::OnHelp (wxCommandEvent& event) {
 void yatishFrame::OnAbout (wxCommandEvent& event) {
     wxAboutDialogInfo info;
     info.SetName ("Yatish");
-    info.SetVersion ("0.2");
+    info.SetVersion ("V0.3");
     wxString what (_("Yet Another TIme SHeet\n"
-                     "Time tracking for freelancers/homeworkers\n"
+                     "Time tracking for freelancers/homeworkers\n\n"
                      "Built with:\n") );
     what << wxVERSION_STRING;
-    what << "\n+wxDatabase\n+Code::Blocks\n+wxSmith";
+    what << "\nCode::Blocks\twxSmith\nwxDatabase\twxPdfDocument";
     info.SetDescription (what);
-    info.SetCopyright ("(C) 2020 EIF-services");
+    info.SetCopyright ("(C) 2020-2021 EIF-services");
     info.SetLicence ("This program is free software:\n"
     "you can redistribute it and/or modify it\n"
     "under the terms of the GNU General Public License\n"
@@ -703,7 +703,7 @@ void yatishFrame::OnButtonStartClick (wxCommandEvent& event) {
     Recording();
 }
 
-/** \todo `SetIcon()` not applied when `yatish.desktop` is installed */
+/** \todo `SetIcon()` not applied when `yatish.desktop` is installed (Linux issue) */
 void yatishFrame::Recording () {
     clockStart = wxDateTime::Now();
     UpdateClock();
@@ -729,9 +729,11 @@ void yatishFrame::OnChoiceTableSelect (wxCommandEvent& event) {
     if (event.GetSelection() == timeslot_tid) {
         datePicker1->Enable();
         datePicker2->Enable();
+        //buttonPDF->Enable();
     } else {
         datePicker1->Disable();
         datePicker2->Disable();
+        //buttonPDF->Disable();
     }
     UpdateColumns();
 }
@@ -742,7 +744,7 @@ void yatishFrame::OnDatePicker1Changed (wxDateEvent& event) {
 }
 
 void yatishFrame::OnDatePicker2Changed (wxDateEvent& event) {
-    masterDB.SetLastDay ( datePicker2->GetValue() + wxDateSpan::Day() );
+    masterDB.SetLastDay ( datePicker2->GetValue() );
     UpdateRows (timeslot_tid);
 }
 
@@ -788,7 +790,7 @@ void yatishFrame::OnListColumnClick (wxListEvent& event) {
     }
     if (ret == wxID_OK) {
         UpdateRows (tid);
-        ResetPickers();
+        //ResetPickers();
     }
 }
 
@@ -828,4 +830,12 @@ void yatishFrame::OnListKeyDown (wxListEvent& event) {
         default:
             event.Skip();
     }
+}
+
+void yatishFrame::OnButtonPDFClick(wxCommandEvent& event) {
+    wxFileDialog pdfDlg (this, _("Specify the PDF file to be written"),
+                         wxStandardPaths::Get().GetDocumentsDir(), "yatish.pdf",
+                         "PDF|*.pdf", wxFD_SAVE|wxFD_OVERWRITE_PROMPT);
+    if (pdfDlg.ShowModal() == wxID_CANCEL) return;
+    yatishPDF test ( settings, listCtrl, masterDB, pdfDlg.GetPath() );
 }

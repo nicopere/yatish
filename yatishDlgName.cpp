@@ -46,11 +46,11 @@ yatishDlgName::yatishDlgName (yatishDBsqlite * p_db, tableID t_id) {
 
 void yatishDlgName::BuildContent () {
     //(*Initialize(yatishDlgName)
-    wxBoxSizer* BoxSizer2;
     wxBoxSizer* BoxSizer1;
+    wxBoxSizer* BoxSizer2;
     wxButton* buttonCancel;
-    wxStaticText* StaticText;
     wxButton* buttonNew;
+    wxStaticText* StaticText;
 
     Create(0, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("wxID_ANY"));
     BoxSizer1 = new wxBoxSizer(wxVERTICAL);
@@ -58,6 +58,7 @@ void yatishDlgName::BuildContent () {
     StaticText = new wxStaticText(this, wxID_ANY, _("Name:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
     staticBoxSizer->Add(StaticText, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     textCtrl = new wxTextCtrl(this, idTextCtrl, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("idTextCtrl"));
+    textCtrl->SetMaxLength(20);
     staticBoxSizer->Add(textCtrl, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     BoxSizer1->Add(staticBoxSizer, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);

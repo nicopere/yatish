@@ -1,6 +1,6 @@
 [Setup]
 AppName=YATiSh
-AppVersion=0.2
+AppVersion=0.3
 DefaultDirName={autopf}\yatish
 DefaultGroupName=Yatish
 AppPublisher=EIF-services
@@ -9,6 +9,7 @@ AppSupportURL=https://www.eif-services.eu/sites/default/files/yatish/help/doc-00
 AppUpdatesURL=https://www.eif-services.eu/yatish
 AppCopyright=Copyright (C) 2020 EIF-services
 LicenseFile=GPLv3.txt
+ArchitecturesAllowed=x64
 ArchitecturesInstallIn64BitMode=x64
 OutputDir=.
 OutputBaseFilename=yatish_install

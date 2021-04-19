@@ -3,43 +3,58 @@
 <BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
 <TABLE>
 <TR>
+<TD></TD>
+<TD><B>English</B></TD>
+<TD><B>French</B></TD>
+</TR>
+<TR>
 <TD><B>File/Connect</B></TD>
+<TD>CTRL-C</TD>
 <TD>CTRL-C</TD>
 </TR>
 <TR>
 <TD><B>File/Update</B></TD>
 <TD>CTRL-U</TD>
+<TD>CTRL-M</TD>
 </TR>
 <TR>
 <TD><B>File/Quit</B></TD>
+<TD>CTRL-Q</TD>
 <TD>CTRL-Q</TD>
 </TR>
 <TR>
 <TD><B>Edit/Activity</B></TD>
 <TD>CTRL-A</TD>
+<TD>CTRL-A</TD>
 </TR>
 <TR>
 <TD><B>Edit/Tables</B></TD>
+<TD>CTRL-T</TD>
 <TD>CTRL-T</TD>
 </TR>
 <TR>
 <TD><B>Edit/Charts</B></TD>
 <TD>CTRL-G <I>(not yet activated)</I></TD>
+<TD>CTRL-G</TD>
 </TR>
 <TR>
 <TD><B>Edit/New record...</B></TD>
+<TD>CTRL-N</TD>
 <TD>CTRL-N</TD>
 </TR>
 <TR>
 <TD><B>Edit/Reset filter</B></TD>
 <TD>CTRL-R</TD>
+<TD>CTRL-R</TD>
 </TR>
 <TR>
 <TD><B>Edit/Settings</B></TD>
 <TD>CTRL-S</TD>
+<TD>CTRL-P</TD>
 </TR>
 <TR>
 <TD><B>Help/User guide</B></TD>
+<TD>F1</TD>
 <TD>F1</TD>
 </TR>
 </TABLE>

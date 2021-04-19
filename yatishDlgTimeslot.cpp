@@ -6,6 +6,7 @@
  *   when SetValidator was called on a wxChoice...
  * - Validate() always returns true, i.e. we rely on wx(Date|Time)PickerCtrl
  *   (style wxDP_ALLOWNONE __not__ set)
+ * .
  * \todo
  * - fix RTTI
  * - try template?
@@ -140,11 +141,11 @@ yatishDlgTimeslot::yatishDlgTimeslot (yatishDBsqlite * p_db) {
 
 void yatishDlgTimeslot::BuildContent() {
     //(*Initialize(yatishDlgTimeslot)
-    wxFlexGridSizer* FlexGridSizer1;
-    wxBoxSizer* BoxSizer2;
-    wxStaticText* StaticText1;
     wxBoxSizer* BoxSizer1;
+    wxBoxSizer* BoxSizer2;
     wxButton* buttonCancel;
+    wxFlexGridSizer* FlexGridSizer1;
+    wxStaticText* StaticText1;
     wxStaticText* StaticText2;
 
     Create(0, wxID_ANY, _("Table: yatish_timeslot"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("wxID_ANY"));

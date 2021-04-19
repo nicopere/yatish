@@ -43,13 +43,16 @@
 			<Add directory="$(#wx)/include" />
 			<Add directory="$(#wx)/lib/gcc_dll/mswu" />
 			<Add directory="$(#wx)/3rdparty/wxDatabase/include" />
+			<Add directory="$(#wx)/3rdparty/wxpdfdoc/include" />
 		</Compiler>
 		<Linker>
 			<Add option="-mthreads" />
 			<Add option="-lwxdatabase" />
+			<Add option="-lwxpdfdoc" />
 			<Add library="libwxmsw31u.a" />
 			<Add directory="$(#wx)/lib/gcc_dll" />
 			<Add directory="$(#wx)/3rdparty/wxDatabase/build/lib" />
+			<Add directory="$(#wx)/3rdparty/wxpdfdoc/lib/gcc_x64_dll" />
 		</Linker>
 		<Unit filename="wx_pch.h">
 			<Option compile="1" />
@@ -82,6 +85,8 @@
 		<Unit filename="yatishDlgTimeslot.h" />
 		<Unit filename="yatishFrame.cpp" />
 		<Unit filename="yatishFrame.h" />
+		<Unit filename="yatishPDF.cpp" />
+		<Unit filename="yatishPDF.h" />
 		<Unit filename="yatishSettings.cpp" />
 		<Unit filename="yatishSettings.h" />
 		<Extensions>

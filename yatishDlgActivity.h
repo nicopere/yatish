@@ -3,11 +3,11 @@
 
 #ifndef WX_PRECOMP
     //(*HeadersPCH(yatishDlgActivity)
+    #include <wx/button.h>
+    #include <wx/choice.h>
     #include <wx/dialog.h>
     #include <wx/sizer.h>
-    #include <wx/button.h>
     #include <wx/stattext.h>
-    #include <wx/choice.h>
     //*)
 #endif
 //(*Headers(yatishDlgActivity)
@@ -28,12 +28,12 @@ class yatishDlgActivity: public wxDialog {
         static const long idChoiceTool;
         //*)
         //(*Declarations(yatishDlgActivity)
+        wxButton* buttonNew;
+        wxButton* buttonSave;
         wxChoice* choiceProject;
         wxChoice* choiceTask;
-        wxStaticBoxSizer* staticBoxSizer;
         wxChoice* choiceTool;
-        wxButton* buttonSave;
-        wxButton* buttonNew;
+        wxStaticBoxSizer* staticBoxSizer;
         //*)
         yatishDBsqlite * pdb;
         long id;

@@ -3,11 +3,11 @@
 
 #ifndef WX_PRECOMP
     //(*HeadersPCH(yatishDlgTimeslot)
+    #include <wx/button.h>
+    #include <wx/choice.h>
     #include <wx/dialog.h>
     #include <wx/sizer.h>
-    #include <wx/button.h>
     #include <wx/stattext.h>
-    #include <wx/choice.h>
     //*)
 #endif
 //(*Headers(yatishDlgTimeslot)
@@ -35,16 +35,16 @@ class yatishDlgTimeslot: public wxDialog {
         static const long idChoiceTool;
         //*)
         //(*Declarations(yatishDlgTimeslot)
-        wxDatePickerCtrl* datePicker1;
+        wxButton* buttonNew;
+        wxButton* buttonSave;
         wxChoice* choiceProject;
         wxChoice* choiceTask;
+        wxChoice* choiceTool;
+        wxDatePickerCtrl* datePicker1;
+        wxDatePickerCtrl* datePicker2;
         wxStaticBoxSizer* staticBoxSizer;
         wxTimePickerCtrl* timePicker1;
         wxTimePickerCtrl* timePicker2;
-        wxChoice* choiceTool;
-        wxButton* buttonSave;
-        wxDatePickerCtrl* datePicker2;
-        wxButton* buttonNew;
         //*)
         yatishDBsqlite * pdb;
         long id;

@@ -9,6 +9,7 @@ Indeed this program does not claim to provide revolutionary features, but rather
 <UL>
 <LI>SQLite based: internet access not needed but...
 <LI>...can sync to a MySQL/MariaDB server (optional)
+<LI>PDF export of selected listings (to be appended to invoices)
 <LI>GUI in English or French
 <LI>online user guide (obviously)
 <LI>Doxygen source code documentation

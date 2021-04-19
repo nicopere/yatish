@@ -15,6 +15,7 @@
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="./" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -26,6 +27,7 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-DNDEBUG" />
+					<Add directory="./" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -44,6 +46,7 @@
 		<Linker>
 			<Add option="`wx-config --libs`" />
 			<Add option="-lwxdatabase" />
+			<Add option="-lwxcode_gtk3u_pdfdoc-3.0" />
 			<Add directory="/usr/local/lib" />
 		</Linker>
 		<ExtraCommands>
@@ -81,12 +84,11 @@
 		<Unit filename="yatishDlgTimeslot.h" />
 		<Unit filename="yatishFrame.cpp" />
 		<Unit filename="yatishFrame.h" />
+		<Unit filename="yatishPDF.cpp" />
+		<Unit filename="yatishPDF.h" />
 		<Unit filename="yatishSettings.cpp" />
 		<Unit filename="yatishSettings.h" />
 		<Extensions>
-			<code_completion />
-			<envvars />
-			<debugger />
 			<lib_finder disable_auto="1" />
 			<wxsmith version="1">
 				<gui name="wxWidgets" src="yatishApp.cpp" main="yatishFrame" init_handlers="necessary" language="CPP" />

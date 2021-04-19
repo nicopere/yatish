@@ -3,10 +3,10 @@
 
 #ifndef WX_PRECOMP
 	//(*HeadersPCH(yatishDlgFilter)
-	#include <wx/dialog.h>
-	#include <wx/sizer.h>
 	#include <wx/button.h>
 	#include <wx/choice.h>
+	#include <wx/dialog.h>
+	#include <wx/sizer.h>
 	//*)
 #endif
 //(*Headers(yatishDlgFilter)

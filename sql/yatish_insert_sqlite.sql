@@ -4,44 +4,51 @@ INSERT INTO yatish_client (name,sync) VALUES
   ('EIF','I');
 INSERT INTO yatish_task (name,sync) VALUES
   ('Research','I'),
-  ('Sysadmin','I'),
   ('Development','I'),
   ('Data','I'),
   ('Model','I'),
   ('Report','I'),
+  ('Sysadmin','I'),
   ('Accounting','I'),
+  ('Business','I'),
   ('maths-sciences','I'),
+  ('planification','I'),
+  ('évaluation','I'),
   ('coordination','I'),
   ('vie sco et conseils','I'),
-  ('examens, certifs','I'),
+  ('suivi stage','I'),
   ('(auto)formation','I');
 INSERT INTO yatish_tool (name,sync) VALUES
+  (' ','I'),
   ('Blender/Grass','I'),
   ('Basilisk/Gerris/Swat','I'),
   ('CodeBlocks/Poedit/HelpBlocks','I'),
   ('Drupal/Dokuwiki','I'),
-  ('Pronote/SACoche','I'),
-  ('Pyromaths/GeoGebra','I')
   ('Windows','I'),
+  ('Reporting-ERP','I'),
   ('bash/C/C++/SQL','I'),
   ('web/pdf/books','I'),
   ('bureautique/images','I'),
-  ('courriel','I'),
-  ('secrétariat','I'),
+  ('tice/multimédia','I'),
+  ('copies/cahiers','I'),
+  ('papier-crayon','I'),
+  ('photocop/papeterie','I'),
+  ('chariot/labo','I'),
   ('tél.','I'),
   ('réunion-RdV','I'),
-  ('reporting-ERP','I'),
+  ('courriel','I'),
   ('forums/réseaux','I'),
-  ('photocop/chariot','I'),
-  ('correction copies','I'),
-  ('tice/multimédia','I');
+  ('Pronote','I'),
+  ('SACoche','I'),
+  ('Pyromaths','I'),
+  ('GeoGebra','I');
 INSERT INTO yatish_project (name,client_id,sync) VALUES
   ('DDL29',1,'I'),
   ('Portfolio',2,'I'),
   ('Yatish',2,'I');
 INSERT INTO yatish_activity (project_id,task_id,tool_id,sync) VALUES
-  (3,1,6,'I'),
-  (3,2,5,'I');
+  (3,1,9,'I'),
+  (3,2,8,'I');
 /*INSERT INTO yatish_timeslot (start,activity_id,sync) VALUES (datetime('now'),1,'I');
 UPDATE yatish_timeslot SET stop = datetime('now','+75 minutes') WHERE id = 1;
 INSERT INTO yatish_timeslot (start,activity_id,sync) VALUES (datetime('now'),2,'I');

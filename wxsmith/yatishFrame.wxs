@@ -140,7 +140,8 @@
 										</object>
 										<object class="sizeritem">
 											<object class="wxButton" name="idButtonPDF" variable="buttonPDF" member="yes">
-												<label>Export PDF</label>
+												<label>E&amp;xport PDF</label>
+												<handler function="OnButtonPDFClick" entry="EVT_BUTTON" />
 											</object>
 											<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 											<border>5</border>

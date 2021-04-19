@@ -3,9 +3,9 @@
 
 #ifndef WX_PRECOMP
     //(*HeadersPCH(yatishDlgName)
+    #include <wx/button.h>
     #include <wx/dialog.h>
     #include <wx/sizer.h>
-    #include <wx/button.h>
     #include <wx/stattext.h>
     #include <wx/textctrl.h>
     //*)
@@ -25,9 +25,9 @@ class yatishDlgName : public wxDialog {
         static const long idTextCtrl;
         //*)
         //(*Declarations(yatishDlgName)
+        wxButton* buttonSave;
         wxStaticBoxSizer* staticBoxSizer;
         wxTextCtrl* textCtrl;
-        wxButton* buttonSave;
         //*)
         yatishDBsqlite * pdb;
         tableID tid;

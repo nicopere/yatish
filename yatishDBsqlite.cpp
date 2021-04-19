@@ -10,7 +10,7 @@
 #include "wx_pch.h"
 #include "yatishDBsqlite.h"
 
-/** \brief Mainly connects to the `yatish.sqlite` database
+/** Mainly connects to the `yatish.sqlite` database
  *
  * (initializing protected member `yatishDB::masterDB`).
  */
@@ -340,14 +340,26 @@ void yatishDBsqlite::AddToFilter (tableID tid, int choice) {
     filter += sqlAnd;
 }
 
+/** Returns the total duration of currently viewed timeslots (and their count).
+ * \param[out] ts where the total duration shall be written
+ * \return the timeslot count
+ */
+long yatishDBsqlite::FilteredTotal (wxTimeSpan& ts) const {
+    if (slotCount)
+        ts = totalSpan;
+    else
+        ts = wxTimeSpan::Hours (0);
+    return slotCount;
+}
+
 /** Writes the total and average durations of currently viewed timeslots.
  * One work day amounts to 7 hours.
  * \return a properly formatted `wxString`, or `wxEmptyString`
  *         if the currently viewed table is not _yatish_timeslot_
  */
-wxString yatishDBsqlite::FilteredTotal () {
+wxString yatishDBsqlite::FilteredTotalFormatted () {
     if (!slotCount) return wxEmptyString;
-    unsigned long totalSeconds = totalSpan.GetSeconds().ToLong();
+    double totalSeconds = totalSpan.GetSeconds().ToDouble();
     double totalDays, averageHours;
     totalDays = totalSeconds / 3600.; // hours still...
     averageHours = totalDays / slotCount;
@@ -362,6 +374,7 @@ wxString yatishDBsqlite::FilteredTotal () {
  */
 void yatishDBsqlite::SetFirstDay (const wxDateTime& dt) {
     firstDay = dt.ToUTC().FormatISOCombined();
+    wxFirstDay = dt; // stores a copy in case somebody needs it (yatishPDF...)
 }
 
 /** Sets private member `lastDay` (for future SQL queries).
@@ -369,7 +382,8 @@ void yatishDBsqlite::SetFirstDay (const wxDateTime& dt) {
  * \sa SetFirstDay()
  */
 void yatishDBsqlite::SetLastDay (const wxDateTime& dt) {
-    lastDay = dt.ToUTC().FormatISOCombined();
+    wxLastDay = dt; // stores a copy in case somebody needs it (yatishPDF...)
+    lastDay = ( dt + wxDateSpan::Day() ).ToUTC().FormatISOCombined();
 }
 
 /** Obtains the minimum time in column _start_ from currently selected rows of table _yatish_timeslot_.

@@ -53,11 +53,11 @@ yatishDlgProject::yatishDlgProject (yatishDBsqlite * p_db) {
 
 void yatishDlgProject::BuildContent() {
     //(*Initialize(yatishDlgProject)
-    wxFlexGridSizer* FlexGridSizer1;
-    wxBoxSizer* BoxSizer2;
-    wxStaticText* StaticText1;
     wxBoxSizer* BoxSizer1;
+    wxBoxSizer* BoxSizer2;
     wxButton* buttonCancel;
+    wxFlexGridSizer* FlexGridSizer1;
+    wxStaticText* StaticText1;
     wxStaticText* StaticText2;
 
     Create(0, wxID_ANY, _("Table: yatish_project"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("wxID_ANY"));

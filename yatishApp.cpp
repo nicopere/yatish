@@ -3,15 +3,13 @@
   * - Cross-platform (Linux, _Windows_)
   * - SQLite based: no connection needed but...
   * - ...can sync to a MySQL/MariaDB server (_there is a viewer version of yatish for customers_)
-  * - _PDF export of selected listings (to be appended to invoices)_
+  * - PDF export of selected listings (to be appended to invoices)
   * - _2 charting toolsets available_
   * - GUI in English or French
   * - online (shipped with the application) user guide (not translated though).
   * - Doxygen source code documentation (obviously) e.g. our yatishDBsqlite class.
   * - Privacy: _yatish_ will not publish anything unless you do mean it,
   * and then only in a privately owned database.
-  *
-  * \todo try and unify `yatish.cbp` and `yatish4windows.cbp` using C::B global variables
   *
   * This file:
 > * Name:      yatishApp.cpp
@@ -44,7 +42,7 @@ bool yatishApp::OnInit () {
     yatishLocale->AddCatalog ("yatish");
 #ifdef NDEBUG
     if ( checker.IsAnotherRunning() ) {
-        wxLogError(_("Another program instance is already running, aborting.") );
+        wxLogError(_("Another program instance is already running, aborting this one.") );
         return false;
     }
 #endif

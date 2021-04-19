@@ -18,11 +18,10 @@
 
 wxDatabase * yatishDBmysql::slaveDB = nullptr;
 
-/** \brief Mainly connects to the MySQL database specified in `yatish.auth`
+/** Mainly connects to the MySQL database specified in `yatish.auth`
  *
  * (initializing private member `slaveDB`).
  *
- * \todo optimize Download() & Upload() (wxPreparedStatement?)
  */
 yatishDBmysql::yatishDBmysql () {
     wxASSERT_MSG (slaveDB == nullptr, "There can be only one instance of yatishDBmysql.");
@@ -138,8 +137,8 @@ int yatishDBmysql::Commit () {
  */
 int yatishDBmysql::Upload () {
     if (!slaveDB || !masterDB) return 0;
-    EmptySlaveTables();
-    OutdateMasterTables();
+    Commit() && //  first ensure that any locally modified records are cleared out (including local CASCADE...)
+    EmptySlaveTables() && OutdateMasterTables() &&
     Insert() && InsertProject() && InsertActivity() && InsertTimeslot();
     return errorCode;
 }
@@ -150,7 +149,7 @@ int yatishDBmysql::Upload () {
  */
 int yatishDBmysql::Download () {
     if (!slaveDB || !masterDB) return 0;
-    EmptyMasterTables();
+    EmptyMasterTables() &&
     DownloadNames() && DownloadProject() && DownloadActivity() && DownloadTimeslot();
     return errorCode;
 }
@@ -200,12 +199,12 @@ bool yatishDBmysql::EmptyMasterTables () {
 bool yatishDBmysql::OutdateMasterTables () {
     if (!masterDB) return false;
     try {
-        masterDB->RunQuery ("UPDATE yatish_client SET sync='I';");
-        masterDB->RunQuery ("UPDATE yatish_project SET sync='I';");
-        masterDB->RunQuery ("UPDATE yatish_task SET sync='I';");
-        masterDB->RunQuery ("UPDATE yatish_tool SET sync='I';");
-        masterDB->RunQuery ("UPDATE yatish_activity SET sync='I';");
-        masterDB->RunQuery ("UPDATE yatish_timeslot SET sync='I';");
+        masterDB->RunQuery ("UPDATE yatish_client   SET sync = 'I';");
+        masterDB->RunQuery ("UPDATE yatish_project  SET sync = 'I';");
+        masterDB->RunQuery ("UPDATE yatish_task     SET sync = 'I';");
+        masterDB->RunQuery ("UPDATE yatish_tool     SET sync = 'I';");
+        masterDB->RunQuery ("UPDATE yatish_activity SET sync = 'I';");
+        masterDB->RunQuery ("UPDATE yatish_timeslot SET sync = 'I';");
     }
     CATCH (false);
     errorCode = 0;
@@ -231,9 +230,10 @@ bool yatishDBmysql::Delete () {
                 id = results->GetResultLong (1);
                 sql.Printf ("DELETE FROM yatish_%s WHERE id = %ld;", n, id);
                 slaveDB->RunQuery (sql);
-                masterDB->RunQuery (sql);
             }
             masterDB->CloseResultSet (results);
+            sql.Printf("DELETE FROM yatish_%s WHERE sync = 'D';", n);
+            masterDB->RunQuery (sql);
         }
         CATCH (false)
     }
@@ -263,10 +263,10 @@ bool yatishDBmysql::Insert () {
                 name = results->GetResultString (2);
                 sql.Printf ("INSERT INTO yatish_%s (id,name) VALUES (%ld,'%s');", n, id, name);
                 slaveDB->RunQuery (sql);
-                sql.Printf ("UPDATE yatish_%s SET sync='S' WHERE id = %ld;", n, id);
-                masterDB->RunQuery (sql);
             }
             masterDB->CloseResultSet (results);
+            sql.Printf("UPDATE yatish_%s SET sync='S' WHERE sync = 'I';", n);
+            masterDB->RunQuery (sql);
         }
         CATCH (false)
     }
@@ -328,10 +328,10 @@ bool yatishDBmysql::Update () {
                 name = results->GetResultString (2);
                 sql.Printf ("UPDATE yatish_%s SET name='%s' WHERE id = %ld;", n, name, id);
                 slaveDB->RunQuery (sql);
-                sql.Printf ("UPDATE yatish_%s SET sync='S' WHERE id = %ld;", n, id);
-                masterDB->RunQuery (sql);
             }
             masterDB->CloseResultSet (results);
+            sql.Printf ("UPDATE yatish_%s SET sync='S' WHERE sync = 'U';", n);
+            masterDB->RunQuery (sql);
         }
         CATCH (false)
     }
@@ -357,10 +357,10 @@ bool yatishDBmysql::InsertProject () {
             sql.Printf ("INSERT INTO yatish_project (id,name,client_id)"
                         " VALUES (%ld,'%s',%ld);", id, name, client_id);
             slaveDB->RunQuery (sql);
-            sql.Printf ("UPDATE yatish_project SET sync='S' WHERE id = %ld;", id);
-            masterDB->RunQuery (sql);
         }
         masterDB->CloseResultSet (results);
+        sql.Printf ("UPDATE yatish_project SET sync='S' WHERE sync = 'I';");
+        masterDB->RunQuery (sql);
     }
     CATCH (false)
     errorCode = 0;
@@ -411,10 +411,10 @@ bool yatishDBmysql::UpdateProject () {
             sql.Printf ("UPDATE yatish_project SET name='%s',client_id=%ld"
                         " WHERE id = %ld;", name, client_id, id);
             slaveDB->RunQuery (sql);
-            sql.Printf ("UPDATE yatish_project SET sync='S' WHERE id = %ld;", id);
-            masterDB->RunQuery (sql);
         }
         masterDB->CloseResultSet (results);
+        sql.Printf ("UPDATE yatish_project SET sync='S' WHERE sync = 'U';");
+        masterDB->RunQuery (sql);
     }
     CATCH (false)
     errorCode = 0;
@@ -440,10 +440,10 @@ bool yatishDBmysql::InsertActivity () {
             sql.Printf ("INSERT INTO yatish_activity (id,project_id,task_id,tool_id)"
                         " VALUES (%ld,%ld,%ld,%ld);", id1, id2, id3, id4);
             slaveDB->RunQuery (sql);
-            sql.Printf ("UPDATE yatish_activity SET sync='S' WHERE id = %ld;", id1);
-            masterDB->RunQuery (sql);
         }
         masterDB->CloseResultSet (results);
+        sql.Printf ("UPDATE yatish_activity SET sync='S' WHERE sync = 'I';");
+        masterDB->RunQuery (sql);
     }
     CATCH (false)
     errorCode = 0;
@@ -496,10 +496,10 @@ bool yatishDBmysql::UpdateActivity () {
             sql.Printf ("UPDATE yatish_activity SET project_id=%ld,task_id=%ld,tool_id=%ld"
                         " WHERE id = %ld;", id2, id3, id4, id1);
             slaveDB->RunQuery (sql);
-            sql.Printf ("UPDATE yatish_activity SET sync='S' WHERE id = %ld;", id1);
-            masterDB->RunQuery (sql);
         }
         masterDB->CloseResultSet (results);
+        sql.Printf ("UPDATE yatish_activity SET sync='S' WHERE sync = 'U';");
+        masterDB->RunQuery (sql);
     }
     CATCH (false)
     errorCode = 0;
@@ -516,19 +516,27 @@ bool yatishDBmysql::InsertTimeslot () {
     long id, activity_id;
     try {
         sql.Printf("SELECT id,start,stop,activity_id FROM yatish_timeslot WHERE sync = 'I';");
+        // masterDB->RunQueryWithResults before the loop
+        // is much faster than
+        // masterDB->RunQuery inside the loop
         wxDatabaseResultSet * results = masterDB->RunQueryWithResults (sql);
+        wxPreparedStatement * prepareSlave = slaveDB->PrepareStatement (
+            "INSERT INTO yatish_timeslot (id,start,stop,activity_id) VALUES (?,?,?,?);" );
         while ( results->Next() ) {
             id = results->GetResultLong (1);
             start = results->GetResultString (2);
             stop = results->GetResultString (3);
             activity_id = results->GetResultLong (4);
-            sql.Printf ("INSERT INTO yatish_timeslot (id,start,stop,activity_id)"
-                        " VALUES (%ld,'%s','%s',%ld);", id, start, stop, activity_id);
-            slaveDB->RunQuery (sql);
-            sql.Printf ("UPDATE yatish_timeslot SET sync='S' WHERE id = %ld;", id);
-            masterDB->RunQuery (sql);
+            prepareSlave->SetParamLong (1, id);          // my wxDatabase
+            prepareSlave->SetParamString (2, start);
+            prepareSlave->SetParamString (3, stop);
+            prepareSlave->SetParamLong (4, activity_id); // my wxDatabase
+            prepareSlave->RunQuery();
         }
+        slaveDB->CloseStatement (prepareSlave);
         masterDB->CloseResultSet (results);
+        sql.Printf ("UPDATE yatish_timeslot SET sync='S' WHERE sync='I';");
+        masterDB->RunQuery (sql);
     }
     CATCH (false)
     errorCode = 0;
@@ -544,6 +552,7 @@ bool yatishDBmysql::DownloadTimeslot () {
     wxString sql, start, stop;
     long id, activity_id;
     try {
+        masterDB->BeginTransaction();
         sql.Printf("SELECT id,start,stop,activity_id FROM yatish_timeslot;");
         wxDatabaseResultSet * results = slaveDB->RunQueryWithResults (sql);
         while ( results->Next() ) {
@@ -556,6 +565,7 @@ bool yatishDBmysql::DownloadTimeslot () {
             masterDB->RunQuery (sql);
         }
         slaveDB->CloseResultSet (results);
+        masterDB->Commit();
     }
     CATCH (false)
     errorCode = 0;
@@ -581,10 +591,10 @@ bool yatishDBmysql::UpdateTimeslot () {
             sql.Printf ("UPDATE yatish_timeslot SET start='%s',stop='%s',activity_id=%ld"
                         " WHERE id = %ld;", start, stop, activity_id, id);
             slaveDB->RunQuery (sql);
-            sql.Printf ("UPDATE yatish_timeslot SET sync='S' WHERE id = %ld;", id);
-            masterDB->RunQuery (sql);
         }
         masterDB->CloseResultSet (results);
+        sql.Printf ("UPDATE yatish_timeslot SET sync='S' WHERE sync = 'U';");
+        masterDB->RunQuery (sql);
     }
     CATCH (false)
     errorCode = 0;

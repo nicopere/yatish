@@ -45,13 +45,17 @@ class yatishDBsqlite : public yatishDB {
         bool StartTimeslot (int, int, int);
         bool StopTimeslot ();
         int RunningTimeslots ();
+        void SetLimit (bool b, int i) { limitRow = b; rowLimit = i; }
         bool FillList (wxListCtrl *, tableID);
         void AddToFilter (tableID, int);
-        void SetLimit (bool b, int i) { limitRow = b; rowLimit = i; }
-        wxString FilteredTotal ();
+        wxString GetFilter () const { return filter; };
         void ClearFilter () { filter.Clear(); }
+        long FilteredTotal (wxTimeSpan &) const;
+        wxString FilteredTotalFormatted ();
         void SetFirstDay (const wxDateTime&);
         void SetLastDay (const wxDateTime&);
+        wxDateTime GetFirstDay () const { return wxFirstDay; }
+        wxDateTime GetLastDay () const { return wxLastDay; }
         wxDateTime First ();
         wxDateTime Last ();
         long LastActivity ();
@@ -69,6 +73,7 @@ class yatishDBsqlite : public yatishDB {
         long currentTimeslotID, slotCount;
         wxArrayLong clientIDs, projectIDs, taskIDs, toolIDs;
         wxString firstDay, lastDay, filter;
+        wxDateTime wxFirstDay, wxLastDay;
         wxTimeSpan totalSpan;
 };
 

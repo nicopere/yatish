@@ -38,6 +38,7 @@
 #include "yatishDlgName.h"
 #include "yatishDlgProject.h"
 #include "yatishDlgTimeslot.h"
+#include "yatishPDF.h"
 #include "yatishSettings.h"
 
 enum mysqlStatus {
@@ -96,6 +97,7 @@ class yatishFrame: public wxFrame {
         void OnMenuitemEditLastmonthSelected(wxCommandEvent& event);
         void OnMenuitemEditActivitySelected(wxCommandEvent& event);
         void OnMenuitemEditChartSelected(wxCommandEvent& event);
+        void OnButtonPDFClick(wxCommandEvent& event);
         //*)
         void OnMenuitemEditActivityUpdate (wxUpdateUIEvent&);
         void OnMenuitemEditTableUpdate (wxUpdateUIEvent&);

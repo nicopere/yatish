@@ -21,10 +21,10 @@ END_EVENT_TABLE()
 
 yatishDlgFilter::yatishDlgFilter (yatishDBsqlite * p_db, tableID t_id) {
 	//(*Initialize(yatishDlgFilter)
-	wxButton* buttonOK;
-	wxBoxSizer* BoxSizer2;
 	wxBoxSizer* BoxSizer1;
+	wxBoxSizer* BoxSizer2;
 	wxButton* buttonCancel;
+	wxButton* buttonOK;
 
 	Create(0, wxID_ANY, _("Value to display \?"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("wxID_ANY"));
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);

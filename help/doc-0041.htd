@@ -1,7 +1,7 @@
 <HTML>
 <HEAD><TITLE>SQL schema</TITLE></HEAD>
 <BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
-The <I>yatish</I> database is <A HREF="https://en.wikipedia.org/wiki/Database_normalization" TARGET="_blank">normalized</A> up to BCNF (at least... I have not quite understood the upper levels ;-).<P>
+The <I>yatish</I> database is "normalized" (check out <em> https://en.wikipedia.org/wiki/Database_normalization</em>) up to BCNF (at least... I have not quite understood the upper levels ;-).<P>
 The relations between <I>yatish</I> tables are best described with a graph:<P>
 <IMG SRC="img/yatish_tables.png"><P>
 In the graph above, primary keys are underlined and foreign keys are written in italics.<P>

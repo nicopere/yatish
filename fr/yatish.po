@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: yatish\n"
-"POT-Creation-Date: 2020-07-25 16:28+0200\n"
-"PO-Revision-Date: 2020-07-25 16:28+0200\n"
+"POT-Creation-Date: 2021-04-17 19:03+0200\n"
+"PO-Revision-Date: 2021-04-17 19:03+0200\n"
 "Last-Translator: Nicolas Pérenne <nicolas.perenne@eif-services.eu>\n"
 "Language-Team: Nicolas Pérenne\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4\n"
+"X-Generator: Poedit 2.4.2\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-KeywordsList: _\n"
@@ -24,10 +24,13 @@ msgstr ""
 "X-Poedit-SearchPath-8: yatishDBmysql.cpp\n"
 "X-Poedit-SearchPath-9: yatishSettings.cpp\n"
 "X-Poedit-SearchPath-10: yatishFrame.cpp\n"
+"X-Poedit-SearchPath-11: yatishPDF.cpp\n"
 
-#: yatishApp.cpp:47
-msgid "Another program instance is already running, aborting."
-msgstr "Une autre instance du programme est déjà en cours d'exécution: on arrête."
+#: yatishApp.cpp:45
+msgid "Another program instance is already running, aborting this one."
+msgstr ""
+"Une autre instance du programme est déjà en cours d'exécution: on arrête "
+"celle-ci."
 
 #: yatishDB.cpp:55
 #, c-format
@@ -48,11 +51,11 @@ msgstr ""
 "Erreur de lecture dans le fichier d'authentification:\n"
 "%s"
 
-#: yatishDBmysql.cpp:33
+#: yatishDBmysql.cpp:32
 msgid "Slave DB must be MySQL"
 msgstr "La base esclave doit être MySQL"
 
-#: yatishDBmysql.cpp:35
+#: yatishDBmysql.cpp:34
 msgid "Yatish tables not created (MySQL)"
 msgstr "Échec à la création des tables Yatish (MySQL)"
 
@@ -78,12 +81,12 @@ msgstr "La base maître doit être SQLite"
 msgid "Yatish tables not found (SQLite)"
 msgstr "Tables Yatish pas trouvées (SQLite)"
 
-#: yatishDBsqlite.cpp:355
+#: yatishDBsqlite.cpp:367
 #, c-format
 msgid "SUM: %.1f days | AVG: %.1f hours (x%ld)"
 msgstr "TOT: %.1f jours | MOY: %.1f heures (x%ld)"
 
-#: yatishDBsqlite.cpp:465
+#: yatishDBsqlite.cpp:479
 msgid ""
 "Owing to foreign key constraints\n"
 "in the Yatish database,\n"
@@ -95,12 +98,12 @@ msgstr ""
 "les enregistrements se référant à cet article\n"
 "seront aussi détruits."
 
-#: yatishDBsqlite.cpp:467
+#: yatishDBsqlite.cpp:481
 msgid "Confirm deletion"
 msgstr "Confirmer la suppression"
 
 #: yatishDlgActivity.cpp:46 yatishDlgName.cpp:37 yatishDlgProject.cpp:40
-#: yatishDlgTimeslot.cpp:116
+#: yatishDlgTimeslot.cpp:117
 msgid "New row"
 msgstr "Nouvelle ligne"
 
@@ -109,7 +112,7 @@ msgid "Table: yatish_activity"
 msgstr "Table: yatish_activity"
 
 #: yatishDlgActivity.cpp:77 yatishDlgName.cpp:57 yatishDlgProject.cpp:65
-#: yatishDlgTimeslot.cpp:152
+#: yatishDlgTimeslot.cpp:153
 msgid "(previously selected row)"
 msgstr "(ligne précédemment sélectionnée)"
 
@@ -145,15 +148,15 @@ msgstr "Table: yatish_project"
 msgid "Client:"
 msgstr "Client:"
 
-#: yatishDlgTimeslot.cpp:150
+#: yatishDlgTimeslot.cpp:151
 msgid "Table: yatish_timeslot"
 msgstr "Table: yatish_timeslot"
 
-#: yatishDlgTimeslot.cpp:154
+#: yatishDlgTimeslot.cpp:155
 msgid "Start:"
 msgstr "Début:"
 
-#: yatishDlgTimeslot.cpp:160
+#: yatishDlgTimeslot.cpp:161
 msgid "Stop:"
 msgstr "Fin:"
 
@@ -182,20 +185,20 @@ msgstr "A&RRÊTER"
 msgid "Table"
 msgstr "Table"
 
-#: yatishFrame.cpp:136 yatishFrame.cpp:349 yatishFrame.cpp:355
-#: yatishFrame.cpp:361
+#: yatishFrame.cpp:136 yatishFrame.cpp:350 yatishFrame.cpp:356
+#: yatishFrame.cpp:362
 msgid "Client"
 msgstr "Client"
 
-#: yatishFrame.cpp:137 yatishFrame.cpp:350 yatishFrame.cpp:356
+#: yatishFrame.cpp:137 yatishFrame.cpp:351 yatishFrame.cpp:357
 msgid "Task"
 msgstr "Tâche"
 
-#: yatishFrame.cpp:138 yatishFrame.cpp:351 yatishFrame.cpp:357
+#: yatishFrame.cpp:138 yatishFrame.cpp:352 yatishFrame.cpp:358
 msgid "Tool"
 msgstr "Outil"
 
-#: yatishFrame.cpp:139 yatishFrame.cpp:348 yatishFrame.cpp:354
+#: yatishFrame.cpp:139 yatishFrame.cpp:349 yatishFrame.cpp:355
 msgid "Project"
 msgstr "Projet"
 
@@ -212,8 +215,8 @@ msgid "Date interval (inclusive)"
 msgstr "Intervalle de date (inclusif)"
 
 #: yatishFrame.cpp:151
-msgid "Export PDF"
-msgstr "Export PDF"
+msgid "E&xport PDF"
+msgstr "&Export PDF"
 
 #: yatishFrame.cpp:160
 msgid "Coming soon..."
@@ -227,7 +230,7 @@ msgstr "Activité en cours"
 msgid "List/Edit"
 msgstr "Liste/Édition"
 
-#: yatishFrame.cpp:163
+#: yatishFrame.cpp:163 yatishPDF.cpp:115
 msgid "Charts"
 msgstr "Graphiques"
 
@@ -383,35 +386,35 @@ msgstr "&À propos..."
 msgid "&Help"
 msgstr "&Aide"
 
-#: yatishFrame.cpp:286
+#: yatishFrame.cpp:287
 msgid "Several yatish were inappropriately terminated!"
 msgstr "Plusieurs yatish se sont terminés abruptement!"
 
-#: yatishFrame.cpp:346
+#: yatishFrame.cpp:347
 msgid "Date"
 msgstr "Date"
 
-#: yatishFrame.cpp:347
+#: yatishFrame.cpp:348
 msgid "Duration"
 msgstr "Durée"
 
-#: yatishFrame.cpp:360 yatishFrame.cpp:364
+#: yatishFrame.cpp:361 yatishFrame.cpp:365 yatishSettings.cpp:133
 msgid "Name"
 msgstr "Nom"
 
-#: yatishFrame.cpp:436
+#: yatishFrame.cpp:437
 msgid "Please stop the current activity"
 msgstr "Veuillez stopper l'activité en cours"
 
-#: yatishFrame.cpp:437
+#: yatishFrame.cpp:438
 msgid "Update refused"
 msgstr "Mise à jour refusée"
 
-#: yatishFrame.cpp:442 yatishFrame.cpp:457 yatishFrame.cpp:472
+#: yatishFrame.cpp:443 yatishFrame.cpp:458 yatishFrame.cpp:473
 msgid "MySQL connection timed out: try to reconnect..."
 msgstr "La connexion MySQL a expiré: essayer de se reconnecter..."
 
-#: yatishFrame.cpp:449
+#: yatishFrame.cpp:450
 msgid ""
 "Remote data (if any) will be\n"
 "overwritten by local ones."
@@ -419,15 +422,15 @@ msgstr ""
 "Les éventuelles données distantes\n"
 "seront écrasées par les locales."
 
-#: yatishFrame.cpp:450 yatishFrame.cpp:465
+#: yatishFrame.cpp:451 yatishFrame.cpp:466
 msgid "Are you sure?"
 msgstr "Êtes-vous sûrs?"
 
-#: yatishFrame.cpp:453 yatishFrame.cpp:468
+#: yatishFrame.cpp:454 yatishFrame.cpp:469
 msgid "Please wait, working..."
 msgstr "Veuillez attendre, traitement en cours..."
 
-#: yatishFrame.cpp:464
+#: yatishFrame.cpp:465
 msgid ""
 "Local data (if any) will be\n"
 "overwritten by remote ones."
@@ -447,14 +450,16 @@ msgstr "RàZ filtre"
 msgid ""
 "Yet Another TIme SHeet\n"
 "Time tracking for freelancers/homeworkers\n"
+"\n"
 "Built with:\n"
 msgstr ""
 "Yet Another TIme SHeet\n"
 "Suivi du temps pour les travailleurs\n"
 "indépendants ou à domicile\n"
-"Construit <svn:147> avec:\n"
+"\n"
+"Construit <svn:179> avec:\n"
 
-#: yatishFrame.cpp:816
+#: yatishFrame.cpp:818
 msgid ""
 "Won't edit the current activity\n"
 "(first close it)."
@@ -462,42 +467,134 @@ msgstr ""
 "Impossible d'éditer l'activité en cours\n"
 "(la terminer d'abord)."
 
-#: yatishFrame.cpp:817
+#: yatishFrame.cpp:819
 msgid "Change selection"
 msgstr "Changer de sélection"
 
-#: yatishSettings.cpp:56
+#: yatishFrame.cpp:836
+msgid "Specify the PDF file to be written"
+msgstr "Spécifier le fichier PDF à écrire"
+
+#: yatishPDF.cpp:29
+msgid "Timesheet"
+msgstr "Feuille de temps"
+
+#: yatishPDF.cpp:31
+msgid "YATiSh table"
+msgstr "Table YATiSh"
+
+#: yatishPDF.cpp:50
+msgid "Summary"
+msgstr "Résumé"
+
+#: yatishPDF.cpp:52
+msgid "Number of records:"
+msgstr "Nombre d'enregistrements:"
+
+#: yatishPDF.cpp:54
+msgid " (limited)"
+msgstr " (limité)"
+
+#: yatishPDF.cpp:58
+msgid "Number of fields:"
+msgstr "Nombre de champs:"
+
+#: yatishPDF.cpp:65 yatishPDF.cpp:70
+msgid "SQL filter:"
+msgstr "Filtre SQL:"
+
+#: yatishPDF.cpp:67
+msgid "none"
+msgstr "aucun"
+
+#: yatishPDF.cpp:77
+msgid "Date range:"
+msgstr "Intervalle de temps:"
+
+#: yatishPDF.cpp:82
+msgid "Total duration (hours):"
+msgstr "Durée totale (heures):"
+
+#: yatishPDF.cpp:135
+msgid "Listing"
+msgstr "Détails"
+
+#: yatishPDF.cpp:166
+msgid ""
+"Logo file not found... thus not drawn.\n"
+"Check out your PDF settings (Ctrl-S)."
+msgstr ""
+"Fichier logo introuvable... donc non dessiné.\n"
+"Consultez vos préférences PDF (Ctrl-P)."
+
+#: yatishPDF.cpp:251 yatishPDF.cpp:257
+msgid "others"
+msgstr "autres"
+
+#: yatishSettings.cpp:98
 msgid "Yatish settings"
 msgstr "Préférences utilisateur"
 
-#: yatishSettings.cpp:58
+#: yatishSettings.cpp:104
 msgid "Logging:"
 msgstr "Messages:"
 
-#: yatishSettings.cpp:60
+#: yatishSettings.cpp:106
 msgid "main frame"
 msgstr "fenêtre principale"
 
-#: yatishSettings.cpp:63
+#: yatishSettings.cpp:109
 msgid "Timeslot:"
 msgstr "Intervalle de temps:"
 
-#: yatishSettings.cpp:65
+#: yatishSettings.cpp:111
 msgid "limit list"
 msgstr "limiter la liste"
 
-#: yatishSettings.cpp:68
+#: yatishSettings.cpp:114
 msgid "Row limit:"
 msgstr "Limite de liste:"
 
-#: yatishSettings.cpp:73
+#: yatishSettings.cpp:119
 msgid "Charts:"
 msgstr "Graphiques:"
 
-#: yatishSettings.cpp:76
+#: yatishSettings.cpp:122
 msgid "wxFreeChart"
 msgstr "wxFreeChart"
 
-#: yatishSettings.cpp:77
+#: yatishSettings.cpp:123
 msgid "wxCharts"
 msgstr "wxCharts"
+
+#: yatishSettings.cpp:131
+msgid "Company"
+msgstr "Entreprise"
+
+#: yatishSettings.cpp:139
+msgid "Logo"
+msgstr "Logo"
+
+#: yatishSettings.cpp:142
+msgid "File..."
+msgstr "Fichier..."
+
+#: yatishSettings.cpp:146
+msgid "Motto"
+msgstr "Slogan"
+
+#: yatishSettings.cpp:153
+msgid "with charts"
+msgstr "avec graphiques"
+
+#: yatishSettings.cpp:159
+msgid "GUI"
+msgstr "IHM"
+
+#: yatishSettings.cpp:160
+msgid "PDF"
+msgstr "PDF"
+
+#: yatishSettings.cpp:230
+msgid "Select the logo file"
+msgstr "Choisir le fichier du logo"

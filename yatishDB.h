@@ -1,6 +1,6 @@
 /***************************************************************
  * Name:      yatishDB.h
- * Purpose:   Defines the base classe for yatish database controllers
+ * Purpose:   Defines the base class of yatish database controllers
  * Author:    Nicolas Pérenne (nicolas.perenne@eif-services.eu)
  * Created:   2020-04-15
  * Copyright: EIF-services (https://www.eif-services.eu)
@@ -44,7 +44,7 @@ enum tableID {
  * -5 | yatishDBsqlite::yatishDBsqlite | Yatish tables not found
  * -5 | yatishDBmysql::yatishDBmysql | Yatish tables not created
  *
- * (error codes from the wxDatabase library are positive...).
+ * (error codes from the wxDatabase library itself are positive...).
  */
 class yatishDB {
     public:
