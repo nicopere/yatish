@@ -1,7 +1,0 @@
-<HTML>
-<HEAD><TITLE>Menu bar</TITLE></HEAD>
-<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
-The <A HREF="doc-0023.htm">menu bar</A> provides access to most of <I>yatish</I> commands, except for the <A HREF="doc-0007.htm#shift">SHIFT commands</A> of panel #2. Furthermore some commands from the <B>Edit</B> menu are also provided in <A HREF="doc-0024.htm">context menus</A> (only in panel #2).<P>
-Apart from the mouse, one can navigate the menus with the usual ALT mechanism (checkout underlined letters when pressing the ALT key). There are also <A HREF="doc-0025.htm">keyboard shortcuts</A> for some common tasks. These shortcuts are mentionned in menu subtitles and it's worth remembering them; they begin with CTRL except for F1 (which spawns the present help).
-</BODY>
-</HTML>
