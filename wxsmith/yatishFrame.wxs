@@ -4,7 +4,7 @@
 		<title>YATiSh</title>
 		<id_arg>0</id_arg>
 		<handler function="OnClose" entry="EVT_CLOSE" />
-		<object class="wxBoxSizer" variable="BoxSizer1" member="yes">
+		<object class="wxBoxSizer" variable="boxSizer1" member="yes">
 			<orient>wxVERTICAL</orient>
 			<object class="sizeritem">
 				<object class="wxNotebook" name="idNotebook" variable="notebook" member="yes">
@@ -12,7 +12,7 @@
 					<object class="notebookpage">
 						<object class="wxPanel" name="idPanelCurrent" variable="panelCurrent" member="no">
 							<style>0</style>
-							<object class="wxBoxSizer" variable="BoxSizer2" member="no">
+							<object class="wxBoxSizer" variable="boxSizer2" member="no">
 								<orient>wxVERTICAL</orient>
 								<object class="spacer">
 									<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
@@ -20,7 +20,7 @@
 									<option>1</option>
 								</object>
 								<object class="sizeritem">
-									<object class="wxStaticBoxSizer" variable="StaticBoxSizer1" member="no">
+									<object class="wxStaticBoxSizer" variable="staticBoxSizer1" member="no">
 										<label>Select project, task and tool</label>
 										<object class="sizeritem">
 											<object class="wxChoice" name="idChoiceProject" variable="choiceProject" member="yes" />
@@ -47,7 +47,7 @@
 									<option>1</option>
 								</object>
 								<object class="sizeritem">
-									<object class="wxBoxSizer" variable="BoxSizer3" member="no">
+									<object class="wxBoxSizer" variable="boxSizer3" member="no">
 										<object class="sizeritem">
 											<object class="wxButton" name="idButtonStart" variable="buttonStart" member="yes">
 												<label>&amp;RECORD</label>
@@ -82,12 +82,12 @@
 					<object class="notebookpage">
 						<object class="wxPanel" name="idPanelList" variable="panelList" member="no">
 							<style>0</style>
-							<object class="wxBoxSizer" variable="BoxSizer4" member="no">
+							<object class="wxBoxSizer" variable="boxSizer4" member="no">
 								<orient>wxVERTICAL</orient>
 								<object class="sizeritem">
-									<object class="wxBoxSizer" variable="BoxSizer5" member="no">
+									<object class="wxBoxSizer" variable="boxSizer5" member="no">
 										<object class="sizeritem">
-											<object class="wxStaticBoxSizer" variable="StaticBoxSizer2" member="no">
+											<object class="wxStaticBoxSizer" variable="staticBoxSizer2" member="no">
 												<label>Table</label>
 												<object class="sizeritem">
 													<object class="wxChoice" name="idChoiceTable" variable="choiceTable" member="yes">
@@ -111,7 +111,7 @@
 											<border>5</border>
 										</object>
 										<object class="sizeritem">
-											<object class="wxStaticBoxSizer" variable="StaticBoxSizer3" member="no">
+											<object class="wxStaticBoxSizer" variable="staticBoxSizer3" member="no">
 												<label>Date interval (inclusive)</label>
 												<object class="sizeritem">
 													<object class="wxDatePickerCtrl" name="idDatePicker1" variable="datePicker1" member="yes">
@@ -153,6 +153,7 @@
 								<object class="sizeritem">
 									<object class="wxListCtrl" name="idListCtrl" variable="listCtrl" member="yes">
 										<style>wxLC_REPORT|wxLC_SINGLE_SEL</style>
+										<handler function="OnListItemRightClick" entry="EVT_LIST_ITEM_RIGHT_CLICK" />
 										<handler function="OnListKeyDown" entry="EVT_LIST_KEY_DOWN" />
 										<handler function="OnListColumnClick" entry="EVT_LIST_COL_CLICK" />
 									</object>
@@ -165,10 +166,91 @@
 						<label>List/Edit</label>
 					</object>
 					<object class="notebookpage">
-						<object class="wxPanel" name="idPanelChart" variable="panelChart" member="no">
+						<object class="wxPanel" name="idPanelChart" variable="panelChart" member="yes">
 							<style>0</style>
-							<object class="wxStaticText" name="wxID_ANY" variable="StaticText1" member="no">
-								<label>Coming soon...</label>
+							<object class="wxBoxSizer" variable="boxSizer6" member="yes">
+								<orient>wxVERTICAL</orient>
+								<object class="sizeritem">
+									<object class="wxBoxSizer" variable="boxSizer7" member="no">
+										<object class="sizeritem">
+											<object class="wxStaticBoxSizer" variable="staticBoxSizer4" member="no">
+												<label>Chart type | Temporal aggregation</label>
+												<object class="sizeritem">
+													<object class="wxChoice" name="idChoiceChart" variable="choiceChart" member="yes">
+														<content>
+															<item>Time series</item>
+															<item>Pie chart</item>
+														</content>
+														<selection>0</selection>
+														<handler function="OnChoiceChartSelect" entry="EVT_CHOICE" />
+													</object>
+													<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+													<border>5</border>
+												</object>
+												<object class="sizeritem">
+													<object class="wxChoice" name="idChoiceAggregate" variable="choiceAggregate" member="yes">
+														<content>
+															<item>Hours (total)</item>
+															<item>Days (worked)</item>
+															<item>Hours/day (max)</item>
+															<item>Time range (max)</item>
+															<item>Minutes/timeslot (average)</item>
+														</content>
+														<selection>0</selection>
+														<handler function="OnChoiceAggregateSelect" entry="EVT_CHOICE" />
+													</object>
+													<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+													<border>5</border>
+													<option>1</option>
+												</object>
+											</object>
+											<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxStaticBoxSizer" variable="staticBoxSizer5" member="no">
+												<label>Data clustering | Date interval</label>
+												<object class="sizeritem">
+													<object class="wxChoice" name="idChoiceCluster" variable="choiceCluster" member="yes">
+														<content>
+															<item>Clients</item>
+															<item>Projects</item>
+															<item>Tasks</item>
+															<item>Tools</item>
+															<item>None</item>
+														</content>
+														<selection>4</selection>
+														<handler function="OnChoiceClusterSelect" entry="EVT_CHOICE" />
+													</object>
+													<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+													<border>5</border>
+												</object>
+												<object class="sizeritem">
+													<object class="wxDatePickerCtrl" name="idDatePicker3" variable="datePicker3" member="yes">
+														<pos>-1,-1</pos>
+														<handler function="OnDatePicker3Changed" entry="EVT_DATE_CHANGED" />
+													</object>
+													<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+													<border>5</border>
+													<option>1</option>
+												</object>
+												<object class="sizeritem">
+													<object class="wxDatePickerCtrl" name="idDatePicker4" variable="datePicker4" member="yes">
+														<pos>-1,-1</pos>
+														<handler function="OnDatePicker4Changed" entry="EVT_DATE_CHANGED" />
+													</object>
+													<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+													<border>5</border>
+													<option>1</option>
+												</object>
+											</object>
+											<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+											<border>5</border>
+										</object>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>5</border>
+								</object>
 							</object>
 						</object>
 						<label>Charts</label>
@@ -187,7 +269,7 @@
 			</object>
 		</object>
 		<object class="wxMenuBar" variable="menuBar" member="no">
-			<object class="wxMenu" variable="Menu1" member="no">
+			<object class="wxMenu" variable="menu1" member="no">
 				<label>&amp;File</label>
 				<object class="wxMenuItem" name="idFileConnect" variable="menuitemFileConnect" member="yes">
 					<label>&amp;Connect</label>
@@ -221,7 +303,7 @@
 					<handler function="OnQuit" entry="EVT_MENU" />
 				</object>
 			</object>
-			<object class="wxMenu" variable="Menu2" member="no">
+			<object class="wxMenu" variable="menu2" member="no">
 				<label>&amp;Edit</label>
 				<object class="wxMenuItem" name="idEditActivity" variable="menuitemEditActivity" member="no">
 					<label>&amp;Activity</label>
@@ -255,38 +337,6 @@
 					<handler function="OnMenuitemEditResetSelected" entry="EVT_MENU" />
 				</object>
 				<object class="separator" />
-				<object class="wxMenuItem" name="idEditToday" variable="menuitemEditToday" member="no">
-					<label>Today</label>
-					<help>Time interval to show: today</help>
-					<handler function="OnMenuitemEditTodaySelected" entry="EVT_MENU" />
-				</object>
-				<object class="wxMenuItem" name="idEditThisweek" variable="menuitemEditThisweek" member="no">
-					<label>This week</label>
-					<help>Time interval to show: this week</help>
-					<handler function="OnMenuitemEditThisweekSelected" entry="EVT_MENU" />
-				</object>
-				<object class="wxMenuItem" name="idEditThismonth" variable="menuitemEditThismonth" member="no">
-					<label>This month</label>
-					<help>Time interval to show: this month</help>
-					<handler function="OnMenuitemEditThismonthSelected" entry="EVT_MENU" />
-				</object>
-				<object class="wxMenuItem" name="idEditYesterday" variable="menuitemEditYesteday" member="no">
-					<label>Yesterday</label>
-					<help>Time interval to show: yesterday</help>
-					<handler function="OnMenuitemEditYestedaySelected" entry="EVT_MENU" />
-				</object>
-				<object class="wxMenuItem" name="idEditLastweek" variable="menuitemEditLastweek" member="no">
-					<label>Last week</label>
-					<help>Time interval to show: last week</help>
-					<enabled>0</enabled>
-					<handler function="OnMenuitemEditLastweekSelected" entry="EVT_MENU" />
-				</object>
-				<object class="wxMenuItem" name="idEditLastmonth" variable="menuitemEditLastmonth" member="no">
-					<label>Last month</label>
-					<help>Time interval to show: last month</help>
-					<handler function="OnMenuitemEditLastmonthSelected" entry="EVT_MENU" />
-				</object>
-				<object class="separator" />
 				<object class="wxMenuItem" name="idEditSettings" variable="menuitemEditSettings" member="no">
 					<label>&amp;Settings...</label>
 					<accel>Ctrl-S</accel>
@@ -294,7 +344,52 @@
 					<handler function="OnMenuitemEditSettingsSelected" entry="EVT_MENU" />
 				</object>
 			</object>
-			<object class="wxMenu" variable="Menu3" member="no">
+			<object class="wxMenu" variable="menu3" member="no">
+				<label>&amp;Time</label>
+				<object class="wxMenuItem" name="idTimeToday" variable="menuitemEditToday" member="no">
+					<label>Today</label>
+					<help>Time interval to show: today</help>
+					<handler function="OnMenuitemTimeTodaySelected" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="idTimeThisweek" variable="menuitemEditThisweek" member="no">
+					<label>This week</label>
+					<help>Time interval to show: this week</help>
+					<handler function="OnMenuitemTimeThisweekSelected" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="idTimeThismonth" variable="menuitemEditThismonth" member="no">
+					<label>This month</label>
+					<help>Time interval to show: this month</help>
+					<handler function="OnMenuitemTimeThismonthSelected" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="idTimeThisyear" variable="menuitemEditThisyear" member="no">
+					<label>This year</label>
+					<help>Time interval to show: this year</help>
+					<handler function="OnMenuitemTimeThisyearSelected" entry="EVT_MENU" />
+				</object>
+				<object class="separator" />
+				<object class="wxMenuItem" name="idTimeYesterday" variable="menuitemEditYesteday" member="no">
+					<label>Yesterday</label>
+					<help>Time interval to show: yesterday</help>
+					<handler function="OnMenuitemTimeYesterdaySelected" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="idTimeLastweek" variable="menuitemEditLastweek" member="no">
+					<label>Last week</label>
+					<help>Time interval to show: last week</help>
+					<enabled>0</enabled>
+					<handler function="OnMenuitemTimeLastweekSelected" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="idTimeLastmonth" variable="menuitemEditLastmonth" member="no">
+					<label>Last month</label>
+					<help>Time interval to show: last month</help>
+					<handler function="OnMenuitemTimeLastmonthSelected" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="idTimeLastyear" variable="menuitemEditLastyear" member="no">
+					<label>Last year</label>
+					<help>Time interval to show: last year</help>
+					<handler function="OnMenuitemTimeLastyearSelected" entry="EVT_MENU" />
+				</object>
+			</object>
+			<object class="wxMenu" variable="menu4" member="no">
 				<label>&amp;Help</label>
 				<object class="wxMenuItem" name="idHelpUser" variable="menuitemHelpUser" member="no">
 					<label>&amp;User guide</label>

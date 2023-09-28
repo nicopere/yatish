@@ -1,16 +1,15 @@
-/***************************************************************
+/********************************************************************
  * Name:      yatishDBmysql.h
- * Purpose:   Defines a mysql controller
+ * Purpose:   Declares a mysql controller
  * Author:    Nicolas Pérenne (nicolas.perenne@eif-services.eu)
  * Created:   2020-04-16
- * Copyright: EIF-services (https://www.eif-services.eu)
+ * Copyright: EIF-services (https://www.eif-services.eu/yatish)
  * License:   GPLv3
- **************************************************************/
+ ********************************************************************/
 
 #ifndef YATISHDBMYSQL_H
 #define YATISHDBMYSQL_H
 
-#include <wx/listctrl.h>
 #include "yatishDB.h"
 
 /** Interacts with _yatish_ tables in a MySQL/MariaDB database.

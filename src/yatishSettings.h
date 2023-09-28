@@ -19,27 +19,22 @@
 #include <wx/spinctrl.h>
 //*)
 
-#include <wx/config.h>
-#include <wx/stdpaths.h>
-#include <wx/valgen.h>
-
+/** Same order as yatishSettings::choiceLib. */
 enum ChartLib {
-    wxFreeChart, // 0
+    wxMathPlot,
+    wxFreeChart,
     wxCharts
 };
 
-/** Defines the application settings. Defined here but instantiated in yatishFrame
- * (private member there).
- */
+/** As its names implies: the class holding YATiSh settings. */
 struct Settings {
     bool log2text, /**< If `True`, error/warning messages will be forwarded
                         to the bottom of the main frame. */
          limitRow; /**< If `True`, the listing in panel #2 will be limited... */
     int rowLimit;  /**< ...to `rowLimit` lines. */
-    ChartLib lib;  /**< A `ChartLib` enumerates the graphic libraries
-                        available for panel #3 (not used yet). */
-    bool logo4pdf; /**< If `True` the company name is replaced by its logo
-                        in the PDF header. Also determines the meaning of `companyName_or_logoPath`. */
+    ChartLib lib;  /**< A `ChartLib` enumerates the graphic libraries available for panel #3. */
+    bool logo4pdf; /**< If `True` the company name is replaced by its logo in the PDF header.
+                        Also determines the meaning of `companyName_or_logoPath`. */
     wxString companyName_or_logoPath; /**< Either the company name or its logo.
                                            Can be left empty if `logo4pdf` is `False`. */
     bool motto4pdf; /**< Print the company motto in the PDF header? */
@@ -49,6 +44,7 @@ struct Settings {
     ~Settings ();
 };
 
+/** A dialog to modify YATiSh settings. */
 class yatishSettings: public wxDialog {
     public:
         yatishSettings ();

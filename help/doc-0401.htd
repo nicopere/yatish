@@ -1,0 +1,115 @@
+<HTML>
+<HEAD><TITLE>Menu bar commands</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+<A NAME="top">Menu items</A> are enabled according to the current state of the application or its GUI.<P> 
+<A HREF="#file">File</A> | <A HREF="#edit">Edit</A> | <A HREF="#time">Time</A> | <A HREF="#help">Help</A>
+
+<A NAME="file"><H3>File</H3></A>
+MySQL connection and application exit.<P>
+<TABLE>
+<TR>
+<TD><B>Connect</B></TD>
+<TD>Connect to a (remote) MySQL/MariaDB server.</TD>
+</TR>
+<TR>
+<TD><B>Update</B></TD>
+<TD>Update remote database.</TD>
+</TR>
+<TR>
+<TD><B>Upload</B></TD>
+<TD>Replace remote data (by local). <B>Upload</B> is longer that <B>Update</B>.</TD>
+</TR>
+<TR>
+<TD><B>Download</B></TD>
+<TD>Replace local data (by remote).</TD>
+</TR>
+<TR>
+<TD><B>Quit</B></TD>
+<TD>Exit yatish; current activity, if any, is terminated.</TD>
+</TR>
+</TABLE>
+<A HREF="#top">top</A>
+
+<A NAME="edit"><H3>Edit</H3></A>
+Access yatish tables and preferences.<P>
+<TABLE>
+<TR>
+<TD><B>Activity</B></TD>
+<TD>Start/stop the current activity (switch to panel #1).</TD>
+</TR>
+<TR>
+<TD><B>Tables</B></TD>
+<TD>List/edit any table (switch to panel #2).</TD>
+</TR>
+<TR>
+<TD><B>Charts</B></TD>
+<TD>Visualize data (switch to panel #3).</TD>
+</TR>
+<TR>
+<TD><B>New record...</B></TD>
+<TD><A HREF="doc-0300.htm">Add a record</A> to the currently selected table.</TD>
+</TR>
+<TR>
+<TD><B>Reset filter</B></TD>
+<TD>Reset column filter (<A HREF="doc-0103.htm#filter">panel #2</A>) and date interval (panels #2 and #3).</TD>
+</TR>
+<TR>
+<TD><B>Settings...</B></TD>
+<TD>Set <A HREF="doc-0020.htm">user preferences</A>.</TD>
+</TR>
+</TABLE>
+<A HREF="#top">top</A>
+
+<A NAME="time"><H3>Time</H3></A>
+Time-related shortcuts.<P>
+<TABLE>
+<TD><B>Today</B></TD>
+<TD>Set the date interval to the present day.</TD>
+</TR>
+<TR>
+<TD><B>This week</B></TD>
+<TD>Set the date interval to the present week.</TD>
+</TR>
+<TR>
+<TD><B>This month</B></TD>
+<TD>Set the date interval to the present month.</TD>
+</TR>
+<TR>
+<TD><B>This yer</B></TD>
+<TD>Set the date interval to the present year.</TD>
+</TR>
+<TR>
+<TD><B>Yesterday</B></TD>
+<TD>Set the date interval to the previous day.</TD>
+</TR>
+<TR>
+<TD><B>Last week</B></TD>
+<TD>Set the date interval to the previous week.</TD>
+</TR>
+<TR>
+<TD><B>Last month</B></TD>
+<TD>Set the date interval to the previous month.</TD>
+</TR>
+<TR>
+<TD><B>Last year</B></TD>
+<TD>Set the date interval to the previous year.</TD>
+</TR>
+</TABLE>
+<A HREF="#top">top</A>
+
+<A NAME="help"><H3>Help</H3></A>
+<TABLE>
+<TR>
+<TD><B>User guide</B></TD>
+<TD>The present documentation.</TD>
+</TR>
+<TR>
+<TD><B>About...</B></TD>
+<TD><I>yatish</I> acknowledgements and licence:</TD>
+</TR>
+</TABLE>
+<IMG SRC="img/about.png"><P>
+<A HREF="#top">top</A>
+
+</BODY>
+</HTML>

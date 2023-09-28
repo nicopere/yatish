@@ -1,0 +1,15 @@
+<HTML>
+<HEAD><TITLE>Listing filter</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+<IMG SRC="img/filter.png"><P>
+This dialog appears when one clicks on the name of a column in panel #2.<P>
+N.B. Leftmost columns usually cannot be filtered upon.
+<H3>Dialog fields</H3>
+<TABLE>
+<TR>
+<TD><B>Choose</B></TD>
+<TD>among the previously entered items (table and column dependent).</TD>
+</TR>
+</TABLE>
+</BODY>
+</HTML>

@@ -1,0 +1,11 @@
+<HTML>
+<HEAD><TITLE>Howto</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+These topics deal with a few short-comings encountered when running <I>yatish</I> on Ubuntu.
+<UL>
+<LI><A HREF="doc-0501.htm">Recover icon updating?</A>
+<LI><A HREF="doc-0502.htm">Get rid of time warning</A>
+<LI><A HREF="doc-0503.htm">Empty plot when changing library</A>
+</UL>
+</BODY>
+</HTML>

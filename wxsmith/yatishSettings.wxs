@@ -76,11 +76,11 @@
 								<object class="sizeritem">
 									<object class="wxChoice" name="idChoiceLib" variable="choiceLib" member="yes">
 										<content>
+											<item>wxMathPlot</item>
 											<item>wxFreeChart</item>
 											<item>wxCharts</item>
 										</content>
 										<selection>0</selection>
-										<enabled>0</enabled>
 									</object>
 									<flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
 									<border>5</border>

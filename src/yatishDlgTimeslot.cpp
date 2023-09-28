@@ -6,7 +6,9 @@
  *   when SetValidator was called on a wxChoice...
  * - Validate() always returns true, i.e. we rely on wx(Date|Time)PickerCtrl
  *   (style wxDP_ALLOWNONE __not__ set)
- * .
+ *
+ * \note This class is necessary because wxGenericValidator [doesn't support]
+ * (https://docs.wxwidgets.org/stable/classwx_generic_validator.html) wxDatePickerCrl.
  * \todo
  * - fix RTTI
  * - try template?
@@ -33,8 +35,10 @@ bool DateValidator::TransferToWindow () {
     date->SetValue (*pdt);
     return true;
 }
-/** \sa DateValidator
- */
+
+/** This class is necessary because wxGenericValidator [doesn't support]
+ * (https://docs.wxwidgets.org/stable/classwx_generic_validator.html) wxTimePickerCtrl.
+ * \sa DateValidator */
 class TimeValidator : public wxValidator {
     public:
         TimeValidator () { pdt = nullptr; }
@@ -82,7 +86,9 @@ BEGIN_EVENT_TABLE (yatishDlgTimeslot, wxDialog)
     //*)
 END_EVENT_TABLE()
 
-/** This constructor initializes the dialog box with data from the SQL record identified by `sql_id`. */
+/** This constructor initializes the dialog box with data from the SQL record identified by `sql_id`.
+ * \todo TAB traversal broken by wx[Date|Time]PickerCtrl (idem panels #2 and #3) [no problem on Windows]
+ */
 yatishDlgTimeslot::yatishDlgTimeslot (yatishDBsqlite * p_db, long sql_id) {
     BuildContent();
     pdb = p_db;
@@ -108,7 +114,6 @@ yatishDlgTimeslot::yatishDlgTimeslot (yatishDBsqlite * p_db, long sql_id) {
     } else
         wxLogError ("Initialization of dates failed (yatishDlgTimeslot)");
     Fit(); SetMaxSize ( GetSize() ); // Fit() really needed here !
-    /** \todo TAB traversal broken by wx[Date|Time]PickerCtrl... (idem panel #2) [no problem on Windows]*/
 }
 
 /** The dialog box is initially empty and only writes NEW records (the SAVE button is cancelled). */
@@ -139,6 +144,7 @@ yatishDlgTimeslot::yatishDlgTimeslot (yatishDBsqlite * p_db) {
       buttonNew->Disable(); // in case we get here while some tables are still empty
 }
 
+/** \note _wxSmith_ has no button for _wxTimePickerCtrl_ hence a custom control was set up there. */
 void yatishDlgTimeslot::BuildContent() {
     //(*Initialize(yatishDlgTimeslot)
     wxBoxSizer* BoxSizer1;

@@ -16,7 +16,6 @@
 #include <wx/timectrl.h>
 //*)
 
-#include <wx/valgen.h>
 #include "yatishDBsqlite.h"
 
 class yatishDlgTimeslot: public wxDialog {

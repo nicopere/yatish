@@ -1,0 +1,22 @@
+<HTML>
+<HEAD><TITLE>Start recording</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+Once you have defined at least one client, project, task and tool, panel #1 is operational and you can select a combination of project, task and tool. Such a combination is know to <I>yatish</I> as an "activity". If the chosen activity does not exist in the <I>activity</I> table, <I>yatish</I> will create one for you when you press the RECORD button, which has several other consequences:
+<UL>
+<LI>a new record is created in the <I>timeslot</I> table; the current timestamp is written in the <I>start</I> field;
+<LI>the (RECORD) STOP button is (de)activated;
+<LI>the status bar clock begins to tick;
+<LI>the <I>yatish</I> icon is changed (however <A HREF="doc-0501.htm">check this</A>).
+</UL>
+<CENTER><IMG SRC="img/yatish_recording.png" ALIGN="TEXTTOP"></CENTER><P>
+Pressing the STOP button reverses these effects:
+<UL>
+<LI>the <I>timeslot</I> record is updated: the current timestamp is written in the <I>stop</I> field;
+<LI>the (STOP) RECORD button is (de)activated;
+<LI>the status bar clock is frozen;
+<LI>the <I>yatish</I> icon is reset.
+</UL>
+<CENTER><IMG SRC="img/yatish.png"  ALIGN="TEXTTOP"></CENTER><P>
+N.B. <I>yatish</I> will behave as if you had pressed the STOP button if you exit (CTRL-Q) before. 
+</BODY>
+</HTML>

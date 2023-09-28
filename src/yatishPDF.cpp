@@ -1,15 +1,14 @@
-/***************************************************************
+/********************************************************************
  * Name:      yatishDB.cpp
- * Purpose:   Code for the class exporting PDF from yatish data
+ * Purpose:   Implements the class exporting PDF from yatish data
  * Author:    Nicolas Pérenne (nicolas.perenne@eif-services.eu)
  * Created:   2021-03-23
- * Copyright: EIF-services (https://www.eif-services.eu)
+ * Copyright: EIF-services (https://www.eif-services.eu/yatish)
  * License:   GPLv3
- **************************************************************/
+ ********************************************************************/
 
+#include "wx_pch.h"
 #include "yatishPDF.h"
-using namespace std;
-typedef map <string, long> map4pdf;
 
 /** Prints a title then calls other member functions for the body of the PDF document.
  * \param[in] s application settings
@@ -91,14 +90,14 @@ void yatishPDF::Charts (const wxListCtrl * lst) {
     if (colmax != 6) return;
     // data from wxListCtrl: total time (in minutes) for each label
     wxString timeslot;
-    long hours, minutes;
-    map4pdf projects, clients, tasks, tools;
+    unsigned long hours, minutes;
+    Map4pie projects, clients, tasks, tools;
     for (int row = 0; row < rowmax; row++) {
         timeslot = lst->GetItemText (row, 1);
         if (row == 0 && timeslot.IsEmpty()) continue; // an activity is underway: don't count it
         wxStringTokenizer tkz (timeslot, ":");
-        tkz.GetNextToken().ToLong (&hours);
-        tkz.GetNextToken().ToLong (&minutes);
+        tkz.GetNextToken().ToULong (&hours);
+        tkz.GetNextToken().ToULong (&minutes);
         minutes += hours*60;
         projects[lst->GetItemText (row, 2) .ToStdString()] += minutes;
         clients [lst->GetItemText (row, 3) .ToStdString()] += minutes;
@@ -187,7 +186,7 @@ void yatishPDF::Footer () {
 
 /** Modified from `charting.cpp` in the _wxPdfDocument_ samples. */
 void yatishPDF::PieChart (double xPage, double yPage, double width, double height,
-                          const map4pdf& data, const wxColour * colors) {
+                          const Map4pie& data, const wxColour * colors) {
     SetFont ("Helvetica", "", 8);
     double margin = 1;
     double hLegend = 3;
@@ -241,21 +240,19 @@ void yatishPDF::PieChart (double xPage, double yPage, double width, double heigh
 
 /** Modifies its argument `map` so that there is no more than six records.
  *  Creates an `others` key if need be, which contains the _smallest_ items. */
-void yatishPDF::NoMoreThan6 (map4pdf& map) {
-    long mini;
-    string key;
-    map4pdf::iterator iter;
+void yatishPDF::NoMoreThan6 (Map4pie& map) {
+    unsigned long mini;
+    string key, others = _("others").ToStdString();
     while (map.size() > 6) {
-        mini = -1;
+        mini = ULONG_MAX;
         for (auto element : map) {
-            if ( element.first == _("others").ToStdString() ) continue;
-            if (mini < 0 || element.second < mini) {
+            if (element.first == others) continue;
+            if (element.second < mini) {
                 mini = element.second;
                 key = element.first;
             }
         }
-        map[_("others").ToStdString()] += mini;
-        iter = map.find (key);
-        map.erase (iter);
+        map[others] += mini;
+        map.erase ( map.find (key) );
     }
 }

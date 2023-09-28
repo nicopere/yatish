@@ -1,16 +1,16 @@
-/***************************************************************
+/********************************************************************
  * Name:      yatishDBmysql.cpp
- * Purpose:   Code for the mysql controller
+ * Purpose:   Implements the mysql controller
  * Author:    Nicolas Pérenne (nicolas.perenne@eif-services.eu)
  * Created:   2020-04-16
- * Copyright: EIF-services (https://www.eif-services.eu)
+ * Copyright: EIF-services (https://www.eif-services.eu/yatish)
  * License:   GPLv3
- **************************************************************/
+ ********************************************************************/
 
 #include "wx_pch.h"
 #include "yatishDBmysql.h"
 
-#undef CATCH // avoids a warning before redefining
+#undef CATCH // avoids a warning before redefining (in order to store errorCode)
 #define CATCH(returnValue) catch (wxDatabaseException& e) {\
  errorCode = e.GetErrorCode();\
  wxLogError ( "[%d] %s", errorCode, e.GetErrorMessage() );\
@@ -43,7 +43,7 @@ yatishDBmysql::yatishDBmysql () {
 }
 
 /** Creates the _yatish_ tables.
- * Warning! If any of the tables was already there, it is emptied.
+ * \warning If any of the tables was already there, it is emptied.
  * \return `false` if something went wrong
  */
 bool yatishDBmysql::NewTables () {
@@ -119,8 +119,8 @@ yatishDBmysql::~yatishDBmysql () {
     slaveDB = nullptr;
 }
 
-/** Updates `slaveDB` with records of `masterDB` where the _sync_ field is not `'S'`.
- * Also sets the (local) _sync_ field to `'S'` when (remote) data were updated with no error.
+/** Updates `slaveDB` with records of `masterDB` where the _sync_ field is not 'S'.
+ * Also sets the (local) _sync_ field to 'S' when (remote) data were updated with no error.
  * \return wxDatabase error code if something went wrong (otherwise 0)
  */
 int yatishDBmysql::Commit () {
@@ -132,7 +132,7 @@ int yatishDBmysql::Commit () {
 }
 
 /** Uploads `masterDB` into `slaveDB`.
- * Warning! Former data in `slaveDB` (if any) are erased.
+ * \warning Former data in `slaveDB` (if any) are erased.
  * \return wxDatabase error code if something went wrong (otherwise 0)
  */
 int yatishDBmysql::Upload () {
@@ -144,7 +144,7 @@ int yatishDBmysql::Upload () {
 }
 
 /** Downloads `slaveDB` into `masterDB`.
- * Warning! Former data in `masterDB` (if any) are erased.
+ * \warning Former data in `masterDB` (if any) are erased.
  * \return wxDatabase error code if something went wrong (otherwise 0)
  */
 int yatishDBmysql::Download () {
@@ -214,8 +214,7 @@ bool yatishDBmysql::OutdateMasterTables () {
 /** Takes care of DELETEs in _yatish_ tables.
  * The error code from the wxDatabase library (if any) is stored in `errorCode` (private member).
  * \return `false` if something went wrong
- *
- * N.B. We rely on the fact that the _id_ of a record is the same in both RDBMS (cf. Insert()).
+ * \note We rely on the fact that the _id_ of a record is the same in both RDBMS (cf. Insert()).
  */
 bool yatishDBmysql::Delete () {
     if (!slaveDB || !masterDB) return false;
@@ -245,8 +244,7 @@ bool yatishDBmysql::Delete () {
  * The _id_ is also copied (we do not use remote AUTO_INCREMENT).
  * The error code from the wxDatabase library (if any) is stored in `errorCode` (private member).
  * \return `false` if something went wrong
- *
- * N.B. This function assumes `tableName` was defined with "simple" tables first.
+ * \note This function assumes `tableName` was defined with "simple" tables first.
  * \sa InsertProject() InsertActivity() InsertTimeslot()
  */
 bool yatishDBmysql::Insert () {
@@ -278,8 +276,7 @@ bool yatishDBmysql::Insert () {
  * The _id_ is also copied (we do not use local AUTO_INCREMENT).
  * The error code from the wxDatabase library (if any) is stored in `errorCode` (private member).
  * \return `false` if something went wrong
- *
- * N.B. This function assumes `tableName` was defined with "simple" tables first.
+ * \note This function assumes `tableName` was defined with "simple" tables first.
  * \sa DownloadProject() DownloadActivity() DownloadTimeslot()
  */
 bool yatishDBmysql::DownloadNames () {
@@ -288,6 +285,7 @@ bool yatishDBmysql::DownloadNames () {
     long id;
     for (int i = 0; i < 3; i++) {
         try {
+            masterDB->BeginTransaction(); // quicker (1/2)
             const char * n = tableName[i];
             sql.Printf("SELECT id,name FROM yatish_%s;", n);
             wxDatabaseResultSet * results = slaveDB->RunQueryWithResults (sql);
@@ -298,6 +296,7 @@ bool yatishDBmysql::DownloadNames () {
                 masterDB->RunQuery (sql);
             }
             slaveDB->CloseResultSet (results);
+            masterDB->Commit();           // quicker (2/2)
         }
         CATCH (false)
     }
@@ -308,10 +307,8 @@ bool yatishDBmysql::DownloadNames () {
 /** Takes care of UPDATEs in _yatish_ tables with a single _name_ column.
  * The error code from the wxDatabase library (if any) is stored in `errorCode` (private member).
  * \return `false` if something went wrong
- *
- * N.B. This function assumes `tableName` was defined with "simple" tables first.
- *
- * N.B. We rely on the fact that the _id_ of a record is the same in both RDBMS (cf. Insert()).
+ * \note This function assumes `tableName` was defined with "simple" tables first.
+ * \note We rely on the fact that the _id_ of a record is the same in both RDBMS (cf. Insert()).
  * \sa UpdateProject() UpdateActivity() UpdateTimeslot()
  */
 bool yatishDBmysql::Update () {
@@ -376,6 +373,7 @@ bool yatishDBmysql::DownloadProject () {
     wxString sql, name;
     long id, client_id;
     try {
+        masterDB->BeginTransaction(); // quicker (1/2)
         sql.Printf("SELECT id,name,client_id FROM yatish_project;");
         wxDatabaseResultSet * results = slaveDB->RunQueryWithResults (sql);
         while ( results->Next() ) {
@@ -387,6 +385,7 @@ bool yatishDBmysql::DownloadProject () {
             masterDB->RunQuery (sql);
         }
         slaveDB->CloseResultSet (results);
+        masterDB->Commit();           // quicker (2/2)
     }
     CATCH (false)
     errorCode = 0;
@@ -459,6 +458,7 @@ bool yatishDBmysql::DownloadActivity () {
     wxString sql;
     long id1, id2, id3, id4;
     try {
+        masterDB->BeginTransaction(); // quicker (1/2)
         sql.Printf("SELECT id,project_id,task_id,tool_id FROM yatish_activity;");
         wxDatabaseResultSet * results = slaveDB->RunQueryWithResults (sql);
         while ( results->Next() ) {
@@ -471,6 +471,7 @@ bool yatishDBmysql::DownloadActivity () {
             masterDB->RunQuery (sql);
         }
         slaveDB->CloseResultSet (results);
+        masterDB->Commit();           // quicker (2/2)
     }
     CATCH (false)
     errorCode = 0;
@@ -527,10 +528,10 @@ bool yatishDBmysql::InsertTimeslot () {
             start = results->GetResultString (2);
             stop = results->GetResultString (3);
             activity_id = results->GetResultLong (4);
-            prepareSlave->SetParamLong (1, id);          // my wxDatabase
+            prepareSlave->SetParamInt (1, id);          // no SetParamLong()...
             prepareSlave->SetParamString (2, start);
             prepareSlave->SetParamString (3, stop);
-            prepareSlave->SetParamLong (4, activity_id); // my wxDatabase
+            prepareSlave->SetParamInt (4, activity_id); // no SetParamLong()...
             prepareSlave->RunQuery();
         }
         slaveDB->CloseStatement (prepareSlave);
@@ -552,7 +553,7 @@ bool yatishDBmysql::DownloadTimeslot () {
     wxString sql, start, stop;
     long id, activity_id;
     try {
-        masterDB->BeginTransaction();
+        masterDB->BeginTransaction(); // quicker (1/2)
         sql.Printf("SELECT id,start,stop,activity_id FROM yatish_timeslot;");
         wxDatabaseResultSet * results = slaveDB->RunQueryWithResults (sql);
         while ( results->Next() ) {
@@ -565,7 +566,7 @@ bool yatishDBmysql::DownloadTimeslot () {
             masterDB->RunQuery (sql);
         }
         slaveDB->CloseResultSet (results);
-        masterDB->Commit();
+        masterDB->Commit();           // quicker (2/2)
     }
     CATCH (false)
     errorCode = 0;

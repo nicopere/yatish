@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>User settings</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+The user settings are "remembered" by <I>yatish</I> when you start it.<P>
+The shortcut for this dialog is CTRL-S (CTRL-P in the French version).<P>
+<IMG SRC="img/settings.png">
+<H3>GUI fields</H3>
+<TABLE>
+<TR>
+<TD><B>Logging</B></TD>
+<TD>Check this if you want logging messages to appear at the bottom of the <I>yatish</I> main window; otherwise the (few) messages will be sent to ad hoc message boxes. Mostly used for developing purposes.</TD>
+</TR>
+<TR>
+<TD><B>Timeslot</B></TD>
+<TD>Whether or not to limit the listing provided by panel #2 when the <I>timeslot</I> table is selected.</TD>
+</TR>
+<TR>
+<TD><B>Row limit</B></TD>
+<TD>The maximum number of rows if the previous choice is selected.</TD>
+</TR>
+<TR>
+<TD><B>Charts</B></TD>
+<TD>Choose between wxMathPlot, wxFreeChart and wxCharts.</TD>
+</TR>
+</TABLE><P>
+<H3>PDF settings</H3>
+Here one can:
+<UL>
+<LI> modify the header of <A HREF="doc-0103.htm#pdf">PDF exports</A> (fields inside the "Company" box, described below);
+<LI> decide to issue (or cancel) PDF charts (timeslot view only).
+</UL>
+<P><IMG SRC="img/settings_pdf.png"><P>
+<TABLE>
+<TR>
+<TD><B>Name</B></TD>
+<TD>Mutually exclusive with <B>Logo</B>. When this check box is activated, the text box next to it becomes writeable and the user is supposed to supply there the company name. This name will then be written in th PDF header instead of the company logo.</TD>
+</TR>
+<TR>
+<TD><B>Logo</B></TD>
+<TD>Mutually exclusive with <B>Name</B>. When this check box is activated, the button next to it is activated and the user can choose a (small) PNG/GIF/JPEG file. The text control is then read only but is updated with the path to the currently selected logo.</TD>
+</TR>
+<TR>
+<TD><B>Motto</B></TD>
+<TD>A (short) slogan to be right justified in the PDF header.</TD>
+</TR>
+<TR>
+<TD><B>with charts</B></TD>
+<TD>Check this to add pie charts to your PDF output.</TD>
+</TR>
+</TABLE>
+</BODY>
+</HTML>

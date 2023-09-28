@@ -1,0 +1,89 @@
+<HTML>
+<HEAD><TITLE>SQL schema</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+The <I>yatish</I> database is "normalized" (check out <em> https://en.wikipedia.org/wiki/Database_normalization</em>) up to BCNF (at least... I have not quite understood the upper levels ;-).<P>
+The relations between <I>yatish</I> tables are best described with a graph:<P>
+<IMG SRC="img/yatish_tables.png"><P>
+In the graph above, primary keys are underlined and foreign keys are written in italics.<P>
+SQL foreign key constraints are rather strictly applied: 
+<UL>
+<LI>all foreign keys are compulsory (NOT NULL); however if you don't need to document the <I>tool</I> used during an <I>activity</I> (for example), then just create an empty record in the <I>tool</I> table and select it for your <I>activity</I>;
+<LI>ON DELETE CASCADE is invoked on table creation: thus if one deletes a row in, say, the <I>tool</I> table then any row which refers to this record in the <I>activity</I> table will also be deleted.
+</UL><P>
+Yatish tables are prefixed with <TT>yatish_</TT>: it is possible to share a database with other applications.<P>
+The <I>sync</I> field exists only in the (local) SQLite database: 
+<TABLE><TR>
+<TD><B>S</B></TD>
+<TD>(synchronized)</TD>
+<TD>the record has been inserted/updated in the (remote) MySQL table</TD>
+</TR><TR>
+<TD><B>I</B></TD>
+<TD>(inserted)</TD>
+<TD>the record was inserted locally but not yet in the remote table</TD>
+</TR><TR>
+<TD><B>U</B></TD>
+<TD>(updated)</TD>
+<TD>the record was modified locally and needs to be updated in the remote table</TD>
+</TR><TR>
+<TD><B>D</B></TD>
+<TD>(deleted)</TD>
+<TD>the record has been deleted locally and but not yet in the remote table</TD>
+</TR></TABLE><P>
+<B>File/Update</B>, if successful, will bring all SQLite <I>sync</I> values do <TT>S</TT>.<P>
+The SQL code used to create the local tables is listed here for reference:
+<PRE>
+CREATE TABLE yatish_client (
+  id INTEGER,
+  name TEXT NOT NULL UNIQUE,
+  sync CHAR NOT NULL,
+  PRIMARY KEY (id)
+);
+CREATE TABLE yatish_project (
+  id INTEGER,
+  name TEXT NOT NULL UNIQUE,
+  client_id INT NOT NULL,
+  sync CHAR NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (client_id) REFERENCES yatish_client (id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE yatish_task (
+  id INTEGER,
+  name TEXT NOT NULL UNIQUE,
+  sync CHAR NOT NULL,
+  PRIMARY KEY (id)
+);
+CREATE TABLE yatish_tool (
+  id INTEGER,
+  name TEXT NOT NULL UNIQUE,
+  sync CHAR NOT NULL,
+  PRIMARY KEY (id)
+);
+CREATE TABLE yatish_activity (
+  id INTEGER,
+  project_id INT NOT NULL,
+  task_id INT NOT NULL,
+  tool_id INT NOT NULL,
+  sync CHAR NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE (project_id,task_id,tool_id),
+  FOREIGN KEY (project_id) REFERENCES yatish_project (id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (task_id) REFERENCES yatish_task (id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (tool_id) REFERENCES yatish_tool (id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE yatish_timeslot (
+  id INTEGER,
+  start TEXT,
+  stop TEXT,
+  activity_id INT NOT NULL,
+  sync CHAR NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (activity_id) REFERENCES yatish_activity (id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+);
+</PRE>
+</BODY>
+</HTML>

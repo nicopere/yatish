@@ -1,0 +1,16 @@
+<HTML>
+<HEAD><TITLE>Getting started</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+<U>Before using <I>yatish</I></U> you need to create your personal <I>yatish</I> directory and copy there the squeleton SQLite database installed system-wide.<P>
+The actual paths depend on the system you are using<P>
+<UL>
+<LI>Linux: create a <TT>.yatish</TT> directory in your $HOME and copy there <TT>/usr/local/share/yatish/yatish.sqlite</TT>;
+<LI>Windows: create a <TT>yatish</TT> directory under your <TT>AppData\\Local\\</TT> and copy there <TT>C:\\Windows\\Program files\\Yatish\\sql\\yatish.sqlite</TT>.
+</UL><P>
+N.B. This procedure is not quite user-friendly but now you know where are your <I>yatish</I> data :-) For instance you can choose to archive <TT>yatish.sqlite</TT> once a year and reset the current one...<P>
+Then when you start <I>yatish</I> for the first time, the selectors are empty and all controls are actually disabled:<P>
+<IMG SRC="img/empty.png"><P>
+<U>This is normal:</U> you must first populate the <I>yatish</I> tables with at least a few items.<P>
+The procedure is described in the next pages and cannot be done on your behalf because it depends heavily on what you use <I>yatish</I> for.
+</BODY>
+</HTML>

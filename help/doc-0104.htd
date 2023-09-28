@@ -1,0 +1,49 @@
+<HTML>
+<HEAD><TITLE>Panel 3</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+Panel #3 (CTRL-G) consolidates data <U>by week</U> and shows them as time series or pie charts.<P>
+N.B. Data consolidation is done once per <I>yatish</I> run (to save CPU cycles), that is when panel #3 is first activated: thus one must restart <I>yatish</I> in order to plot data entered since the first switch to panel #3 in the current run.<P>
+Here is a first example, drawn with the wxFreeChart library:<P>
+<IMG SRC="img/timeSeries_hoursTotal_projectClusters_wxFreeChart.png"><P>
+The various controls allow you to choose (from left to right):<P>
+<UL>
+<LI>Chart type:
+<DL>
+<DT><TT>Time series</TT></DT><DD>One curve (if data clustering is <TT>None</TT>, see <A HREF="#cluster">below</A>) or the three most significant curves (other clustering schemes, see example above).
+<DT><TT>Pie chart</TT></DT><DD>One pie chart with up to four sectors: the three <U>largest</U> ones and an <TT>others</TT> sector adding all the... others. A clustering scheme must be chosen (<TT>None</TT> is unavailable). The status bar is updated. Here is an example (which is another view of the very same data as above):
+</DL>
+<IMG SRC="img/pieChart_hoursTotal_projectClusters_wxFreeChart.png"><P>
+<LI>Temporal aggregation: when data clustering is set to <TT>None</TT> (see <A HREF="#cluster">below</A>), various weekly consolidations are available to diagnose one's working habits.
+<DL>
+<DT><TT>Hours (total)</TT></DT><DD>Weekly sum of the recorded hours (any activity). There is no other choice when data clustering is <U>not</U> <TT>None</TT>. <I>Did you work too much?</I> (depending on the labor law in your country ;-)
+<DT><TT>Days (worked)</TT></DT><DD>Number of days with recorded activity, per week. <I>Were you able to save your weekends?</I> 
+<DT><TT>Time range (max)</TT></DT><DD>Time lapse between the beginning of the day (start of the earliest activity) and the end of it (stop of the latest one); the maximum (per week) of such work day lengths is shown. <I>Are you able to always disconnect in the evening?</I>
+<DT><TT>Minutes/timeslot (average)</TT></DT><DD>Average duration of the activities, per week. <I>Do you have to continuously switch between (micro)tasks?</I>
+</DL>
+<LI><A NAME="cluster">Data clustering</A>: the attibute to analyse when drawing multiple times series, or pie charts. The temporal aggregation is set to <TT>Hours (total)</TT> except when no  (<TT>None</TT>) clustering is performed (in which case other temporal aggregates become available).
+<DL>
+<DT><TT>Clients</TT></DT><DD>Show the (up to) three largest <A HREF="doc-0601.htm">Clients</A> involved in the selected time period.
+<DT><TT>Projects</TT></DT><DD>Show the (up to) three largest <A HREF="doc-0601.htm">Projects</A> involved in the selected time period.
+<DT><TT>Tasks</TT></DT><DD>Show the (up to) three largest <A HREF="doc-0601.htm">Tasks</A> involved in the selected time period.
+<DT><TT>Tools</TT></DT><DD>Show the (up to) three largest <A HREF="doc-0601.htm">Tools</A> involved in the selected time period.
+<DT><TT>None</TT></DT><DD>Don't distinguish between Clients, Projects, Tasks nor Tools.
+</DL>
+<LI><A NAME="dates">Date interval</A>: modifying the time window has two effects: (i) zoom in/out the horizontal axis of times series and (ii) choose the relevant (multi-)series or sectors to show, i.e. those having the largest totals <I>in the period</I>.  
+<DL>
+<DT>first day</DT><DD>When to start computing/plotting. A <A HREF="doc-0402.htm">pop-up menu</A> allows one to select <B>This month</B> or <B>This year</B>.
+<DT>last day</DT><DD>When to stop computing/plotting. A <A HREF="doc-0402.htm">pop-up menu</A> allows one to select <B>Last month</B> or <B>Last year</B>.
+</DL>
+</UL>
+<H4>Charting libraries</H4>
+Three third-party toolsets are avalaible in <I>yatish</I>, to be chosen in the <A HREF="doc-0306.htm">Settings</A>:<P>
+<UL>
+<LI>wxMathPlot: the only library natively using a datetime axis (a home-baked week number is used for the other libraries). There is a context menu and mouse commands to zoom/pan the plot (click right in the graph and experiment). This library, however, does not provide pie charts.
+<LI>wxFreeChart: axis labeling is optimized (Talbot et al., IEEE VGTC proceedings, 2010); in the present coding of <I>yatish</I> the legend is always there (empty when no clusters are considered).
+<LI>wxCharts: data values are show under the cursor but axes are not labeled.
+</UL><P>
+Here are examples of the same curve, as rendered by each of the libraries available in <I>yatish</I> (in the same order as the preceeding listing):<P>
+<IMG SRC="img/timeSeries_hoursTotal_none_wxMathPlot.png"><P>
+<IMG SRC="img/timeSeries_hoursTotal_none_wxFreeChart.png"><P>
+<IMG SRC="img/timeSeries_hoursTotal_none_wxCharts.png"><P>
+</BODY>
+</HEAD>

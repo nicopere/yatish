@@ -1,0 +1,24 @@
+<HTML>
+<HEAD><TITLE>Panel 2</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+Panel #2 (CTRL-T) lets you choose one of the <A HREF="doc-0601.htm"><I>yatish</I> tables</A>, then lists its content:<P>
+<IMG SRC="img/list.png"><P>
+If (and only if) the <I>timeslot</I> table is chosen (as shown above), date picker controls are also activated, allowing you to narrow the timeslot list; by default the date interval is set to the entire range of recorded timeslots; you can reset the date interval with the <B>Edit>Reset filter</B> menu command (a.k.a. CTRL-R), which is also provided in a <A HREF="doc-0402.htm">context menu</A>.<P>
+As its name implies, the <A NAME="filter"><B>Reset filter</B></A> command also erases previous selections you may have made by clicking on a column title</A> and choosing a value in the <A HREF="doc-0305.htm">filter dialog</A>. Any filtering thus selected is appended to the previous one and the current listing updated, until <B>Reset filter</B> is used. Not all columns can be filtered on: just click and see! (for the <I>timeslot</I> table those are the "Project", "Client", "Task" and "Tool" column titles, but not the "Date" and "Duration" ones)<P>
+Furthermore when viewing the <I>activity</I> table, right-clicking an item allows you to (i) <B>Record</B> a new timeslot with this activity or (ii) <B>List</B> the recorded timeslots involving this activity:<P>
+<CENTER><IMG SRC="img/list_activity.png"></CENTER><P>
+An important feature of the list/edit panel, however, is to create, edit or delete records, even <I>timeslot</I> records. This functionality is accessible using the SHIFT key, as explained below.<P>
+Finally, panel #2 is also useful because basic timeslot statistics for the current selection are automatically updated in the <A HREF="doc-0105.htm">status bar</A>.<P>
+<A NAME="shift"><H4>SHIFT commands</H4></A>
+Once a row is selected you can type:
+<UL>
+<LI>SHIFT-D to delete the row. Please note that all records refering to the deleted one will also be deleted: for instance if you delete a <I>client</I>, all <I>projects</I> refering to this client, then all <I>activities</I> refering to these projects, and finally all <I>timeslots</I> corresponding to these activities, will be deleted also! A proper warning is issued in case of implied deletions. You should check beforehand what items would be impacted, using the column selection feature described above; check out the <A HREF="doc-0601.htm"><I>yatish</I> tables reference</A> for details. For now just remember that deleting a <I>timeslot</I> record deletes nothing else. 
+<LI>SHIFT-E to edit the row. <A HREF="doc-0300.htm">As explained elsewhere</A>, the dialog that pops up can also be used to create a new record ("Save as" behavior). If no row is available, a new record can also be created from scratch using <B>Edit</B>(or right clic)<B>>New record...</B> (i.e. CTRL-N): you will mainly use this when you <A HREF="doc-0200.htm">begin using <I>yatish</I></A>. 
+</UL>
+<A NAME="pdf"><H4>PDF export</H4></A>
+Clicking the button <B>Export PDF</B> allows you to output a PDF document reflecting the <I>current state</I> of panel #2. Note that some PDF properties are set in the <A HREF="doc-0306.htm">user settings</A> dialog.
+<H4>French GUI</H4>
+So far <I>yatish</I> has only been translated into French; here is for instance the French version of panel #2:<P>
+<IMG SRC="img/liste.png">
+</BODY>
+</HTML>

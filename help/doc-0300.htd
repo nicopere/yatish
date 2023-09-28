@@ -1,0 +1,17 @@
+<HTML>
+<HEAD><TITLE>Dialogs</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+Most <I>yatish</I> dialogs are concerned with record editing:
+<UL>
+<LI>the <I>client</I>, <I>task</I> and <I>tool</I> tables share the <A HREF="doc-0301.htm">same editor</A>;
+<LI>there are specialized dialogs for the <A HREF="doc-0302.htm"><I>project</I></A>, <A HREF="doc-0303.htm"><I>activity</I></A> and <A HREF="doc-0304.htm"><I>timeslot</I></A> tables.
+</UL><P>
+A common feature of all these dialogs is that they also offer the possibility to create a new record ("Save as" behavior: NEW button).<P>
+And there is also an uninitialized version of the dialogs, which is called with <A HREF="doc-0403.htm">CTRL-N</A> (SAVE button disabled).<P>
+Apart from that, <I>yatish</I> provides dialogs for:
+<UL>
+<LI><A HREF="doc-0305.htm">data filtering</A> in panel #2;
+<LI><A HREF="doc-0306.htm">user settings</A>.
+</UL>
+</BODY>
+</HTML>

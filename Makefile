@@ -9,7 +9,7 @@ install:
 	cp sql/yatish.sqlite sql/yatish.auth $(resourcedir)/
 	cp bin/Release/yatish /usr/local/bin/
 	cp yatish.desktop /usr/share/applications/
-	cp yatish.xpm /usr/share/pixmaps/
+	cp src/yatish.xpm /usr/share/pixmaps/
 uninstall:
 	rm -rf $(resourcedir)
 	rm -f /usr/local/bin/yatish
@@ -17,9 +17,9 @@ uninstall:
 	rm -f /usr/share/pixmaps/yatish.xpm
 
 # next 2 targets need HelpBlocks from Anthemion Software
-yatish-doc:
+yatish-help:
 	helpblocks -w help/yatish.wxh # returns 255 although it's OK
-install-doc:
+install-help:
 	cp help/yatish.htb $(resourcedir)/
 
 clean:

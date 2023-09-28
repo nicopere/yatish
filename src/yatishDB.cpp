@@ -1,12 +1,13 @@
-/***************************************************************
+/********************************************************************
  * Name:      yatishDB.cpp
- * Purpose:   Code for the base class of yatish database controllers
+ * Purpose:   Implements the base class of yatish database controllers
  * Author:    Nicolas Pérenne (nicolas.perenne@eif-services.eu)
  * Created:   2020-04-15
- * Copyright: EIF-services (https://www.eif-services.eu)
+ * Copyright: EIF-services (https://www.eif-services.eu/yatish)
  * License:   GPLv3
- **************************************************************/
+ ********************************************************************/
 
+#include "wx_pch.h"
 #include "yatishDB.h"
 
 /** Must be defined in the same order as `enum tableID`.

@@ -12,7 +12,6 @@
 //(*Headers(yatishDlgFilter)
 //*)
 
-#include <wx/valgen.h>
 #include "yatishDBsqlite.h"
 
 class yatishDlgFilter: public wxDialog {

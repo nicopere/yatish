@@ -1,3 +1,17 @@
+# downloads
+cmake-3.19.5-win64-x64.msi
+codeblocks-20.03mingw-setup.exe
+HelpBlocks-1.24-Setup.exe
+innosetup-6.1.2.exe
+mysql-connector-c-6.1.11-winx64.msi
+npp.7.9.3.Installer.exe
+Poedit-2.4.2-setup.exe
+TortoiseSVN-1.14.1.29085-x64-svn-1.14.1.msi
+wxDatabase-master.zip
+wxMSW-3.1.4-Setup.exe
+wxpdfdoc-master.zip
+yatish_install.exe
+
 # path
 C:\Program Files\CodeBlocks\MinGW\bin
 C:\Program Files\MySQL\MySQL Connector C 6.1\lib

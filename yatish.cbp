@@ -4,7 +4,7 @@
 	<Project>
 		<Option title="yatish" />
 		<Option platforms="Unix;" />
-		<Option pch_mode="0" />
+		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
@@ -14,8 +14,8 @@
 				<Option compiler="gcc" />
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
+					<Add option="-Wall" />
 					<Add option="-g" />
-					<Add directory="./" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -26,37 +26,66 @@
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-Wall" />
 					<Add option="-DNDEBUG" />
-					<Add directory="./" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
 					<Add option="-no-pie" />
 				</Linker>
+				<ExtraCommands>
+					<Add after='sed -i &quot;s/&lt;svn:.*&gt;/&lt;svn:`svnversion`&gt;/&quot; fr/yatish.po' />
+					<Add after="msgfmt -o fr/yatish.mo fr/yatish.po" />
+				</ExtraCommands>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="`wx-config --cflags`" />
 			<Add option="-Winvalid-pch" />
-			<Add option="-include wx_pch.h" />
 			<Add option="-DWX_PRECOMP" />
 			<Add directory="/usr/local/include" />
+			<Add directory="src" />
 		</Compiler>
 		<Linker>
 			<Add option="`wx-config --libs`" />
-			<Add option="-lwxdatabase" />
-			<Add option="-lwxcode_gtk3u_pdfdoc-3.0" />
+			<Add library="wxdatabase" />
+			<Add library="wxcode_gtk3u_pdfdoc-3.0" />
+			<Add library="mathplot" />
+			<Add library="wxcode_gtk3u_freechart-3.0" />
+			<Add library="wxcharts" />
 			<Add directory="/usr/local/lib" />
 		</Linker>
-		<ExtraCommands>
-			<Add after='sed -i &quot;s/&lt;svn:.*&gt;/&lt;svn:`svnversion`&gt;/&quot; fr/yatish.po' />
-			<Add after="msgfmt -o fr/yatish.mo fr/yatish.po" />
-		</ExtraCommands>
-		<Unit filename="wx_pch.h">
+		<Unit filename="src/wx_pch.h">
 			<Option compile="1" />
-			<Option weight="0" />
 		</Unit>
+		<Unit filename="src/yatishApp.cpp" />
+		<Unit filename="src/yatishApp.h" />
+		<Unit filename="src/yatishDB.cpp" />
+		<Unit filename="src/yatishDB.h" />
+		<Unit filename="src/yatishDBmysql.cpp" />
+		<Unit filename="src/yatishDBmysql.h" />
+		<Unit filename="src/yatishDBsqlite.cpp" />
+		<Unit filename="src/yatishDBsqlite.h" />
+		<Unit filename="src/yatishDlgActivity.cpp" />
+		<Unit filename="src/yatishDlgActivity.h" />
+		<Unit filename="src/yatishDlgFilter.cpp" />
+		<Unit filename="src/yatishDlgFilter.h" />
+		<Unit filename="src/yatishDlgName.cpp" />
+		<Unit filename="src/yatishDlgName.h" />
+		<Unit filename="src/yatishDlgProject.cpp" />
+		<Unit filename="src/yatishDlgProject.h" />
+		<Unit filename="src/yatishDlgTimeslot.cpp" />
+		<Unit filename="src/yatishDlgTimeslot.h" />
+		<Unit filename="src/yatishFrame.cpp" />
+		<Unit filename="src/yatishFrame.h" />
+		<Unit filename="src/yatishPDF.cpp" />
+		<Unit filename="src/yatishPDF.h" />
+		<Unit filename="src/yatishPlot.cpp" />
+		<Unit filename="src/yatishPlot.h" />
+		<Unit filename="src/yatishSettings.cpp" />
+		<Unit filename="src/yatishSettings.h" />
+		<Unit filename="src/yatishTypes.h" />
 		<Unit filename="wxsmith/yatishDlgActivity.wxs" />
 		<Unit filename="wxsmith/yatishDlgFilter.wxs" />
 		<Unit filename="wxsmith/yatishDlgName.wxs" />
@@ -64,42 +93,18 @@
 		<Unit filename="wxsmith/yatishDlgTimeslot.wxs" />
 		<Unit filename="wxsmith/yatishFrame.wxs" />
 		<Unit filename="wxsmith/yatishSettings.wxs" />
-		<Unit filename="yatishApp.cpp" />
-		<Unit filename="yatishApp.h" />
-		<Unit filename="yatishDB.cpp" />
-		<Unit filename="yatishDB.h" />
-		<Unit filename="yatishDBmysql.cpp" />
-		<Unit filename="yatishDBmysql.h" />
-		<Unit filename="yatishDBsqlite.cpp" />
-		<Unit filename="yatishDBsqlite.h" />
-		<Unit filename="yatishDlgActivity.cpp" />
-		<Unit filename="yatishDlgActivity.h" />
-		<Unit filename="yatishDlgFilter.cpp" />
-		<Unit filename="yatishDlgFilter.h" />
-		<Unit filename="yatishDlgName.cpp" />
-		<Unit filename="yatishDlgName.h" />
-		<Unit filename="yatishDlgProject.cpp" />
-		<Unit filename="yatishDlgProject.h" />
-		<Unit filename="yatishDlgTimeslot.cpp" />
-		<Unit filename="yatishDlgTimeslot.h" />
-		<Unit filename="yatishFrame.cpp" />
-		<Unit filename="yatishFrame.h" />
-		<Unit filename="yatishPDF.cpp" />
-		<Unit filename="yatishPDF.h" />
-		<Unit filename="yatishSettings.cpp" />
-		<Unit filename="yatishSettings.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 			<wxsmith version="1">
-				<gui name="wxWidgets" src="yatishApp.cpp" main="yatishFrame" init_handlers="necessary" language="CPP" />
+				<gui name="wxWidgets" src="src/yatishApp.cpp" main="yatishFrame" init_handlers="necessary" language="CPP" />
 				<resources>
-					<wxFrame wxs="wxsmith/yatishFrame.wxs" src="yatishFrame.cpp" hdr="yatishFrame.h" fwddecl="0" i18n="1" name="yatishFrame" language="CPP" />
-					<wxDialog wxs="wxsmith/yatishDlgName.wxs" src="yatishDlgName.cpp" hdr="yatishDlgName.h" fwddecl="0" i18n="1" name="yatishDlgName" language="CPP" />
-					<wxDialog wxs="wxsmith/yatishDlgProject.wxs" src="yatishDlgProject.cpp" hdr="yatishDlgProject.h" fwddecl="0" i18n="1" name="yatishDlgProject" language="CPP" />
-					<wxDialog wxs="wxsmith/yatishDlgActivity.wxs" src="yatishDlgActivity.cpp" hdr="yatishDlgActivity.h" fwddecl="0" i18n="1" name="yatishDlgActivity" language="CPP" />
-					<wxDialog wxs="wxsmith/yatishDlgTimeslot.wxs" src="yatishDlgTimeslot.cpp" hdr="yatishDlgTimeslot.h" fwddecl="0" i18n="1" name="yatishDlgTimeslot" language="CPP" />
-					<wxDialog wxs="wxsmith/yatishDlgFilter.wxs" src="yatishDlgFilter.cpp" hdr="yatishDlgFilter.h" fwddecl="0" i18n="1" name="yatishDlgFilter" language="CPP" />
-					<wxDialog wxs="wxsmith/yatishSettings.wxs" src="yatishSettings.cpp" hdr="yatishSettings.h" fwddecl="0" i18n="1" name="yatishSettings" language="CPP" />
+					<wxFrame wxs="wxsmith/yatishFrame.wxs" src="src/yatishFrame.cpp" hdr="src/yatishFrame.h" fwddecl="0" i18n="1" name="yatishFrame" language="CPP" />
+					<wxDialog wxs="wxsmith/yatishDlgName.wxs" src="src/yatishDlgName.cpp" hdr="src/yatishDlgName.h" fwddecl="0" i18n="1" name="yatishDlgName" language="CPP" />
+					<wxDialog wxs="wxsmith/yatishDlgProject.wxs" src="src/yatishDlgProject.cpp" hdr="src/yatishDlgProject.h" fwddecl="0" i18n="1" name="yatishDlgProject" language="CPP" />
+					<wxDialog wxs="wxsmith/yatishDlgActivity.wxs" src="src/yatishDlgActivity.cpp" hdr="src/yatishDlgActivity.h" fwddecl="0" i18n="1" name="yatishDlgActivity" language="CPP" />
+					<wxDialog wxs="wxsmith/yatishDlgTimeslot.wxs" src="src/yatishDlgTimeslot.cpp" hdr="src/yatishDlgTimeslot.h" fwddecl="0" i18n="1" name="yatishDlgTimeslot" language="CPP" />
+					<wxDialog wxs="wxsmith/yatishDlgFilter.wxs" src="src/yatishDlgFilter.cpp" hdr="src/yatishDlgFilter.h" fwddecl="0" i18n="1" name="yatishDlgFilter" language="CPP" />
+					<wxDialog wxs="wxsmith/yatishSettings.wxs" src="src/yatishSettings.cpp" hdr="src/yatishSettings.h" fwddecl="0" i18n="1" name="yatishSettings" language="CPP" />
 				</resources>
 			</wxsmith>
 		</Extensions>

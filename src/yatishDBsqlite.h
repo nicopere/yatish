@@ -1,17 +1,18 @@
-/***************************************************************
+/********************************************************************
  * Name:      yatishDBsqlite.h
- * Purpose:   Defines a sqlite controller
+ * Purpose:   Declares a sqlite controller
  * Author:    Nicolas Pérenne (nicolas.perenne@eif-services.eu)
  * Created:   2020-03-09
- * Copyright: EIF-services (https://www.eif-services.eu)
+ * Copyright: EIF-services (https://www.eif-services.eu/yatish)
  * License:   GPLv3
- **************************************************************/
+ ********************************************************************/
 
 #ifndef YATISHDBSQLITE_H
 #define YATISHDBSQLITE_H
 
-#include <wx/listctrl.h>
+#include "wx_pch.h"
 #include "yatishDB.h"
+#include "yatishTypes.h"
 
 /** Interacts with _yatish_ tables in a SQLite database.
  * Cf. the application example distributed with the wxDatabase library.
@@ -33,7 +34,7 @@
  * (as would be the case with the TIMESTAMP type).
  * - This choice means that the application does not need to be in the same timezone
  * as the server and can also move from a timezone to another one.
- * The drawback is that formating a timestamp in local time (if need be)
+ * The drawback is that formatting a timestamp in local time (if need be)
  * must be performed by the application itself. \sa ReadDates()
  */
 class yatishDBsqlite : public yatishDB {
@@ -47,7 +48,9 @@ class yatishDBsqlite : public yatishDB {
         int RunningTimeslots ();
         void SetLimit (bool b, int i) { limitRow = b; rowLimit = i; }
         bool FillList (wxListCtrl *, tableID);
+        bool FillPlotData (RawData&);
         void AddToFilter (tableID, int);
+        void AddToFilter (long);
         wxString GetFilter () const { return filter; };
         void ClearFilter () { filter.Clear(); }
         long FilteredTotal (wxTimeSpan &) const;
@@ -60,7 +63,7 @@ class yatishDBsqlite : public yatishDB {
         wxDateTime Last ();
         long LastActivity ();
         long Activity (long);
-        bool Delete(tableID, long);
+        bool Delete (tableID, long);
         wxString ReadName (tableID, long);
         bool ReadDates (long, wxDateTime&, wxDateTime&);
         bool RecordName (tableID, long, const wxString&);

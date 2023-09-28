@@ -13,7 +13,6 @@
 //(*Headers(yatishDlgActivity)
 //*)
 
-#include <wx/valgen.h>
 #include "yatishDBsqlite.h"
 
 class yatishDlgActivity: public wxDialog {

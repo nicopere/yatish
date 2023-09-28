@@ -1,0 +1,9 @@
+<HTML>
+<HEAD><TITLE>User interface</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+The main frame of Yatish is composed of a <A HREF="doc-0101.htm">menu bar</A>, a notebook with three panels (<A HREF="doc-0102.htm">#1</A>, <A HREF="doc-0103.htm">#2</A>, <A HREF="doc-0104.htm">#3</A>) and a <A HREF="doc-0105.htm">status bar</A>:
+<IMG SRC="img/startup.png"><P>
+The screenshot above was taken on Linux; here is one from Windows:<P>
+<CENTER><IMG SRC="img/startup_win.png"></CENTER>
+</BODY>
+</HTML>

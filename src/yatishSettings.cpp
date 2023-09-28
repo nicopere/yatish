@@ -1,9 +1,8 @@
 #include "wx_pch.h"
 #include "yatishSettings.h"
 
-/** The `Settings` constructor retrieves itself from the configuration file
- *
- *  (set up by yatishApp::OnInit()).
+/** The `Settings` constructor retrieves itself from the configuration file.
+ *  The latter is set up by yatishApp::OnInit().
  */
 Settings::Settings () {
     wxConfigBase * config = wxConfigBase::Get (false);
@@ -22,9 +21,8 @@ Settings::Settings () {
     config->Read ("pdfCharts", &pdfCharts, true);
 }
 
-/** The `Settings` destructor saves itself to the configuration file
- *
- *  (set up by yatishApp::OnInit()).
+/** The `Settings` destructor saves itself to the configuration file.
+ *  The latter was set up by yatishApp::OnExit().
  */
 Settings::~Settings () {
     wxConfigBase * config = wxConfigBase::Get (false);
@@ -119,9 +117,9 @@ yatishSettings::yatishSettings () {
     StaticText4 = new wxStaticText(panelGUI, ID_STATICTEXT4, _("Charts:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT4"));
     FlexGridSizer1->Add(StaticText4, 1, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5);
     choiceLib = new wxChoice(panelGUI, idChoiceLib, wxDefaultPosition, wxDefaultSize, 0, 0, 0, wxDefaultValidator, _T("idChoiceLib"));
-    choiceLib->SetSelection( choiceLib->Append(_("wxFreeChart")) );
+    choiceLib->SetSelection( choiceLib->Append(_("wxMathPlot")) );
+    choiceLib->Append(_("wxFreeChart"));
     choiceLib->Append(_("wxCharts"));
-    choiceLib->Disable();
     FlexGridSizer1->Add(choiceLib, 1, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
     panelGUI->SetSizer(FlexGridSizer1);
     FlexGridSizer1->Fit(panelGUI);

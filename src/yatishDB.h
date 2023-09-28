@@ -1,24 +1,17 @@
-/***************************************************************
+/********************************************************************
  * Name:      yatishDB.h
- * Purpose:   Defines the base class of yatish database controllers
+ * Purpose:   Declares the base class of yatish database controllers
  * Author:    Nicolas Pérenne (nicolas.perenne@eif-services.eu)
  * Created:   2020-04-15
- * Copyright: EIF-services (https://www.eif-services.eu)
+ * Copyright: EIF-services (https://www.eif-services.eu/yatish)
  * License:   GPLv3
- **************************************************************/
+ ********************************************************************/
 
 #ifndef YATISHDB_H
 #define YATISHDB_H
 
-#include <wx/database/wxprec.h>
-#include <wx/fileconf.h>
-#include <wx/filename.h>
-#include <wx/sstream.h>
-#include <wx/stdpaths.h>
-#include <wx/wfstream.h>
-
 enum tableID {
-    client_tid, // 0
+    client_tid,
     task_tid,
     tool_tid,
     project_tid,

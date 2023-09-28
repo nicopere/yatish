@@ -1,0 +1,17 @@
+<HTML>
+<HEAD><TITLE>Icon - Ubuntu</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+YATiSh updates its icon to reflect the recording status (whether an activity is being tracked or not, cf. panel #1). This (minor) feature works well on Windows (10) and Lubuntu (18.04 LTS) but is somewhat unstable on mainstream Ubuntu:<P>
+<UL>
+<LI>Ubuntu 18.04 LTS (Bionic Beaver) & 20.04 LTS (Focal Fossa):<P>
+There is a trick to recover icon updating:<BR>
+delete <TT>/usr/share/applications/yatish.desktop</TT><BR>
+(or move it somewhere else in case you change your mind later on).<BR>
+Yatish will then disappear from the Activities view (Super key)<BR>
+but you can still start it easily by typing <TT>yatish</TT> after ALT-F2.<P>
+<LI>Ubuntu 22.02 LTS (Jammy JellyFish):<P>
+Feature not working (except in the <B>About...</B> box!).<BR>
+Leave the <TT>yatish.desktop</TT> otherwise you won't get any icon.
+</UL>
+</BODY>
+</HTML>

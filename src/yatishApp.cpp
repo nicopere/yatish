@@ -1,22 +1,22 @@
 /** \mainpage Time tracking desktop application for freelancers/homeworkers
-  * __Features (_work in progress_):__
-  * - Cross-platform (Linux, _Windows_)
+  * __Features:__
+  * - Cross-platform (Linux, Windows).
   * - SQLite based: no connection needed but...
-  * - ...can sync to a MySQL/MariaDB server (_there is a viewer version of yatish for customers_)
-  * - PDF export of selected listings (to be appended to invoices)
-  * - _2 charting toolsets available_
-  * - GUI in English or French
-  * - online (shipped with the application) user guide (not translated though).
+  * - ...can sync to a MySQL/MariaDB server.
+  * - PDF export of selected listings (to be appended to invoices).
+  * - 3 charting toolsets available.
+  * - GUI in English or French.
+  * - Integrated user guide (not translated though).
   * - Doxygen source code documentation (obviously) e.g. our yatishDBsqlite class.
   * - Privacy: _yatish_ will not publish anything unless you do mean it,
   * and then only in a privately owned database.
   *
   * This file:
 > * Name:      yatishApp.cpp
-> * Purpose:   Code for Application Class
+> * Purpose:   Implements the Application class
 > * Author:    Nicolas Pérenne (nicolas.perenne@eif-services.eu)
 > * Created:   2020-02-11
-> * Copyright: EIF-services (https://www.eif-services.eu)
+> * Copyright: EIF-services (https://www.eif-services.eu/yatish)
 > * License:   GPLv3
   */
 

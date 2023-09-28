@@ -1,13 +1,12 @@
-/***************************************************************
+/********************************************************************
  * Name:      yatishDBsqlite.cpp
- * Purpose:   Code for the sqlite controller
+ * Purpose:   Implements the sqlite controller
  * Author:    Nicolas Pérenne (nicolas.perenne@eif-services.eu)
  * Created:   2020-03-09
- * Copyright: EIF-services (https://www.eif-services.eu)
+ * Copyright: EIF-services (https://www.eif-services.eu/yatish)
  * License:   GPLv3
- **************************************************************/
+ ********************************************************************/
 
-#include "wx_pch.h"
 #include "yatishDBsqlite.h"
 
 /** Mainly connects to the `yatish.sqlite` database
@@ -315,7 +314,38 @@ bool yatishDBsqlite::FillList (wxListCtrl * lst, tableID tid) {
     return true;
 }
 
-/** Add a condition to the WHERE clause of FillList().
+/** Fills a `RawData` (typedefined in yatishTypes.h).
+ * \param v where to write (reference)
+ * \return `false` if something went wrong
+ */
+bool yatishDBsqlite::FillPlotData (RawData& v) {
+    if (!masterDB) return false;
+    wxString sql ("SELECT t.start,t.stop,p.name,c.name,tk.name,tl.name FROM yatish_timeslot t"
+                  " INNER JOIN yatish_activity a ON t.activity_id = a.id"
+                  " INNER JOIN yatish_project p ON a.project_id = p.id"
+                  " INNER JOIN yatish_client c ON p.client_id = c.id"
+                  " INNER JOIN yatish_task tk ON a.task_id = tk.id"
+                  " INNER JOIN yatish_tool tl ON a.tool_id = tl.id"
+                  " WHERE stop IS NOT NULL ORDER BY start;");
+    try {
+        wxDatabaseResultSet * results = masterDB->RunQueryWithResults (sql);
+        RawRecord record;
+        while ( results->Next() ) {
+            record.start   = results->GetResultDate   (1);
+            record.stop    = results->GetResultDate   (2);
+            record.project = results->GetResultString (3);
+            record.client  = results->GetResultString (4);
+            record.task    = results->GetResultString (5);
+            record.tool    = results->GetResultString (6);
+            v.push_back (record);
+        }
+        masterDB->CloseResultSet (results);
+    }
+    CATCH (false)
+    return true;
+}
+
+/** Adds a condition to the WHERE clause of FillList().
  * \param tid the table used to build the new condition
  * \param choice the item in this table (as returned from a previously filled `wxChoice`)
  */
@@ -337,6 +367,16 @@ void yatishDBsqlite::AddToFilter (tableID tid, int choice) {
       default:
             return;
     }
+    filter += sqlAnd;
+}
+
+/** Adds a condition to the WHERE clause of FillList().
+ * \param activityID the foreign key
+ * \note This overload is relevant to the _timeslot_ table only (SQL error otherwise).
+ */
+void yatishDBsqlite::AddToFilter (long activityID) {
+    wxString sqlAnd;
+    sqlAnd.Printf (" AND activity_id = %ld", activityID);
     filter += sqlAnd;
 }
 
@@ -518,18 +558,6 @@ wxString yatishDBsqlite::ReadName (tableID tid, long id) {
  * \param dt1 where to write the _start_ value
  * \param dt2 where to write the _stop_ value
  * \return `false` if something went wrong (or activity still running)
- *
- * N.B. wxWidgets assumes the string from the database is local time which is wrong
- *      (it's UTC from SQLite) thus `dt1.GetTicks()` and `dt2.GetTicks()` would be  biased
- *      (by the same offset: no problem when computing their difference). However
- *      `wxDateTime::MakeFromUTC()` appears to reverse the (fake) local->UTC transformation
- *      initially applied by the `wxDateTime` constructor, so that we can get
- *      the correct _local_ time afterward (wxWidgets output is always local time).
- *      Furthermore `GetTicks()` is then OK.
- *
- * However this trick is not satisfying when the Daylight Saving Time
- *  changes between (i) writing and (ii) reading a record.
- * \todo fix the DST issue when reading a wxDateTime from the database
  */
 bool yatishDBsqlite::ReadDates (long id, wxDateTime& dt1, wxDateTime& dt2) {
     if (!masterDB) return false;

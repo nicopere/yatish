@@ -1,0 +1,26 @@
+<HTML>
+<HEAD><TITLE>Status bar</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+It has 3 fields. From left to right:
+<OL>
+<LI>Clock: if evolving, it is the time elapsed since the beginning of the current timeslot. Frozen when the STOP button is pressed (panel #1). <TT>00:00:00</TT> at <I>yatish</I> onset.
+<LI>MySQL status: either OFF, ON or ERR, reflecting the state of the (optional) <A HREF="doc-0204.htm">MySQL/MariaDB connection</A>.
+<LI>Menu hint / Timeslot stats: a short description of menu commands is provided here, <U>or</U>
+<UL>
+<LI>when in panel #2 with the <I>timeslot</I> table selected, the following indicators:
+<UL>
+<LI>SUM: total duration of the currently selected timeslots (in work days of 7 hours);
+<LI>AVG: average duration of the currently selected timeslots (hours);
+<LI>the count of currently selected timeslots (in brackets).<P>
+N.B. These numbers depend on the <A HREF="doc-0103.htm">date interval</A> chosen, any <A HREF="doc-0305.htm">filter</A> applied and possibly the row limit in your <A HREF="doc-0306.htm">preferences</A>.<P>
+</UL>
+<LI>when in panel #3 with a pie chart, the following indicators:
+<UL>
+<LI>SUM: total duration during the currently selected weeks, i.e. the whole pie (hours);
+<LI>in brackets: the conversion into workdays (of 7 hours).<P>
+N.B. These numbers depend on the <A HREF="doc-0104.htm#dates">date interval</A> chosen.
+</UL>
+</UL>
+</OL>
+</BODY>
+</HTML>

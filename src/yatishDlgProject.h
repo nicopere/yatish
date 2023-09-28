@@ -14,7 +14,6 @@
 //(*Headers(yatishDlgProject)
 //*)
 
-#include <wx/valgen.h>
 #include "yatishDBsqlite.h"
 
 class yatishDlgProject: public wxDialog {
