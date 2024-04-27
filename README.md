@@ -22,7 +22,7 @@ The development of YATiSh is first recorded in the public area of a Subversion s
 svn checkout svn://eif-services.eu/eif/yatish/trunk yatish
 ```
 
-Then last stable version of the code (currently V0.4) is also published here on GitHub.
+Then the last stable version of the code (currently V0.4) is also published here on GitHub.
 
 The C++ (documented) code now amounts to 5261 non-empty lines (`grep -v ^$ src/* | wc -l`).
 
