@@ -19,7 +19,7 @@ The name of the application is an acronym: **Y**et **A**nother **Ti**me **Sh**ee
 
 The development of YATiSh is first recorded in the public area of a Subversion server:
 ```
-svn checkout svn://eif-services.eu/eif/yatish/trunk --username anonymous yatish
+svn checkout svn://eif-services.eu/eif/yatish/trunk yatish
 ```
 
 Then last stable version of the code (currently V0.4) is also published here on GitHub.
